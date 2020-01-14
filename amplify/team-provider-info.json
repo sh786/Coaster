@@ -1,0 +1,15 @@
+{
+    "dev": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-blizzardapp-dev-214430-authRole",
+            "UnauthRoleArn": "arn:aws:iam::885195653239:role/amplify-blizzardapp-dev-214430-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::885195653239:role/amplify-blizzardapp-dev-214430-authRole",
+            "Region": "us-east-1",
+            "DeploymentBucketName": "amplify-blizzardapp-dev-214430-deployment",
+            "UnauthRoleName": "amplify-blizzardapp-dev-214430-unauthRole",
+            "StackName": "amplify-blizzardapp-dev-214430",
+            "StackId": "arn:aws:cloudformation:us-east-1:885195653239:stack/amplify-blizzardapp-dev-214430/ca73db60-3677-11ea-8504-0a30b495b19a",
+            "AmplifyAppId": "d3ary2t8j7apnf"
+        }
+    }
+}
