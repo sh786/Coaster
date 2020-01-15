@@ -110,3 +110,24 @@ export const listComments = `query ListComments(
   }
 }
 `;
+export const getBar = `query GetBar($id: ID!) {
+  getBar(id: $id) {
+    id
+    name
+    address
+    phoneNumber
+  }
+}
+`;
+export const listBars = `query ListBars($filter: ModelBarFilterInput, $limit: Int, $nextToken: String) {
+  listBars(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      name
+      address
+      phoneNumber
+    }
+    nextToken
+  }
+}
+`;

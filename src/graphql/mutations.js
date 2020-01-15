@@ -187,3 +187,39 @@ export const deleteComment = `mutation DeleteComment(
   }
 }
 `;
+export const createBar = `mutation CreateBar(
+  $input: CreateBarInput!
+  $condition: ModelBarConditionInput
+) {
+  createBar(input: $input, condition: $condition) {
+    id
+    name
+    address
+    phoneNumber
+  }
+}
+`;
+export const updateBar = `mutation UpdateBar(
+  $input: UpdateBarInput!
+  $condition: ModelBarConditionInput
+) {
+  updateBar(input: $input, condition: $condition) {
+    id
+    name
+    address
+    phoneNumber
+  }
+}
+`;
+export const deleteBar = `mutation DeleteBar(
+  $input: DeleteBarInput!
+  $condition: ModelBarConditionInput
+) {
+  deleteBar(input: $input, condition: $condition) {
+    id
+    name
+    address
+    phoneNumber
+  }
+}
+`;

@@ -160,3 +160,30 @@ export const onDeleteComment = `subscription OnDeleteComment {
   }
 }
 `;
+export const onCreateBar = `subscription OnCreateBar {
+  onCreateBar {
+    id
+    name
+    address
+    phoneNumber
+  }
+}
+`;
+export const onUpdateBar = `subscription OnUpdateBar {
+  onUpdateBar {
+    id
+    name
+    address
+    phoneNumber
+  }
+}
+`;
+export const onDeleteBar = `subscription OnDeleteBar {
+  onDeleteBar {
+    id
+    name
+    address
+    phoneNumber
+  }
+}
+`;

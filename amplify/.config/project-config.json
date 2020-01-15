@@ -1,6 +1,9 @@
 {
+    "providers": [
+        "awscloudformation"
+    ],
     "projectName": "BlizzardApp",
-    "version": "2.0",
+    "version": "3.0",
     "frontend": "javascript",
     "javascript": {
         "framework": "react-native",
@@ -10,8 +13,5 @@
             "BuildCommand": "npm run-script build",
             "StartCommand": "npm run-script start"
         }
-    },
-    "providers": [
-        "awscloudformation"
-    ]
+    }
 }
