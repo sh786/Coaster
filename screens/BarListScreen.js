@@ -1,8 +1,6 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-
-import { fetchBars } from '../redux/actions';
-
+import { fetchBars, createNewBar } from '../redux/actions';
 import {
     Button,
     Keyboard,
@@ -12,26 +10,13 @@ import {
     TextInput,
     TouchableWithoutFeedback,
 } from 'react-native';
-
-
-// async function createNewBar({ name, address, phoneNumber }) {
-//   const bar = {
-//     name,
-//     address,
-//     phoneNumber,
-//   };
-//   await API.graphql(graphqlOperation(createBar, { input: bar }));
-// }
+import AppNavigator from '../navigation/AppNavigator';
 
 export const BarListScreen = () => {
     const dispatch = useDispatch();
     const bars = useSelector(state => {
-      console.log(state);
-      return state.bars;
+      return state.bars.bars;
     });
-    console.log('bahhhhs', bars);
-
-    if (!bars) return null;
   
     const [barFormData, onBarFormDataChange] = useState({
         name: '',
@@ -75,19 +60,19 @@ export const BarListScreen = () => {
           <Button
             title='Add Bar'
             onPress={() => {
-              // createNewBar({
-              //   name: barFormData.name,
-              //   address: barFormData.address,
-              //   phoneNumber: barFormData.phoneNumber,
-              // });
+              dispatch(createNewBar({
+                name: barFormData.name,
+                address: barFormData.address,
+                phoneNumber: barFormData.phoneNumber,
+              }));
               Keyboard.dismiss();
             }}
           />
-          {/* {bars.map((bar, i) => (
+          {bars && bars.map((bar, i) => (
             <Text key={bar.id}>
               {bar.name}, {bar.address}: {bar.phoneNumber}
             </Text>
-          ))} */}
+          ))}
         </View>
       </TouchableWithoutFeedback>
     )

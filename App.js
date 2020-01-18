@@ -4,25 +4,28 @@ import * as Font from 'expo-font';
 
 import React from 'react';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
-import reducers from './redux/reducers'
+import rootReducer from './redux/reducers'
+import thunkMiddleware from 'redux-thunk'
+import { createStore, applyMiddleware } from 'redux'
 import { BarListScreen } from './screens/BarListScreen';
 
 import { Ionicons } from '@expo/vector-icons';
 // AWS
-import API, { graphqlOperation } from '@aws-amplify/api';
+import API from '@aws-amplify/api';
 import PubSub from '@aws-amplify/pubsub';
-// GraphQL
-import { createBar } from './src/graphql/mutations';
-import { listBars } from './src/graphql/queries';
 
-import AppNavigator from './navigation/AppNavigator';
 
 import config from './aws-exports';
 API.configure(config); // Configure Amplify
 PubSub.configure(config);
 
-const store = createStore(reducers);
+
+const store = createStore(
+  rootReducer,
+  applyMiddleware(
+    thunkMiddleware, // lets us dispatch() functions
+  )
+);
 
 export default function App() {
   return (
