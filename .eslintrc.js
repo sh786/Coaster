@@ -2,6 +2,7 @@ module.exports = {
   env: {
     browser: true,
     es6: true,
+    node: true,
   },
   globals: {
     Atomics: 'readonly',
@@ -15,9 +16,11 @@ module.exports = {
     sourceType: 'module',
   },
   plugins: ['react'],
-  rules: {},
-  extends: [
-    "eslint:recommended",
-    "plugin:react/recommended"
-  ]
+  rules: {
+    'no-unused-vars': [
+      'warn',
+      { vars: 'all', args: 'after-used', ignoreRestSiblings: false },
+    ],
+  },
+  extends: ['eslint:recommended', 'plugin:react/recommended'],
 };
