@@ -10,7 +10,6 @@ import {
     TextInput,
     TouchableWithoutFeedback,
 } from 'react-native';
-import AppNavigator from '../navigation/AppNavigator';
 
 export const BarListScreen = () => {
     const dispatch = useDispatch();
