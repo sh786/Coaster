@@ -13,7 +13,7 @@ import Logo from '../components/Logo';
 import TabBarIcon from '../components/TabBarIcon';
 
 
-const Lobby = (props) => {
+const VenueScreen = (props) => {
     const dispatch = useDispatch();
     const bars = useSelector(state => {
       return state.bars.bars;
@@ -26,33 +26,14 @@ const Lobby = (props) => {
     return (
         <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
             <View style={styles.container}>
-            {bars && bars.map((bar, i) => (
-                <Text key={bar.id}>
-                {bar.name}, {bar.address}: {bar.phoneNumber}
-                </Text>
-            ))}
-            <Button title="Venue Page" onPress={() => props.navigation.navigate('Venue', {exampleProp: 'This is an example prop'})} />
+                <Text>{props.navigation.getParam('exampleProp', 'default value')}</Text>
             </View>
         </TouchableWithoutFeedback>
     )
 }
 
-Lobby.navigationOptions = {
+VenueScreen.navigationOptions = {
     headerTitle: <Logo />,
-    headerLeft: 
-        <TabBarIcon
-            name="md-person"
-            size={32}
-            color="white"
-            style={{marginLeft: 10}}
-        />,
-    headerRight:
-        <TabBarIcon
-            name="md-funnel"
-            size={32}
-            color="white"
-            style={{marginRight: 10}}
-        />,
 }
 
 const styles = StyleSheet.create({
@@ -80,4 +61,4 @@ const styles = StyleSheet.create({
     },
   });
 
-export default Lobby;
+export default VenueScreen;

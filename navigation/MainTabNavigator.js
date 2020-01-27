@@ -4,6 +4,7 @@ import { createStackNavigator } from 'react-navigation-stack';
 import Logo from '../components/Logo';
 
 import LobbyScreen from '../screens/Lobby';
+import VenueScreen from '../screens/VenueScreen';
 
 const config = Platform.select({
   web: { headerMode: 'screen' },
@@ -13,6 +14,7 @@ const config = Platform.select({
 const MainTabNavigator = createStackNavigator(
   {
     Lobby: LobbyScreen,
+    Venue: VenueScreen,
   },
   {
     initialRouteName: 'Lobby',
