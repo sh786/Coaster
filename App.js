@@ -7,18 +7,16 @@ import { Provider } from 'react-redux';
 import rootReducer from './redux/reducers'
 import thunkMiddleware from 'redux-thunk'
 import { createStore, applyMiddleware } from 'redux'
-import { BarListScreen } from './screens/BarListScreen';
 
 import { Ionicons } from '@expo/vector-icons';
 // AWS
 import API from '@aws-amplify/api';
 import PubSub from '@aws-amplify/pubsub';
-
+import AppNavigator from './navigation/AppNavigator';
 
 import config from './aws-exports';
 API.configure(config); // Configure Amplify
 PubSub.configure(config);
-
 
 const store = createStore(
   rootReducer,
@@ -30,7 +28,7 @@ const store = createStore(
 export default function App() {
   return (
     <Provider store={store}>
-        <BarListScreen />
+        <AppNavigator />
     </Provider>
   );
 
