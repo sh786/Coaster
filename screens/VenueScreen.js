@@ -10,7 +10,7 @@ import {
     Image,
 } from 'react-native';
 import Logo from '../components/Logo';
-import TabBarIcon from '../components/TabBarIcon';
+import Icon from '../components/Icon';
 import HeaderTitle from '../components/HeaderTitle';
 
 import {styles} from '../styles/VenueStyles';

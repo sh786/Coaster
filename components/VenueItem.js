@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, TouchableWithoutFeedback } from 'react-native';
 
 import Colors from '../constants/Colors';
+import Icon from './Icon';
 
 const VenueItem = ({venue, navigation}) => {
   return (
@@ -10,13 +11,17 @@ const VenueItem = ({venue, navigation}) => {
         <View style={styles.venueItemLeftContent}>
           <Text style={styles.venueItemName}>{venue.name}</Text>
           <Text style={styles.venueItemStreetAddress}>{venue.address}</Text>
+          <Text style={styles.venueItemStreetAddress}>{`${venue.city}, ${venue.state}`}</Text>
           <Text style={styles.venueItemDistance}>0.6mi</Text>
         </View>
         <View style={styles.venueItemRightContent}>
-          <Text style={styles.venueItemPrice}>$10+</Text>
-          <View style={styles.venueItemOffer}>
-            <Text style={styles.venueItemOfferText}>20%</Text>
-          </View>
+          <Text style={styles.venueItemPrice}>{venue.description}</Text>
+        </View>
+        <View style={styles.arrowContainer}>
+          <Icon name="ios-arrow-forward"
+            size={32}
+            color="#051622"
+          />
         </View>
       </View>
     </TouchableWithoutFeedback>
@@ -31,10 +36,17 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     backgroundColor: '#fff',
     height: 80,
-    width: 300,
-    padding: 8,
+    width: '95%',
+    padding: 10,
     marginBottom: 20,
-    // boxShadow: '0 10px 20px rgba(0,0,0,0.19), 0 2px 4px rgba(0,0,0,0.23)',
+    borderColor: '#ddd',
+    borderBottomWidth: 0,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.8,
+    shadowRadius: 2,
+    fontFamily: 'san-francisco',
+    borderRadius: 10,
   },
   venueItemLeftContent: {
     display: 'flex',
@@ -57,13 +69,14 @@ const styles = StyleSheet.create({
   venueItemRightContent: {
     display: 'flex',
     position: 'relative',
-    flex: 1,
+    flex: 2,
     flexDirection: 'column',
     justifyContent: 'flex-start',
     textAlign: 'right',
+    marginHorizontal: 10,
   },
   venueItemPrice: {
-    fontSize: 15,
+    fontSize: 12,
   },
   venueItemOffer: {
     position: 'absolute',
@@ -82,4 +95,10 @@ const styles = StyleSheet.create({
     fontSize: 10,
     color: '#fff',
   },
+  arrowContainer: {
+    flex: 0.4,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  }
 });

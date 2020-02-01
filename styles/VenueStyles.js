@@ -11,8 +11,8 @@ export const styles = StyleSheet.create({
       height: 200,
     },
     description: {
-      fontFamily: 'space-mono',
-      fontSize: 13,
+      fontFamily: 'san-francisco',
+      fontSize: 16,
       textAlign: 'center',
       color: '#fff',
       marginRight: 10,

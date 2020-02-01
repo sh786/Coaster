@@ -7,7 +7,8 @@ import { StyleSheet, Text, View } from 'react-native';
 import VenueItem from '../components/VenueItem';
 import colors from '../constants/Colors.js';
 import Logo from '../components/Logo';
-import TabBarIcon from '../components/TabBarIcon';
+import Icon from '../components/Icon';
+import SortView from '../components/SortView';
 
 export const VenueLobby = (props) => {
   const dispatch = useDispatch();
@@ -21,8 +22,8 @@ export const VenueLobby = (props) => {
 
   return (
     <View style={styles.venueContainer}>
-      {bars.map((b, i) => {
-        return <VenueItem key={i} venue={b} navigation={props.navigation} />;
+      {[1,2,3,4,5,6,7,8,9,1,2,2,2].map((b, i) => {
+        return <VenueItem key={i} venue={bars.length ? bars[0] : {}} navigation={props.navigation} />;
       })}
     </View>
   );
@@ -31,19 +32,14 @@ export const VenueLobby = (props) => {
 VenueLobby.navigationOptions = {
   headerTitle: <Logo />,
   headerLeft: 
-      <TabBarIcon
+      <Icon
           name="md-person"
           size={32}
           color="white"
           style={{marginLeft: 10}}
       />,
   headerRight:
-      <TabBarIcon
-          name="md-funnel"
-          size={32}
-          color="white"
-          style={{marginRight: 10}}
-      />,
+      <SortView />,
 }
 
 const styles = StyleSheet.create({

@@ -10,7 +10,7 @@ import {
     Button,
 } from 'react-native';
 import Logo from '../components/Logo';
-import TabBarIcon from '../components/TabBarIcon';
+import Icon from '../components/Icon';
 
 
 const Lobby = (props) => {
@@ -40,14 +40,14 @@ const Lobby = (props) => {
 Lobby.navigationOptions = {
     headerTitle: <Logo />,
     headerLeft: 
-        <TabBarIcon
+        <Icon
             name="md-person"
             size={32}
             color="white"
             style={{marginLeft: 10}}
         />,
     headerRight:
-        <TabBarIcon
+        <Icon
             name="md-funnel"
             size={32}
             color="white"
