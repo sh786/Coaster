@@ -10,7 +10,7 @@ export const fetchBars = () => {
         return API.graphql(graphqlOperation(listBars))
             .then((bars) => {
                 dispatch({ type: 'FETCH_BARS_SUCCESS', payload: bars.data.listBars.items });
-            }, () => dispatch({ type: 'FETCH_BARS_FAILURE' }));
+            }, e => dispatch({ type: 'FETCH_BARS_FAILURE', payload: e }));
         }
 }
 

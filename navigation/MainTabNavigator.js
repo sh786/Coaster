@@ -3,7 +3,7 @@ import { Platform } from 'react-native';
 import { createStackNavigator } from 'react-navigation-stack';
 import Logo from '../components/Logo';
 
-import LobbyScreen from '../screens/Lobby';
+import { VenueLobby } from '../screens/VenueLobby';
 import VenueScreen from '../screens/VenueScreen';
 
 const config = Platform.select({
@@ -13,7 +13,7 @@ const config = Platform.select({
 
 const MainTabNavigator = createStackNavigator(
   {
-    Lobby: LobbyScreen,
+    Lobby: VenueLobby,
     Venue: VenueScreen,
   },
   {

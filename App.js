@@ -4,9 +4,9 @@ import * as Font from 'expo-font';
 
 import React from 'react';
 import { Provider } from 'react-redux';
-import rootReducer from './redux/reducers'
-import thunkMiddleware from 'redux-thunk'
-import { createStore, applyMiddleware } from 'redux'
+import rootReducer from './redux/reducers';
+import thunkMiddleware from 'redux-thunk';
+import { createStore, applyMiddleware } from 'redux';
 
 import { Ionicons } from '@expo/vector-icons';
 // AWS
@@ -22,7 +22,7 @@ const store = createStore(
   rootReducer,
   applyMiddleware(
     thunkMiddleware, // lets us dispatch() functions
-  )
+  ),
 );
 
 export default function App() {

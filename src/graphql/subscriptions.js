@@ -1,171 +1,31 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const onCreateBlog = `subscription OnCreateBlog {
-  onCreateBlog {
-    id
-    name
-    posts {
-      items {
-        id
-        title
-      }
-      nextToken
-    }
-  }
-}
-`;
-export const onUpdateBlog = `subscription OnUpdateBlog {
-  onUpdateBlog {
-    id
-    name
-    posts {
-      items {
-        id
-        title
-      }
-      nextToken
-    }
-  }
-}
-`;
-export const onDeleteBlog = `subscription OnDeleteBlog {
-  onDeleteBlog {
-    id
-    name
-    posts {
-      items {
-        id
-        title
-      }
-      nextToken
-    }
-  }
-}
-`;
-export const onCreatePost = `subscription OnCreatePost {
-  onCreatePost {
-    id
-    title
-    blog {
-      id
-      name
-      posts {
-        nextToken
-      }
-    }
-    comments {
-      items {
-        id
-        content
-      }
-      nextToken
-    }
-  }
-}
-`;
-export const onUpdatePost = `subscription OnUpdatePost {
-  onUpdatePost {
-    id
-    title
-    blog {
-      id
-      name
-      posts {
-        nextToken
-      }
-    }
-    comments {
-      items {
-        id
-        content
-      }
-      nextToken
-    }
-  }
-}
-`;
-export const onDeletePost = `subscription OnDeletePost {
-  onDeletePost {
-    id
-    title
-    blog {
-      id
-      name
-      posts {
-        nextToken
-      }
-    }
-    comments {
-      items {
-        id
-        content
-      }
-      nextToken
-    }
-  }
-}
-`;
-export const onCreateComment = `subscription OnCreateComment {
-  onCreateComment {
-    id
-    content
-    post {
-      id
-      title
-      blog {
-        id
-        name
-      }
-      comments {
-        nextToken
-      }
-    }
-  }
-}
-`;
-export const onUpdateComment = `subscription OnUpdateComment {
-  onUpdateComment {
-    id
-    content
-    post {
-      id
-      title
-      blog {
-        id
-        name
-      }
-      comments {
-        nextToken
-      }
-    }
-  }
-}
-`;
-export const onDeleteComment = `subscription OnDeleteComment {
-  onDeleteComment {
-    id
-    content
-    post {
-      id
-      title
-      blog {
-        id
-        name
-      }
-      comments {
-        nextToken
-      }
-    }
-  }
-}
-`;
 export const onCreateBar = `subscription OnCreateBar {
   onCreateBar {
     id
     name
     address
+    city
+    state
     phoneNumber
+    lat
+    lon
+    description
+    coverPhoto
+    socialLinks
+    rules
+    events {
+      items {
+        id
+        title
+        description
+        startTime
+        endTime
+        rules
+      }
+      nextToken
+    }
   }
 }
 `;
@@ -174,7 +34,26 @@ export const onUpdateBar = `subscription OnUpdateBar {
     id
     name
     address
+    city
+    state
     phoneNumber
+    lat
+    lon
+    description
+    coverPhoto
+    socialLinks
+    rules
+    events {
+      items {
+        id
+        title
+        description
+        startTime
+        endTime
+        rules
+      }
+      nextToken
+    }
   }
 }
 `;
@@ -183,7 +62,251 @@ export const onDeleteBar = `subscription OnDeleteBar {
     id
     name
     address
+    city
+    state
     phoneNumber
+    lat
+    lon
+    description
+    coverPhoto
+    socialLinks
+    rules
+    events {
+      items {
+        id
+        title
+        description
+        startTime
+        endTime
+        rules
+      }
+      nextToken
+    }
+  }
+}
+`;
+export const onCreateEvent = `subscription OnCreateEvent {
+  onCreateEvent {
+    id
+    bar {
+      id
+      name
+      address
+      city
+      state
+      phoneNumber
+      lat
+      lon
+      description
+      coverPhoto
+      socialLinks
+      rules
+      events {
+        nextToken
+      }
+    }
+    title
+    description
+    ticketOffers {
+      items {
+        id
+        title
+        description
+        capacity
+        expiration
+        price
+      }
+      nextToken
+    }
+    startTime
+    endTime
+    rules
+  }
+}
+`;
+export const onUpdateEvent = `subscription OnUpdateEvent {
+  onUpdateEvent {
+    id
+    bar {
+      id
+      name
+      address
+      city
+      state
+      phoneNumber
+      lat
+      lon
+      description
+      coverPhoto
+      socialLinks
+      rules
+      events {
+        nextToken
+      }
+    }
+    title
+    description
+    ticketOffers {
+      items {
+        id
+        title
+        description
+        capacity
+        expiration
+        price
+      }
+      nextToken
+    }
+    startTime
+    endTime
+    rules
+  }
+}
+`;
+export const onDeleteEvent = `subscription OnDeleteEvent {
+  onDeleteEvent {
+    id
+    bar {
+      id
+      name
+      address
+      city
+      state
+      phoneNumber
+      lat
+      lon
+      description
+      coverPhoto
+      socialLinks
+      rules
+      events {
+        nextToken
+      }
+    }
+    title
+    description
+    ticketOffers {
+      items {
+        id
+        title
+        description
+        capacity
+        expiration
+        price
+      }
+      nextToken
+    }
+    startTime
+    endTime
+    rules
+  }
+}
+`;
+export const onCreateTicketOffer = `subscription OnCreateTicketOffer {
+  onCreateTicketOffer {
+    id
+    title
+    description
+    capacity
+    expiration
+    price
+    event {
+      id
+      bar {
+        id
+        name
+        address
+        city
+        state
+        phoneNumber
+        lat
+        lon
+        description
+        coverPhoto
+        socialLinks
+        rules
+      }
+      title
+      description
+      ticketOffers {
+        nextToken
+      }
+      startTime
+      endTime
+      rules
+    }
+  }
+}
+`;
+export const onUpdateTicketOffer = `subscription OnUpdateTicketOffer {
+  onUpdateTicketOffer {
+    id
+    title
+    description
+    capacity
+    expiration
+    price
+    event {
+      id
+      bar {
+        id
+        name
+        address
+        city
+        state
+        phoneNumber
+        lat
+        lon
+        description
+        coverPhoto
+        socialLinks
+        rules
+      }
+      title
+      description
+      ticketOffers {
+        nextToken
+      }
+      startTime
+      endTime
+      rules
+    }
+  }
+}
+`;
+export const onDeleteTicketOffer = `subscription OnDeleteTicketOffer {
+  onDeleteTicketOffer {
+    id
+    title
+    description
+    capacity
+    expiration
+    price
+    event {
+      id
+      bar {
+        id
+        name
+        address
+        city
+        state
+        phoneNumber
+        lat
+        lon
+        description
+        coverPhoto
+        socialLinks
+        rules
+      }
+      title
+      description
+      ticketOffers {
+        nextToken
+      }
+      startTime
+      endTime
+      rules
+    }
   }
 }
 `;

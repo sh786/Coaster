@@ -1,192 +1,6 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const createBlog = `mutation CreateBlog(
-  $input: CreateBlogInput!
-  $condition: ModelBlogConditionInput
-) {
-  createBlog(input: $input, condition: $condition) {
-    id
-    name
-    posts {
-      items {
-        id
-        title
-      }
-      nextToken
-    }
-  }
-}
-`;
-export const updateBlog = `mutation UpdateBlog(
-  $input: UpdateBlogInput!
-  $condition: ModelBlogConditionInput
-) {
-  updateBlog(input: $input, condition: $condition) {
-    id
-    name
-    posts {
-      items {
-        id
-        title
-      }
-      nextToken
-    }
-  }
-}
-`;
-export const deleteBlog = `mutation DeleteBlog(
-  $input: DeleteBlogInput!
-  $condition: ModelBlogConditionInput
-) {
-  deleteBlog(input: $input, condition: $condition) {
-    id
-    name
-    posts {
-      items {
-        id
-        title
-      }
-      nextToken
-    }
-  }
-}
-`;
-export const createPost = `mutation CreatePost(
-  $input: CreatePostInput!
-  $condition: ModelPostConditionInput
-) {
-  createPost(input: $input, condition: $condition) {
-    id
-    title
-    blog {
-      id
-      name
-      posts {
-        nextToken
-      }
-    }
-    comments {
-      items {
-        id
-        content
-      }
-      nextToken
-    }
-  }
-}
-`;
-export const updatePost = `mutation UpdatePost(
-  $input: UpdatePostInput!
-  $condition: ModelPostConditionInput
-) {
-  updatePost(input: $input, condition: $condition) {
-    id
-    title
-    blog {
-      id
-      name
-      posts {
-        nextToken
-      }
-    }
-    comments {
-      items {
-        id
-        content
-      }
-      nextToken
-    }
-  }
-}
-`;
-export const deletePost = `mutation DeletePost(
-  $input: DeletePostInput!
-  $condition: ModelPostConditionInput
-) {
-  deletePost(input: $input, condition: $condition) {
-    id
-    title
-    blog {
-      id
-      name
-      posts {
-        nextToken
-      }
-    }
-    comments {
-      items {
-        id
-        content
-      }
-      nextToken
-    }
-  }
-}
-`;
-export const createComment = `mutation CreateComment(
-  $input: CreateCommentInput!
-  $condition: ModelCommentConditionInput
-) {
-  createComment(input: $input, condition: $condition) {
-    id
-    content
-    post {
-      id
-      title
-      blog {
-        id
-        name
-      }
-      comments {
-        nextToken
-      }
-    }
-  }
-}
-`;
-export const updateComment = `mutation UpdateComment(
-  $input: UpdateCommentInput!
-  $condition: ModelCommentConditionInput
-) {
-  updateComment(input: $input, condition: $condition) {
-    id
-    content
-    post {
-      id
-      title
-      blog {
-        id
-        name
-      }
-      comments {
-        nextToken
-      }
-    }
-  }
-}
-`;
-export const deleteComment = `mutation DeleteComment(
-  $input: DeleteCommentInput!
-  $condition: ModelCommentConditionInput
-) {
-  deleteComment(input: $input, condition: $condition) {
-    id
-    content
-    post {
-      id
-      title
-      blog {
-        id
-        name
-      }
-      comments {
-        nextToken
-      }
-    }
-  }
-}
-`;
 export const createBar = `mutation CreateBar(
   $input: CreateBarInput!
   $condition: ModelBarConditionInput
@@ -195,7 +9,26 @@ export const createBar = `mutation CreateBar(
     id
     name
     address
+    city
+    state
     phoneNumber
+    lat
+    lon
+    description
+    coverPhoto
+    socialLinks
+    rules
+    events {
+      items {
+        id
+        title
+        description
+        startTime
+        endTime
+        rules
+      }
+      nextToken
+    }
   }
 }
 `;
@@ -207,7 +40,26 @@ export const updateBar = `mutation UpdateBar(
     id
     name
     address
+    city
+    state
     phoneNumber
+    lat
+    lon
+    description
+    coverPhoto
+    socialLinks
+    rules
+    events {
+      items {
+        id
+        title
+        description
+        startTime
+        endTime
+        rules
+      }
+      nextToken
+    }
   }
 }
 `;
@@ -219,7 +71,269 @@ export const deleteBar = `mutation DeleteBar(
     id
     name
     address
+    city
+    state
     phoneNumber
+    lat
+    lon
+    description
+    coverPhoto
+    socialLinks
+    rules
+    events {
+      items {
+        id
+        title
+        description
+        startTime
+        endTime
+        rules
+      }
+      nextToken
+    }
+  }
+}
+`;
+export const createEvent = `mutation CreateEvent(
+  $input: CreateEventInput!
+  $condition: ModelEventConditionInput
+) {
+  createEvent(input: $input, condition: $condition) {
+    id
+    bar {
+      id
+      name
+      address
+      city
+      state
+      phoneNumber
+      lat
+      lon
+      description
+      coverPhoto
+      socialLinks
+      rules
+      events {
+        nextToken
+      }
+    }
+    title
+    description
+    ticketOffers {
+      items {
+        id
+        title
+        description
+        capacity
+        expiration
+        price
+      }
+      nextToken
+    }
+    startTime
+    endTime
+    rules
+  }
+}
+`;
+export const updateEvent = `mutation UpdateEvent(
+  $input: UpdateEventInput!
+  $condition: ModelEventConditionInput
+) {
+  updateEvent(input: $input, condition: $condition) {
+    id
+    bar {
+      id
+      name
+      address
+      city
+      state
+      phoneNumber
+      lat
+      lon
+      description
+      coverPhoto
+      socialLinks
+      rules
+      events {
+        nextToken
+      }
+    }
+    title
+    description
+    ticketOffers {
+      items {
+        id
+        title
+        description
+        capacity
+        expiration
+        price
+      }
+      nextToken
+    }
+    startTime
+    endTime
+    rules
+  }
+}
+`;
+export const deleteEvent = `mutation DeleteEvent(
+  $input: DeleteEventInput!
+  $condition: ModelEventConditionInput
+) {
+  deleteEvent(input: $input, condition: $condition) {
+    id
+    bar {
+      id
+      name
+      address
+      city
+      state
+      phoneNumber
+      lat
+      lon
+      description
+      coverPhoto
+      socialLinks
+      rules
+      events {
+        nextToken
+      }
+    }
+    title
+    description
+    ticketOffers {
+      items {
+        id
+        title
+        description
+        capacity
+        expiration
+        price
+      }
+      nextToken
+    }
+    startTime
+    endTime
+    rules
+  }
+}
+`;
+export const createTicketOffer = `mutation CreateTicketOffer(
+  $input: CreateTicketOfferInput!
+  $condition: ModelTicketOfferConditionInput
+) {
+  createTicketOffer(input: $input, condition: $condition) {
+    id
+    title
+    description
+    capacity
+    expiration
+    price
+    event {
+      id
+      bar {
+        id
+        name
+        address
+        city
+        state
+        phoneNumber
+        lat
+        lon
+        description
+        coverPhoto
+        socialLinks
+        rules
+      }
+      title
+      description
+      ticketOffers {
+        nextToken
+      }
+      startTime
+      endTime
+      rules
+    }
+  }
+}
+`;
+export const updateTicketOffer = `mutation UpdateTicketOffer(
+  $input: UpdateTicketOfferInput!
+  $condition: ModelTicketOfferConditionInput
+) {
+  updateTicketOffer(input: $input, condition: $condition) {
+    id
+    title
+    description
+    capacity
+    expiration
+    price
+    event {
+      id
+      bar {
+        id
+        name
+        address
+        city
+        state
+        phoneNumber
+        lat
+        lon
+        description
+        coverPhoto
+        socialLinks
+        rules
+      }
+      title
+      description
+      ticketOffers {
+        nextToken
+      }
+      startTime
+      endTime
+      rules
+    }
+  }
+}
+`;
+export const deleteTicketOffer = `mutation DeleteTicketOffer(
+  $input: DeleteTicketOfferInput!
+  $condition: ModelTicketOfferConditionInput
+) {
+  deleteTicketOffer(input: $input, condition: $condition) {
+    id
+    title
+    description
+    capacity
+    expiration
+    price
+    event {
+      id
+      bar {
+        id
+        name
+        address
+        city
+        state
+        phoneNumber
+        lat
+        lon
+        description
+        coverPhoto
+        socialLinks
+        rules
+      }
+      title
+      description
+      ticketOffers {
+        nextToken
+      }
+      startTime
+      endTime
+      rules
+    }
   }
 }
 `;

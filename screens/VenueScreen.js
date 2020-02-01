@@ -15,7 +15,8 @@ import HeaderTitle from '../components/HeaderTitle';
 
 import {styles} from '../styles/VenueStyles';
 
-const VenueScreen = (props) => {
+const VenueScreen = ({navigation}) => {
+    const venue = navigation.getParam('venue');
     const dispatch = useDispatch();
 
     return (
@@ -25,14 +26,14 @@ const VenueScreen = (props) => {
                     style={styles.image}
                     source={require('../assets/poodlesPics.jpg')}
                 />
-                <Text style={styles.description}>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</Text>
+                <Text style={styles.description}>{venue.description}</Text>
             </View>
         </TouchableWithoutFeedback>
     )
 }
 
 VenueScreen.navigationOptions = ({navigation}) => ({
-    headerTitle: <HeaderTitle title={navigation.getParam('headerTitle', 'Venue')} />,
+    headerTitle: <HeaderTitle title={navigation.getParam('venue', {name: 'venue'}).name} />,
 })
 
 export default VenueScreen;

@@ -1,121 +1,31 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const getBlog = `query GetBlog($id: ID!) {
-  getBlog(id: $id) {
-    id
-    name
-    posts {
-      items {
-        id
-        title
-      }
-      nextToken
-    }
-  }
-}
-`;
-export const listBlogs = `query ListBlogs(
-  $filter: ModelBlogFilterInput
-  $limit: Int
-  $nextToken: String
-) {
-  listBlogs(filter: $filter, limit: $limit, nextToken: $nextToken) {
-    items {
-      id
-      name
-      posts {
-        nextToken
-      }
-    }
-    nextToken
-  }
-}
-`;
-export const getPost = `query GetPost($id: ID!) {
-  getPost(id: $id) {
-    id
-    title
-    blog {
-      id
-      name
-      posts {
-        nextToken
-      }
-    }
-    comments {
-      items {
-        id
-        content
-      }
-      nextToken
-    }
-  }
-}
-`;
-export const listPosts = `query ListPosts(
-  $filter: ModelPostFilterInput
-  $limit: Int
-  $nextToken: String
-) {
-  listPosts(filter: $filter, limit: $limit, nextToken: $nextToken) {
-    items {
-      id
-      title
-      blog {
-        id
-        name
-      }
-      comments {
-        nextToken
-      }
-    }
-    nextToken
-  }
-}
-`;
-export const getComment = `query GetComment($id: ID!) {
-  getComment(id: $id) {
-    id
-    content
-    post {
-      id
-      title
-      blog {
-        id
-        name
-      }
-      comments {
-        nextToken
-      }
-    }
-  }
-}
-`;
-export const listComments = `query ListComments(
-  $filter: ModelCommentFilterInput
-  $limit: Int
-  $nextToken: String
-) {
-  listComments(filter: $filter, limit: $limit, nextToken: $nextToken) {
-    items {
-      id
-      content
-      post {
-        id
-        title
-      }
-    }
-    nextToken
-  }
-}
-`;
 export const getBar = `query GetBar($id: ID!) {
   getBar(id: $id) {
     id
     name
     address
+    city
+    state
     phoneNumber
+    lat
+    lon
+    description
+    coverPhoto
+    socialLinks
+    rules
+    events {
+      items {
+        id
+        title
+        description
+        startTime
+        endTime
+        rules
+      }
+      nextToken
+    }
   }
 }
 `;
@@ -125,7 +35,154 @@ export const listBars = `query ListBars($filter: ModelBarFilterInput, $limit: In
       id
       name
       address
+      city
+      state
       phoneNumber
+      lat
+      lon
+      description
+      coverPhoto
+      socialLinks
+      rules
+      events {
+        nextToken
+      }
+    }
+    nextToken
+  }
+}
+`;
+export const getEvent = `query GetEvent($id: ID!) {
+  getEvent(id: $id) {
+    id
+    bar {
+      id
+      name
+      address
+      city
+      state
+      phoneNumber
+      lat
+      lon
+      description
+      coverPhoto
+      socialLinks
+      rules
+      events {
+        nextToken
+      }
+    }
+    title
+    description
+    ticketOffers {
+      items {
+        id
+        title
+        description
+        capacity
+        expiration
+        price
+      }
+      nextToken
+    }
+    startTime
+    endTime
+    rules
+  }
+}
+`;
+export const listEvents = `query ListEvents(
+  $filter: ModelEventFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listEvents(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      bar {
+        id
+        name
+        address
+        city
+        state
+        phoneNumber
+        lat
+        lon
+        description
+        coverPhoto
+        socialLinks
+        rules
+      }
+      title
+      description
+      ticketOffers {
+        nextToken
+      }
+      startTime
+      endTime
+      rules
+    }
+    nextToken
+  }
+}
+`;
+export const getTicketOffer = `query GetTicketOffer($id: ID!) {
+  getTicketOffer(id: $id) {
+    id
+    title
+    description
+    capacity
+    expiration
+    price
+    event {
+      id
+      bar {
+        id
+        name
+        address
+        city
+        state
+        phoneNumber
+        lat
+        lon
+        description
+        coverPhoto
+        socialLinks
+        rules
+      }
+      title
+      description
+      ticketOffers {
+        nextToken
+      }
+      startTime
+      endTime
+      rules
+    }
+  }
+}
+`;
+export const listTicketOffers = `query ListTicketOffers(
+  $filter: ModelTicketOfferFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listTicketOffers(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      title
+      description
+      capacity
+      expiration
+      price
+      event {
+        id
+        title
+        description
+        startTime
+        endTime
+        rules
+      }
     }
     nextToken
   }
