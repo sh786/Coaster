@@ -31,7 +31,7 @@ const Lobby = (props) => {
                 {bar.name}, {bar.address}: {bar.phoneNumber}
                 </Text>
             ))}
-            <Button title="Venue Page" onPress={() => props.navigation.navigate('Venue', {exampleProp: 'This is an example prop'})} />
+            <Button title="Venue Page" onPress={() => props.navigation.navigate('Venue', {headerTitle: 'Poodles Pics'})} />
             </View>
         </TouchableWithoutFeedback>
     )

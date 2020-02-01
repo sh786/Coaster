@@ -3,62 +3,36 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchBars } from '../redux/actions';
 import {
     Keyboard,
-    StyleSheet,
     View,
     Text,
     TouchableWithoutFeedback,
     Button,
+    Image,
 } from 'react-native';
 import Logo from '../components/Logo';
 import TabBarIcon from '../components/TabBarIcon';
+import HeaderTitle from '../components/HeaderTitle';
 
+import {styles} from '../styles/VenueStyles';
 
 const VenueScreen = (props) => {
     const dispatch = useDispatch();
-    const bars = useSelector(state => {
-      return state.bars.bars;
-    });
-
-    useEffect(() => {
-      dispatch(fetchBars());
-    }, []);
 
     return (
         <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
             <View style={styles.container}>
-                <Text>{props.navigation.getParam('exampleProp', 'default value')}</Text>
+                <Image
+                    style={styles.image}
+                    source={require('../assets/poodlesPics.jpg')}
+                />
+                <Text style={styles.description}>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</Text>
             </View>
         </TouchableWithoutFeedback>
     )
 }
 
-VenueScreen.navigationOptions = {
-    headerTitle: <Logo />,
-}
-
-const styles = StyleSheet.create({
-    container: {
-      backgroundColor: '#1BA098',
-      alignItems: 'center',
-      justifyContent: 'center',
-      flex: 1,
-    },
-    formTitle: {
-      fontSize: 20,
-      fontWeight: '700',
-      marginBottom: 10,
-      color: 'deepskyblue',
-    },
-    barFormInput: {
-      height: 40,
-      width: 200,
-      borderColor: '#f1f1f1',
-      borderWidth: 1,
-      backgroundColor: '#fff',
-      padding: 4,
-      marginTop: 4,
-      marginBottom: 4,
-    },
-  });
+VenueScreen.navigationOptions = ({navigation}) => ({
+    headerTitle: <HeaderTitle title={navigation.getParam('headerTitle', 'Venue')} />,
+})
 
 export default VenueScreen;
