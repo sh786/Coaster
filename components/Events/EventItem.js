@@ -1,8 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, TouchableWithoutFeedback } from 'react-native';
 
-import Colors from '../constants/Colors';
-
 const EventItem = ({event, navigation}) => {
   return (
     <TouchableWithoutFeedback onPress={() => navigation.navigate('event', {event})}>
@@ -31,7 +29,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     backgroundColor: '#fff',
     height: 80,
-    width: 300,
+    width: '100%',
     padding: 8,
     marginBottom: 20,
     // boxShadow: '0 10px 20px rgba(0,0,0,0.19), 0 2px 4px rgba(0,0,0,0.23)',
@@ -72,7 +70,7 @@ const styles = StyleSheet.create({
     width: 30,
     height: 30,
     borderRadius: 50,
-    backgroundColor: Colors.accentColor,
+    backgroundColor: 'white',
     textAlign: 'center',
     marginRight: -23,
     marginBottom: -23,

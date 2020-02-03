@@ -5,6 +5,7 @@ export const styles = StyleSheet.create({
       backgroundColor: '#1BA098',
       alignItems: 'center',
       flex: 1,
+      width: '100%',
     },
     image: {
       width: '100%',
@@ -15,7 +16,29 @@ export const styles = StyleSheet.create({
       fontSize: 16,
       textAlign: 'center',
       color: '#fff',
-      marginRight: 10,
-      marginLeft: 10,
-    }
+      marginHorizontal: 10,
+    },
+    partition: {
+      backgroundColor: '#DEB992',
+      height: 1,
+      width: '95%',
+      marginVertical: 5,
+    },
+    eventListTitle: {
+      fontFamily: 'san-francisco',
+      fontSize: 20,
+      textAlign: 'center',
+      color: '#fff',
+      fontWeight: 'bold',
+      marginBottom: 5,
+    },
+    eventContainer: {
+      display: 'flex',
+      flex: 1,
+      width: '950%',
+      height: 'auto',
+      paddingVertical: 5,
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
   });

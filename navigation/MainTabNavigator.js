@@ -5,6 +5,7 @@ import Logo from '../components/Logo';
 
 import { VenueLobby } from '../screens/VenueLobby';
 import VenueScreen from '../screens/VenueScreen';
+import EventScreen from '../screens/EventScreen';
 
 const config = Platform.select({
   web: { headerMode: 'screen' },
@@ -15,6 +16,7 @@ const MainTabNavigator = createStackNavigator(
   {
     Lobby: VenueLobby,
     Venue: VenueScreen,
+    Event: EventScreen,
   },
   {
     initialRouteName: 'Lobby',
