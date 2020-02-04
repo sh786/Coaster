@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, TouchableWithoutFeedback } from 'react-native';
 
 const EventItem = ({event, navigation}) => {
   return (
-    <TouchableWithoutFeedback onPress={() => navigation.navigate('event', {event})}>
+    <TouchableWithoutFeedback onPress={() => navigation.navigate('Event', {event})}>
       <View style={styles.eventItemContainer} >
         <View style={styles.eventItemLeftContent}>
           <Text style={styles.eventItemName}>{event.name}</Text>

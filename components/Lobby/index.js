@@ -1,17 +1,17 @@
 import React, { useEffect } from 'react';
+import { ScrollView } from 'react-native-gesture-handler';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchBars } from '../redux/actions';
+import { fetchBars } from '../../redux/actions';
 
 import { StyleSheet} from 'react-native';
 
-import VenueItem from '../components/VenueItem';
-import colors from '../constants/Colors.js';
-import Logo from '../components/Logo';
-import Icon from '../components/Icon';
-import SortView from '../components/SortView';
-import { ScrollView } from 'react-native-gesture-handler';
+import VenueItem from './VenueItem';
+import colors from '../../constants/Colors.js';
+import Logo from '../UI/Logo';
+import Icon from '../UI/Icon';
+import SortView from './SortView';
 
-export const VenueLobby = (props) => {
+const VenueLobby = (props) => {
   const dispatch = useDispatch();
   const bars = useSelector(state => {
     return state.bars.bars;
@@ -56,3 +56,5 @@ const styles = StyleSheet.create({
     paddingVertical: 5,
   },
 });
+
+export default VenueLobby;

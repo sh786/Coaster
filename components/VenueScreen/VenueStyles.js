@@ -1,4 +1,5 @@
 import {StyleSheet} from 'react-native';
+import Colors from '../../constants/Colors';
 
 export const styles = StyleSheet.create({
     container: {
@@ -19,7 +20,7 @@ export const styles = StyleSheet.create({
       marginHorizontal: 10,
     },
     partition: {
-      backgroundColor: '#DEB992',
+      backgroundColor: Colors.accentColor,
       height: 1,
       width: '95%',
       marginVertical: 5,
@@ -35,7 +36,7 @@ export const styles = StyleSheet.create({
     eventContainer: {
       display: 'flex',
       flex: 1,
-      width: '950%',
+      width: '95%',
       height: 'auto',
       paddingVertical: 5,
       alignItems: 'center',

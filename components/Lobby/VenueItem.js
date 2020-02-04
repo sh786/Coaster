@@ -1,8 +1,8 @@
 import React from 'react';
 import { StyleSheet, Text, View, TouchableWithoutFeedback } from 'react-native';
 
-import Colors from '../constants/Colors';
-import Icon from './Icon';
+import Colors from '../../constants/Colors';
+import Icon from '../UI/Icon';
 
 const VenueItem = ({venue, navigation}) => {
   return (

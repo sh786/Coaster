@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {View, Text, StyleSheet, TouchableWithoutFeedback} from 'react-native';
-import Icon from './Icon';
+import Icon from '../UI/Icon';
+import Colors from '../../constants/Colors';
 
-
-const SortView = (props) => {
+const SortView = () => {
     const [enableEdit, setEnableEdit] = useState(false);
 
     /* TODO: bind redux action to sort bars by whatever option user selects */
@@ -13,7 +13,7 @@ const SortView = (props) => {
                 <Icon
                     name="md-funnel"
                     size={32}
-                    color={enableEdit ? '#DEB992' : 'white'}
+                    color={enableEdit ? Colors.accentColor : 'white'}
                     style={{flex: 1, marginRight: 20, marginTop: 10}}
                 />
                 {
