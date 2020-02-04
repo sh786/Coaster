@@ -2,7 +2,7 @@ import React from 'react';
 import { Text, View, TouchableWithoutFeedback } from 'react-native';
 
 import {styles} from './styles/VenueItemStyles';
-import Icon from '../UI/Icon';
+import Icon from '../Common/Icon';
 
 const VenueItem = ({venue, navigation}) => {
   return (

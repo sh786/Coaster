@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {View, Text, TouchableWithoutFeedback} from 'react-native';
-import Icon from '../UI/Icon';
+import Icon from '../Common/Icon';
 import Colors from '../../constants/Colors';
 import {styles} from './styles/SortViewStyles';
 

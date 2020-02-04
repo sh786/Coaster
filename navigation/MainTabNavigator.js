@@ -6,7 +6,7 @@ import VenueLobby from '../components/Lobby';
 import VenueScreen from '../components/VenueScreen';
 import EventScreen from '../components/EventScreen';
 import Colors from '../constants/Colors';
-import Logo from '../components/UI/Logo';
+import Logo from '../components/Common/Logo';
 
 const config = Platform.select({
   web: { headerMode: 'screen' },

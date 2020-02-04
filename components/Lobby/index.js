@@ -5,8 +5,8 @@ import { fetchBars } from '../../redux/actions';
 
 import VenueItem from './VenueItem';
 import {styles} from './styles/VenueLobbyStyles';
-import Logo from '../UI/Logo';
-import Icon from '../UI/Icon';
+import Logo from '../Common/Logo';
+import Icon from '../Common/Icon';
 import SortView from './SortView';
 
 const VenueLobby = (props) => {
