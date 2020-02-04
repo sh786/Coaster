@@ -3,10 +3,8 @@ import { ScrollView } from 'react-native-gesture-handler';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchBars } from '../../redux/actions';
 
-import { StyleSheet} from 'react-native';
-
 import VenueItem from './VenueItem';
-import colors from '../../constants/Colors.js';
+import {styles} from './styles/VenueLobbyStyles';
 import Logo from '../UI/Logo';
 import Icon from '../UI/Icon';
 import SortView from './SortView';
@@ -48,13 +46,5 @@ VenueLobby.navigationOptions = {
   headerRight:
       <SortView />,
 }
-
-const styles = StyleSheet.create({
-  venueContainer: {
-    flex: 1,
-    backgroundColor: colors.primaryColor,
-    paddingVertical: 5,
-  },
-});
 
 export default VenueLobby;

@@ -9,7 +9,7 @@ import {
 import HeaderTitle from '../Header/HeaderTitle';
 import EventItem from './EventItem';
 
-import {styles} from './VenueStyles';
+import {styles} from './styles/VenueStyles';
 import { ScrollView } from 'react-native-gesture-handler';
 
 const VenueScreen = ({navigation}) => {
