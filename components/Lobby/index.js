@@ -1,17 +1,15 @@
 import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchBars } from '../redux/actions';
-
-import { StyleSheet} from 'react-native';
-
-import VenueItem from '../components/VenueItem';
-import colors from '../constants/Colors.js';
-import Logo from '../components/Logo';
-import Icon from '../components/Icon';
-import SortView from '../components/SortView';
 import { ScrollView } from 'react-native-gesture-handler';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchBars } from '../../redux/actions';
 
-export const VenueLobby = (props) => {
+import VenueItem from './VenueItem';
+import {styles} from './styles/VenueLobbyStyles';
+import Logo from '../Common/Logo';
+import Icon from '../Common/Icon';
+import SortView from './SortView';
+
+const VenueLobby = (props) => {
   const dispatch = useDispatch();
   const bars = useSelector(state => {
     return state.bars.bars;
@@ -49,10 +47,4 @@ VenueLobby.navigationOptions = {
       <SortView />,
 }
 
-const styles = StyleSheet.create({
-  venueContainer: {
-    flex: 1,
-    backgroundColor: colors.primaryColor,
-    paddingVertical: 5,
-  },
-});
+export default VenueLobby;

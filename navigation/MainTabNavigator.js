@@ -1,11 +1,12 @@
 import React from 'react';
 import { Platform } from 'react-native';
 import { createStackNavigator } from 'react-navigation-stack';
-import Logo from '../components/Logo';
 
-import { VenueLobby } from '../screens/VenueLobby';
-import VenueScreen from '../screens/VenueScreen';
-import EventScreen from '../screens/EventScreen';
+import VenueLobby from '../components/Lobby';
+import VenueScreen from '../components/VenueScreen';
+import EventScreen from '../components/EventScreen';
+import Colors from '../constants/Colors';
+import Logo from '../components/Common/Logo';
 
 const config = Platform.select({
   web: { headerMode: 'screen' },
@@ -23,9 +24,9 @@ const MainTabNavigator = createStackNavigator(
     /* The header config from HomeScreen is now here */
     defaultNavigationOptions: {
       headerStyle: {
-        backgroundColor: '#051622',
+        backgroundColor: Colors.headerColor,
         height: 60,
-        borderBottomColor: '#DEB992',
+        borderBottomColor: Colors.accentColor,
         borderWidth: 1,
       },
       headerTintColor: '#fff',
