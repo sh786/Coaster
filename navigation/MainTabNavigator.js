@@ -24,7 +24,7 @@ const MainTabNavigator = createStackNavigator(
     /* The header config from HomeScreen is now here */
     defaultNavigationOptions: {
       headerStyle: {
-        backgroundColor: Colors.headerColor,
+        backgroundColor: Colors.primaryColor,
         height: 60,
         borderBottomColor: Colors.accentColor,
         borderWidth: 1,
@@ -36,14 +36,14 @@ const MainTabNavigator = createStackNavigator(
       headerTitle: <Logo />,
     },
   },
-  config
+  config,
 );
 
 MainTabNavigator.navigationOptions = {
-    headerStyle: {
-        backgroundColor: '#fff',
-    }
-}
+  headerStyle: {
+    backgroundColor: '#fff',
+  },
+};
 
 MainTabNavigator.path = '';
 
