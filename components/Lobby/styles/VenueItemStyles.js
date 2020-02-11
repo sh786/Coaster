@@ -5,7 +5,7 @@ export const styles = StyleSheet.create({
   venueItemContainer: {
     display: 'flex',
     flexDirection: 'row',
-    backgroundColor: Colors.lightGrayColor,
+    backgroundColor: Colors.whiteColor,
     height: 80,
     width: '95%',
     padding: 10,

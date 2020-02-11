@@ -4,5 +4,6 @@ export default {
   primaryColorDark: '#00a096',
   accentColor: '#DEB992',
   lightGrayColor: '#fafafa',
+  darkGrayColor: '#263238',
   whiteColor: '#ffffff',
 };
