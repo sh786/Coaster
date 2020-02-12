@@ -2,9 +2,9 @@ import React from 'react';
 import { Platform } from 'react-native';
 import { createStackNavigator } from 'react-navigation-stack';
 
-import VenueLobby from '../components/Lobby';
-import VenueScreen from '../components/VenueScreen';
-import EventScreen from '../components/EventScreen';
+import VenueLobby from '../components/Lobby/VenueLobby';
+import VenueScreen from '../components/VenueScreen/VenueScreen';
+import EventScreen from '../components/EventScreen/EventScreen';
 import Colors from '../constants/Colors';
 import Logo from '../components/Common/Logo';
 
