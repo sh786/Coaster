@@ -4,17 +4,17 @@ import {
     View,
     Text,
     TouchableWithoutFeedback,
+    Button,
 } from 'react-native';
 import HeaderTitle from '../Header/HeaderTitle';
 
 
 const EventScreen = ({navigation}) => {
-    const venue = navigation.getParam('venue');
-
     return (
         <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
             <View>
                 <Text>Event Screen</Text>
+                <Button title="checkout" onPress={() => navigation.navigate('Checkout', {test: 'yo'})} />
             </View>
         </TouchableWithoutFeedback>
     )

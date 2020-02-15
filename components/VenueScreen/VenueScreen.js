@@ -24,7 +24,6 @@ const VenueScreen = ({ navigation }) => {
   const callApi = async () => {
     try {
       const photoData = await API.get('mainApi', '/stockPhoto');
-      console.log('photoData: ', photoData);
       setPhotoData(photoData);
     } catch (err) {
       console.log({ err });
