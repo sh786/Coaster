@@ -63,7 +63,7 @@
 				"Timeout": "25",
 				"Code": {
 					"S3Bucket": "amplify-blizzardapp-dev-214430-deployment",
-					"S3Key": "amplify-builds/getStockPhoto-3036747651556f714544-build.zip"
+					"S3Key": "amplify-builds/getStockPhoto-62756445645754554d61-build.zip"
 				}
 			}
 		},
@@ -73,12 +73,12 @@
 				"RoleName": {
 					"Fn::If": [
 						"ShouldNotCreateEnvResources",
-						"blizzardappLambdaRoleca1ed829",
+						"blizzardappLambdaRole6d277f94",
 						{
 							"Fn::Join": [
 								"",
 								[
-									"blizzardappLambdaRoleca1ed829",
+									"blizzardappLambdaRole6d277f94",
 									"-",
 									{
 										"Ref": "env"

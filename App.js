@@ -2,7 +2,8 @@ import { AppLoading } from 'expo';
 import { Asset } from 'expo-asset';
 import * as Font from 'expo-font';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { Text } from 'react-native';
 import { Provider } from 'react-redux';
 import rootReducer from './redux/reducers';
 import thunkMiddleware from 'redux-thunk';
@@ -10,13 +11,13 @@ import { createStore, applyMiddleware } from 'redux';
 
 import { Ionicons } from '@expo/vector-icons';
 // AWS
+import Amplify from 'aws-amplify';
 import API from '@aws-amplify/api';
-import PubSub from '@aws-amplify/pubsub';
 import AppNavigator from './navigation/AppNavigator';
 
 import config from './aws-exports';
-API.configure(config); // Configure Amplify
-PubSub.configure(config);
+Amplify.configure(config);
+API.configure(config);
 
 const store = createStore(
   rootReducer,
@@ -30,7 +31,7 @@ export default function App() {
 
   return (
     <Provider store={store}>
-        <AppNavigator />
+      <AppNavigator />
     </Provider>
   );
 
@@ -57,6 +58,8 @@ async function loadResourcesAsync() {
     Asset.loadAsync([
       require('./assets/images/robot-dev.png'),
       require('./assets/images/robot-prod.png'),
+      require('./assets/images/drunk_leprechaun.png'),
+      require('./assets/images/poodlesPics.jpg'),
     ]),
     Font.loadAsync({
       // This is the font that we are using for our tab bar

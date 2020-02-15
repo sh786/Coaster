@@ -8,17 +8,47 @@ export const styles = StyleSheet.create({
     flex: 1,
     width: '100%',
   },
-
   image: {
-    width: '90%',
+    width: '96%',
     height: 200,
     marginVertical: '4%',
+    marginLeft: '4%',
   },
-  description: {
+  imageOverlay: {
+    position: 'absolute',
+    top: 0,
+    right: '4%',
+    bottom: 0,
+    left: 0,
+    padding: 8,
+    display: 'flex',
+    justifyContent: 'flex-end',
+    color: Colors.whiteColor,
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  },
+  venueName: {
+    fontSize: 30,
+    color: Colors.whiteColor,
+  },
+  venueAddress: {
+    color: Colors.whiteColor,
+    fontSize: 16,
+  },
+  venueCityState: {
+    color: Colors.whiteColor,
+    fontSize: 16,
+  },
+  details: {
+    display: 'flex',
+  },
+  detailsRow: {
+    display: 'flex',
+  },
+  detailsRowText: {
     fontFamily: 'san-francisco',
     fontSize: 16,
-    textAlign: 'center',
-    color: '#fff',
+    textAlign: 'left',
+    color: Colors.darkGrayColor,
     marginHorizontal: 10,
   },
   partition: {
