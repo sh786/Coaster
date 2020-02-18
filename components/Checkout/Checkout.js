@@ -9,49 +9,135 @@ import HeaderTitle from '../Header/HeaderTitle';
 import API from '@aws-amplify/api';
 import WebView from 'react-native-webview';
 
-
 const Checkout = ({navigation}) => {
+    const [webview, setWebview] = useState(null);
     const [clientToken, setClientToken] = useState('');
     const callApi = async () => {
         try {
             const response = await API.get('mainApi', '/client-token');
-            console.log('clientToken: ', response.token);
+            // console.log('clientToken: ', response.token);
             setClientToken(response.token)
         } catch (err) {
             console.log({ err });
         }
     };
 
-    console.log(clientToken)
+    // console.log(clientToken, webview)
     useEffect(() => {
         callApi();
     }, []);
 
+    if (webview) {
+      webview.postMessage({data: 'hi'});
+    }
+
     return (
         <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
             <WebView
-                source={{html: `<head>
-                <meta charset="utf-8">
-                <script src="https://js.braintreegateway.com/web/dropin/1.22.0/js/dropin.min.js"></script>
-              </head>
-              <body>
-                <div id="dropin-container"></div>
-                <button id="submit-button">Request payment method</button>
-                <script>
-                  var button = document.querySelector('#submit-button');
-              
-                  braintree.dropin.create({
-                    authorization: '${clientToken}',
-                    container: '#dropin-container'
-                  }, function (createErr, instance) {
-                    button.addEventListener('click', function () {
-                      instance.requestPaymentMethod(function (err, payload) {
-                        // Submit payload.nonce to your server
+                ref={component => setWebview(component)}
+                onLoad={() => {
+                  console.log('loaded');
+                  webview.postMessage('hello web view');
+                }}
+                onMessage={d => console.log(d.nativeEvent.data, 'yo')}
+                source={{html: `<!DOCTYPE html>
+                <html lang="en">
+                  <head>
+                    <meta charset="UTF-8">
+                    <title>Checkoutt</title>
+                    <script>
+                      window.addEventListener("message", function(data) {
+                        window.ReactNativeWebView.postMessage('yeooo');
                       });
-                    });
-                  });
-                </script>
-              </body>`}}
+                    </script>
+                  </head>
+                  <body>
+                    <form action="/" id="my-sample-form" method="post">
+                      <label for="card-number">Card Number</label>
+                      <div id="card-number"></div>
+                
+                      <label for="cvv">CVV</label>
+                      <div id="cvv"></div>
+                
+                      <label for="expiration-date">Expiration Date</label>
+                      <div id="expiration-date"></div>
+                
+                      <input type="submit" value="Pay" disabled />
+                    </form>
+                
+                    <script src="https://js.braintreegateway.com/web/3.57.0/js/client.min.js"></script>
+                    <script src="https://js.braintreegateway.com/web/3.57.0/js/hosted-fields.min.js"></script>
+                    <script>
+                      var form = document.querySelector('#my-sample-form');
+                      var submit = document.querySelector('input[type="submit"]');
+
+                      braintree.client.create({
+                        authorization: '${clientToken}'
+                      }, function (clientErr, clientInstance) {
+                        if (clientErr) {
+                          console.error(clientErr);
+                          return;
+                        }
+                
+                        // This example shows Hosted Fields, but you can also use this
+                        // client instance to create additional components here, such as
+                        // PayPal or Data Collector.
+                
+                        braintree.hostedFields.create({
+                          client: clientInstance,
+                          styles: {
+                            'input': {
+                              'font-size': '14px'
+                            },
+                            'input.invalid': {
+                              'color': 'red'
+                            },
+                            'input.valid': {
+                              'color': 'green'
+                            }
+                          },
+                          fields: {
+                            number: {
+                              selector: '#card-number',
+                              placeholder: '4111 1111 1111 1111'
+                            },
+                            cvv: {
+                              selector: '#cvv',
+                              placeholder: '123'
+                            },
+                            expirationDate: {
+                              selector: '#expiration-date',
+                              placeholder: '10/2019'
+                            }
+                          }
+                        }, function (hostedFieldsErr, hostedFieldsInstance) {
+                          if (hostedFieldsErr) {
+                            console.error(hostedFieldsErr);
+                            return;
+                          }
+                
+                          submit.removeAttribute('disabled');
+                
+                          form.addEventListener('submit', function (event) {
+                            event.preventDefault();
+                
+                            hostedFieldsInstance.tokenize(function (tokenizeErr, payload) {
+                              if (tokenizeErr) {
+                                console.error(tokenizeErr);
+                                return;
+                              }
+                
+                              // If this was a real integration, this is where you would
+                              // send the nonce to your server.
+                              console.log('Got a nonce: ' + payload.nonce);
+                            });
+                          }, false);
+                        });
+                      });
+                    </script>
+                  </body>
+                </html>
+                `}}
               style={{height: 800}}
             >
             </WebView>
