@@ -73,6 +73,17 @@ const Checkout = ({navigation}) => {
                       #expiration-date {
                         height: 30px;
                       }
+
+                      .button {
+                        background: #3fd2c7;
+                        color: white;
+                        height: 30px;
+                        width: 200px;
+                        border-style: none;
+                        border-radius: 0;
+                        font-size: 16px;
+                        -webkit-appearance: none;
+                      }
                     </style>
                   </head>
                   <body>
@@ -89,7 +100,7 @@ const Checkout = ({navigation}) => {
                       <label for="expiration-date">Expiration Date</label>
                       <div id="expiration-date"></div>
                 
-                      <input type="submit" value="Pay" disabled />
+                      <input type="submit" value="Pay" disabled class="button"/>
                     </form>
                 
                     <script src="https://js.braintreegateway.com/web/3.57.0/js/client.min.js"></script>
