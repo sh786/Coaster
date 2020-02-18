@@ -4,6 +4,7 @@ import {
     View,
     Text,
     TouchableWithoutFeedback,
+    TextInput,
 } from 'react-native';
 import HeaderTitle from '../Header/HeaderTitle';
 import API from '@aws-amplify/api';
@@ -27,32 +28,58 @@ const Checkout = ({navigation}) => {
         callApi();
     }, []);
 
-    if (webview) {
-      webview.postMessage({data: 'hi'});
-    }
-
     return (
-        <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+        <TouchableWithoutFeedback style={{flex: 1}} onPress={Keyboard.dismiss} accessible={false}>
             <WebView
                 ref={component => setWebview(component)}
                 onLoad={() => {
                   console.log('loaded');
-                  webview.postMessage('hello web view');
+                  webview.postMessage({event: 'loaded', clientToken});
                 }}
                 onMessage={d => console.log(d.nativeEvent.data, 'yo')}
                 source={{html: `<!DOCTYPE html>
                 <html lang="en">
                   <head>
                     <meta charset="UTF-8">
+                    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0">
                     <title>Checkoutt</title>
                     <script>
                       window.addEventListener("message", function(data) {
-                        window.ReactNativeWebView.postMessage('yeooo');
+                        window.ReactNativeWebView.postMessage(data.data);
                       });
                     </script>
+                    <style>
+                      body {
+                        background-color: white;
+                        width: 100%;
+                        height: 100%;
+                      }
+
+                      form {
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        font-size: 20px;
+                      }
+
+                      #card-number {
+                        height: 30px;
+                      }
+
+                      #cvv {
+                        height: 30px;
+                      }
+
+                      #expiration-date {
+                        height: 30px;
+                      }
+                    </style>
                   </head>
                   <body>
-                    <form action="/" id="my-sample-form" method="post">
+                    <form
+                      action="/"
+                      id="my-sample-form" 
+                      method="post">
                       <label for="card-number">Card Number</label>
                       <div id="card-number"></div>
                 
@@ -87,7 +114,7 @@ const Checkout = ({navigation}) => {
                           client: clientInstance,
                           styles: {
                             'input': {
-                              'font-size': '14px'
+                              'font-size': '14px',
                             },
                             'input.invalid': {
                               'color': 'red'
