@@ -42,12 +42,7 @@ const Checkout = ({navigation}) => {
                   <head>
                     <meta charset="UTF-8">
                     <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0">
-                    <title>Checkoutt</title>
-                    <script>
-                      window.addEventListener("message", function(data) {
-                        window.ReactNativeWebView.postMessage(data.data);
-                      });
-                    </script>
+                    <title>Checkout</title>
                     <style>
                       body {
                         background-color: white;
@@ -150,6 +145,7 @@ const Checkout = ({navigation}) => {
                           }
                         }, function (hostedFieldsErr, hostedFieldsInstance) {
                           if (hostedFieldsErr) {
+                            window.ReactNativeWebView.postMessage(hostedFieldsErr);
                             console.error(hostedFieldsErr);
                             return;
                           }
@@ -157,17 +153,23 @@ const Checkout = ({navigation}) => {
                           submit.removeAttribute('disabled');
                 
                           form.addEventListener('submit', function (event) {
+                            var state = hostedFieldsInstance.getState();
+                            window.ReactNativeWebView.postMessage('a');
                             event.preventDefault();
-                
+                            window.ReactNativeWebView.postMessage(JSON.stringify(hostedFieldsInstance));
+
                             hostedFieldsInstance.tokenize(function (tokenizeErr, payload) {
+                              window.ReactNativeWebView.postMessage('tokenize function getting hit');
                               if (tokenizeErr) {
                                 console.error(tokenizeErr);
+                                window.ReactNativeWebView.postMessage(tokenizeErr);
                                 return;
                               }
                 
                               // If this was a real integration, this is where you would
                               // send the nonce to your server.
                               console.log('Got a nonce: ' + payload.nonce);
+                              window.ReactNativeWebView.postMessage(payload.nonce);
                             });
                           }, false);
                         });
