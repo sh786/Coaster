@@ -17,6 +17,7 @@
     "@expo/vector-icons": "~10.0.0",
     "@react-navigation/web": "~1.0.0-alpha.9",
     "aws-amplify": "^2.2.4",
+    "braintree-web": "^3.58.0",
     "expo": "~36.0.0",
     "expo-asset": "~8.0.0",
     "expo-constants": "~8.0.0",

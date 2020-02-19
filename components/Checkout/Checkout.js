@@ -104,6 +104,27 @@ const Checkout = ({navigation}) => {
                       var form = document.querySelector('#my-sample-form');
                       var submit = document.querySelector('input[type="submit"]');
 
+                      function hostedFieldsDidCreate(err, hostedFields) {
+                        window.ReactNativeWebView.postMessage(JSON.stringify(hostedFields));
+                        submit.addEventListener('click', submitHandler.bind(null, hostedFields));
+                        submit.removeAttribute('disabled');
+                      }
+                      
+                      function submitHandler(hostedFields, event) {
+                        event.preventDefault();
+                        submit.setAttribute('disabled', 'disabled');
+                        var tokenize = hostedFields.tokenize();
+                        window.ReactNativeWebView.postMessage(tokenize);
+                      
+                        tokenize.then(function (payload) {
+                          window.ReactNativeWebView.postMessage('tokenize function getting hit');
+                            submit.removeAttribute('disabled');
+                            console.error(err);
+                            form['payment_method_nonce'].value = payload.nonce;
+                            form.submit();
+                        });
+                      }
+
                       braintree.client.create({
                         authorization: '${clientToken}'
                       }, function (clientErr, clientInstance) {
@@ -152,28 +173,33 @@ const Checkout = ({navigation}) => {
                 
                           submit.removeAttribute('disabled');
                 
-                          form.addEventListener('submit', function (event) {
-                            var state = hostedFieldsInstance.getState();
-                            window.ReactNativeWebView.postMessage('a');
-                            event.preventDefault();
-                            window.ReactNativeWebView.postMessage(JSON.stringify(hostedFieldsInstance));
+                          // form.addEventListener('submit', function (event) {
+                          //   var state = hostedFieldsInstance.getState();
+                          //   window.ReactNativeWebView.postMessage('a');
+                          //   event.preventDefault();
+                          //   window.ReactNativeWebView.postMessage(JSON.stringify({
+                          //       hostedFields: hostedFieldsInstance,
+                          //       data: hostedFieldsInstance.tokenize()
+                          //     })
+                          //   );
 
-                            hostedFieldsInstance.tokenize(function (tokenizeErr, payload) {
-                              window.ReactNativeWebView.postMessage('tokenize function getting hit');
-                              if (tokenizeErr) {
-                                console.error(tokenizeErr);
-                                window.ReactNativeWebView.postMessage(tokenizeErr);
-                                return;
-                              }
+                          //   hostedFieldsInstance.tokenize(function (tokenizeErr, payload) {
+                          //     window.ReactNativeWebView.postMessage('tokenize function getting hit');
+                          //     if (tokenizeErr) {
+                          //       console.error(tokenizeErr);
+                          //       window.ReactNativeWebView.postMessage(tokenizeErr);
+                          //       return;
+                          //     }
                 
-                              // If this was a real integration, this is where you would
-                              // send the nonce to your server.
-                              console.log('Got a nonce: ' + payload.nonce);
-                              window.ReactNativeWebView.postMessage(payload.nonce);
-                            });
-                          }, false);
+                          //     // If this was a real integration, this is where you would
+                          //     // send the nonce to your server.
+                          //     console.log('Got a nonce: ' + payload.nonce);
+                          //     window.ReactNativeWebView.postMessage(payload.nonce);
+                          //   });
+                          
+                          }, hostedFieldsDidCreate);
                         });
-                      });
+
                     </script>
                   </body>
                 </html>
