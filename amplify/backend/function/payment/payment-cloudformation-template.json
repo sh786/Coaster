@@ -28,12 +28,12 @@
 				"FunctionName": {
 					"Fn::If": [
 						"ShouldNotCreateEnvResources",
-						"getStockPhoto",
+						"payment",
 						{
 							"Fn::Join": [
 								"",
 								[
-									"getStockPhoto",
+									"payment",
 									"-",
 									{
 										"Ref": "env"
@@ -63,7 +63,7 @@
 				"Timeout": "25",
 				"Code": {
 					"S3Bucket": "amplify-blizzardapp-dev-214430-deployment",
-					"S3Key": "amplify-builds/getStockPhoto-70562f6278774e31755a-build.zip"
+					"S3Key": "amplify-builds/payment-566b54707a6d4d716b6e-build.zip"
 				}
 			}
 		},
@@ -73,12 +73,12 @@
 				"RoleName": {
 					"Fn::If": [
 						"ShouldNotCreateEnvResources",
-						"blizzardappLambdaRole6d277f94",
+						"blizzardappLambdaRole728e3b25",
 						{
 							"Fn::Join": [
 								"",
 								[
-									"blizzardappLambdaRole6d277f94",
+									"blizzardappLambdaRole728e3b25",
 									"-",
 									{
 										"Ref": "env"
