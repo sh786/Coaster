@@ -63,7 +63,7 @@
 				"Timeout": "25",
 				"Code": {
 					"S3Bucket": "amplify-blizzardapp-dev-214430-deployment",
-					"S3Key": "amplify-builds/payment-566b54707a6d4d716b6e-build.zip"
+					"S3Key": "amplify-builds/payment-6358503631374378734d-build.zip"
 				}
 			}
 		},
