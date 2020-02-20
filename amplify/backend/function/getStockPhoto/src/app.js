@@ -1,7 +1,5 @@
 const axios = require('axios');
 
-const Unsplash = require('unsplash-js').default;
-
 var express = require('express');
 var bodyParser = require('body-parser');
 var awsServerlessExpressMiddleware = require('aws-serverless-express/middleware');
@@ -32,7 +30,7 @@ app.get('/stockPhoto', async function(req, res) {
   // Add your code here
   const photo = await axios
     .get('https://api.unsplash.com/search/photos', {
-      params: { query: 'bar', page: 1, per_page: 2, orientation: 'landscape' },
+      params: { query: 'bar', page: 1, per_page: 1, orientation: 'landscape' },
       headers: {
         Authorization: `Client-ID ${UNSPLASH_APP_ID}`,
       },
