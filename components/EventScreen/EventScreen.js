@@ -4,6 +4,7 @@ import {
     View,
     Text,
     TouchableWithoutFeedback,
+    Button,
 } from 'react-native';
 import HeaderTitle from '../Header/HeaderTitle';
 
@@ -15,6 +16,7 @@ const EventScreen = ({navigation}) => {
         <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
             <View>
                 <Text>Event Screen</Text>
+                <Button title="checkout" onPress={() => navigation.navigate('Payment')} />
             </View>
         </TouchableWithoutFeedback>
     )
