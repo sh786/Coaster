@@ -1,0 +1,53 @@
+{
+    "paths": [
+        {
+            "name": "/stockPhoto",
+            "lambdaFunction": "getStockPhoto",
+            "privacy": {
+                "open": true
+            }
+        },
+        {
+            "name": "/client-token",
+            "lambdaFunction": "payment",
+            "privacy": {
+                "open": true
+            }
+        }
+    ],
+    "resourceName": "mainApi",
+    "apiName": "mainApi",
+    "functionArns": [
+        {
+            "lambdaFunction": "getStockPhoto"
+        },
+        {
+            "lambdaFunction": "payment"
+        }
+    ],
+    "privacy": {
+        "auth": 0,
+        "unauth": 0,
+        "authRoleName": "amplify-blizzardapp-dev-214430-authRole",
+        "unAuthRoleName": "amplify-blizzardapp-dev-214430-unauthRole"
+    },
+    "dependsOn": [
+        {
+            "category": "function",
+            "resourceName": "getStockPhoto",
+            "attributes": [
+                "Name",
+                "Arn"
+            ]
+        },
+        {
+            "category": "function",
+            "resourceName": "payment",
+            "attributes": [
+                "Name",
+                "Arn"
+            ]
+        }
+    ],
+    "uuid": "ff206390"
+}
