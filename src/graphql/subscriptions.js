@@ -235,17 +235,11 @@ export const onCreateTicketOffer = `subscription OnCreateTicketOffer {
       endTime
       rules
     }
-    users {
-      id
-      username
-      email
-      firstName
-      lastName
-      phoneNumber
-      dob
-      tickets {
-        nextToken
+    purchasedTickets {
+      items {
+        id
       }
+      nextToken
     }
   }
 }
@@ -283,17 +277,11 @@ export const onUpdateTicketOffer = `subscription OnUpdateTicketOffer {
       endTime
       rules
     }
-    users {
-      id
-      username
-      email
-      firstName
-      lastName
-      phoneNumber
-      dob
-      tickets {
-        nextToken
+    purchasedTickets {
+      items {
+        id
       }
+      nextToken
     }
   }
 }
@@ -331,7 +319,112 @@ export const onDeleteTicketOffer = `subscription OnDeleteTicketOffer {
       endTime
       rules
     }
-    users {
+    purchasedTickets {
+      items {
+        id
+      }
+      nextToken
+    }
+  }
+}
+`;
+export const onCreatePurchasedTicket = `subscription OnCreatePurchasedTicket {
+  onCreatePurchasedTicket {
+    id
+    ticketOffer {
+      id
+      title
+      description
+      capacity
+      expiration
+      price
+      event {
+        id
+        title
+        description
+        startTime
+        endTime
+        rules
+      }
+      purchasedTickets {
+        nextToken
+      }
+    }
+    user {
+      id
+      username
+      email
+      firstName
+      lastName
+      phoneNumber
+      dob
+      tickets {
+        nextToken
+      }
+    }
+  }
+}
+`;
+export const onUpdatePurchasedTicket = `subscription OnUpdatePurchasedTicket {
+  onUpdatePurchasedTicket {
+    id
+    ticketOffer {
+      id
+      title
+      description
+      capacity
+      expiration
+      price
+      event {
+        id
+        title
+        description
+        startTime
+        endTime
+        rules
+      }
+      purchasedTickets {
+        nextToken
+      }
+    }
+    user {
+      id
+      username
+      email
+      firstName
+      lastName
+      phoneNumber
+      dob
+      tickets {
+        nextToken
+      }
+    }
+  }
+}
+`;
+export const onDeletePurchasedTicket = `subscription OnDeletePurchasedTicket {
+  onDeletePurchasedTicket {
+    id
+    ticketOffer {
+      id
+      title
+      description
+      capacity
+      expiration
+      price
+      event {
+        id
+        title
+        description
+        startTime
+        endTime
+        rules
+      }
+      purchasedTickets {
+        nextToken
+      }
+    }
+    user {
       id
       username
       email
@@ -358,11 +451,6 @@ export const onCreateUser = `subscription OnCreateUser {
     tickets {
       items {
         id
-        title
-        description
-        capacity
-        expiration
-        price
       }
       nextToken
     }
@@ -381,11 +469,6 @@ export const onUpdateUser = `subscription OnUpdateUser {
     tickets {
       items {
         id
-        title
-        description
-        capacity
-        expiration
-        price
       }
       nextToken
     }
@@ -404,11 +487,6 @@ export const onDeleteUser = `subscription OnDeleteUser {
     tickets {
       items {
         id
-        title
-        description
-        capacity
-        expiration
-        price
       }
       nextToken
     }

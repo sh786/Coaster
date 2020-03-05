@@ -31,7 +31,13 @@ type TicketOffer @model {
   expiration: String
   price: Int!
   event: Event @connection(name: "EventTicketOffers")
-  users: User @connection(name: "PurchasedTicketOffers")
+  purchasedTickets: [PurchasedTicket] @connection(name: "PurchasedTicketOffers")
+}
+
+type PurchasedTicket @model {
+  id: ID!
+  ticketOffer: TicketOffer @connection(name: "PurchasedTicketOffers")
+  user: User @connection(name: "UserPurchase")
 }
 
 type User @model {
@@ -42,5 +48,5 @@ type User @model {
   lastName: String!
   phoneNumber: String!
   dob: String!
-  tickets: [TicketOffer] @connection(name: "PurchasedTicketOffers")
+  tickets: [PurchasedTicket] @connection(name: "UserPurchase")
 }
