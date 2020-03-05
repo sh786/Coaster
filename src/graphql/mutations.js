@@ -256,6 +256,18 @@ export const createTicketOffer = `mutation CreateTicketOffer(
       endTime
       rules
     }
+    users {
+      id
+      username
+      email
+      firstName
+      lastName
+      phoneNumber
+      dob
+      tickets {
+        nextToken
+      }
+    }
   }
 }
 `;
@@ -295,6 +307,18 @@ export const updateTicketOffer = `mutation UpdateTicketOffer(
       endTime
       rules
     }
+    users {
+      id
+      username
+      email
+      firstName
+      lastName
+      phoneNumber
+      dob
+      tickets {
+        nextToken
+      }
+    }
   }
 }
 `;
@@ -333,6 +357,96 @@ export const deleteTicketOffer = `mutation DeleteTicketOffer(
       startTime
       endTime
       rules
+    }
+    users {
+      id
+      username
+      email
+      firstName
+      lastName
+      phoneNumber
+      dob
+      tickets {
+        nextToken
+      }
+    }
+  }
+}
+`;
+export const createUser = `mutation CreateUser(
+  $input: CreateUserInput!
+  $condition: ModelUserConditionInput
+) {
+  createUser(input: $input, condition: $condition) {
+    id
+    username
+    email
+    firstName
+    lastName
+    phoneNumber
+    dob
+    tickets {
+      items {
+        id
+        title
+        description
+        capacity
+        expiration
+        price
+      }
+      nextToken
+    }
+  }
+}
+`;
+export const updateUser = `mutation UpdateUser(
+  $input: UpdateUserInput!
+  $condition: ModelUserConditionInput
+) {
+  updateUser(input: $input, condition: $condition) {
+    id
+    username
+    email
+    firstName
+    lastName
+    phoneNumber
+    dob
+    tickets {
+      items {
+        id
+        title
+        description
+        capacity
+        expiration
+        price
+      }
+      nextToken
+    }
+  }
+}
+`;
+export const deleteUser = `mutation DeleteUser(
+  $input: DeleteUserInput!
+  $condition: ModelUserConditionInput
+) {
+  deleteUser(input: $input, condition: $condition) {
+    id
+    username
+    email
+    firstName
+    lastName
+    phoneNumber
+    dob
+    tickets {
+      items {
+        id
+        title
+        description
+        capacity
+        expiration
+        price
+      }
+      nextToken
     }
   }
 }

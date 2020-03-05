@@ -159,6 +159,18 @@ export const getTicketOffer = `query GetTicketOffer($id: ID!) {
       endTime
       rules
     }
+    users {
+      id
+      username
+      email
+      firstName
+      lastName
+      phoneNumber
+      dob
+      tickets {
+        nextToken
+      }
+    }
   }
 }
 `;
@@ -182,6 +194,60 @@ export const listTicketOffers = `query ListTicketOffers(
         startTime
         endTime
         rules
+      }
+      users {
+        id
+        username
+        email
+        firstName
+        lastName
+        phoneNumber
+        dob
+      }
+    }
+    nextToken
+  }
+}
+`;
+export const getUser = `query GetUser($id: ID!) {
+  getUser(id: $id) {
+    id
+    username
+    email
+    firstName
+    lastName
+    phoneNumber
+    dob
+    tickets {
+      items {
+        id
+        title
+        description
+        capacity
+        expiration
+        price
+      }
+      nextToken
+    }
+  }
+}
+`;
+export const listUsers = `query ListUsers(
+  $filter: ModelUserFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listUsers(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      username
+      email
+      firstName
+      lastName
+      phoneNumber
+      dob
+      tickets {
+        nextToken
       }
     }
     nextToken

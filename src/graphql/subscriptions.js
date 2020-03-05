@@ -235,6 +235,18 @@ export const onCreateTicketOffer = `subscription OnCreateTicketOffer {
       endTime
       rules
     }
+    users {
+      id
+      username
+      email
+      firstName
+      lastName
+      phoneNumber
+      dob
+      tickets {
+        nextToken
+      }
+    }
   }
 }
 `;
@@ -271,6 +283,18 @@ export const onUpdateTicketOffer = `subscription OnUpdateTicketOffer {
       endTime
       rules
     }
+    users {
+      id
+      username
+      email
+      firstName
+      lastName
+      phoneNumber
+      dob
+      tickets {
+        nextToken
+      }
+    }
   }
 }
 `;
@@ -306,6 +330,87 @@ export const onDeleteTicketOffer = `subscription OnDeleteTicketOffer {
       startTime
       endTime
       rules
+    }
+    users {
+      id
+      username
+      email
+      firstName
+      lastName
+      phoneNumber
+      dob
+      tickets {
+        nextToken
+      }
+    }
+  }
+}
+`;
+export const onCreateUser = `subscription OnCreateUser {
+  onCreateUser {
+    id
+    username
+    email
+    firstName
+    lastName
+    phoneNumber
+    dob
+    tickets {
+      items {
+        id
+        title
+        description
+        capacity
+        expiration
+        price
+      }
+      nextToken
+    }
+  }
+}
+`;
+export const onUpdateUser = `subscription OnUpdateUser {
+  onUpdateUser {
+    id
+    username
+    email
+    firstName
+    lastName
+    phoneNumber
+    dob
+    tickets {
+      items {
+        id
+        title
+        description
+        capacity
+        expiration
+        price
+      }
+      nextToken
+    }
+  }
+}
+`;
+export const onDeleteUser = `subscription OnDeleteUser {
+  onDeleteUser {
+    id
+    username
+    email
+    firstName
+    lastName
+    phoneNumber
+    dob
+    tickets {
+      items {
+        id
+        title
+        description
+        capacity
+        expiration
+        price
+      }
+      nextToken
     }
   }
 }
