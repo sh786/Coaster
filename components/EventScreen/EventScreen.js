@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {
     Keyboard,
     View,
@@ -7,12 +7,20 @@ import {
     Button,
 } from 'react-native';
 import HeaderTitle from '../Header/HeaderTitle';
-import {createNewUser} from '../../redux/actions';
+import {createNewUser, fetchUsers} from '../../redux/actions';
 import { useDispatch, useSelector } from 'react-redux';
 
 const EventScreen = ({navigation}) => {
-    const venue = navigation.getParam('venue');
     const dispatch = useDispatch();
+    const user = useSelector(state => {
+        return state.user;
+    });
+
+    const venue = navigation.getParam('venue');
+
+    useEffect(() => {
+        dispatch(fetchUsers());
+    }, [])
 
     return (
         <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>

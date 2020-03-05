@@ -1,18 +1,25 @@
-import { combineReducers } from 'redux';
+import { combineReducers } from "redux";
 
-const initialState = {
-    bars: []
+const barsReducer = (state = [], { type, payload }) => {
+  console.log(payload);
+  switch (type) {
+    case "FETCH_BARS_SUCCESS":
+      return payload;
+    default:
+      return state;
+  }
 };
 
-const barsReducer = (state = initialState, {type, payload}) => {
+const userReducer = (state = {}, { type, payload }) => {
   switch (type) {
-    case 'FETCH_BARS_SUCCESS':
-      return { ...state, bars: payload };
+    case "FETCH_USERS_SUCCESS":
+      return payload;
     default:
       return state;
   }
 };
 
 export default combineReducers({
-    bars: barsReducer,
+  bars: barsReducer,
+  user: userReducer
 });
