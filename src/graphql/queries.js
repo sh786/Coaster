@@ -159,6 +159,12 @@ export const getTicketOffer = `query GetTicketOffer($id: ID!) {
       endTime
       rules
     }
+    purchasedTickets {
+      items {
+        id
+      }
+      nextToken
+    }
   }
 }
 `;
@@ -182,6 +188,116 @@ export const listTicketOffers = `query ListTicketOffers(
         startTime
         endTime
         rules
+      }
+      purchasedTickets {
+        nextToken
+      }
+    }
+    nextToken
+  }
+}
+`;
+export const getPurchasedTicket = `query GetPurchasedTicket($id: ID!) {
+  getPurchasedTicket(id: $id) {
+    id
+    ticketOffer {
+      id
+      title
+      description
+      capacity
+      expiration
+      price
+      event {
+        id
+        title
+        description
+        startTime
+        endTime
+        rules
+      }
+      purchasedTickets {
+        nextToken
+      }
+    }
+    user {
+      id
+      username
+      email
+      firstName
+      lastName
+      phoneNumber
+      dob
+      tickets {
+        nextToken
+      }
+    }
+  }
+}
+`;
+export const listPurchasedTickets = `query ListPurchasedTickets(
+  $filter: ModelPurchasedTicketFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listPurchasedTickets(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      ticketOffer {
+        id
+        title
+        description
+        capacity
+        expiration
+        price
+      }
+      user {
+        id
+        username
+        email
+        firstName
+        lastName
+        phoneNumber
+        dob
+      }
+    }
+    nextToken
+  }
+}
+`;
+export const getUser = `query GetUser($id: ID!) {
+  getUser(id: $id) {
+    id
+    username
+    email
+    firstName
+    lastName
+    phoneNumber
+    dob
+    tickets {
+      items {
+        id
+      }
+      nextToken
+    }
+  }
+}
+`;
+export const listUsers = `query ListUsers(
+  $filter: ModelUserFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listUsers(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      username
+      email
+      firstName
+      lastName
+      phoneNumber
+      dob
+      tickets {
+        nextToken
       }
     }
     nextToken

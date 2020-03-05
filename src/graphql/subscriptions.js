@@ -235,6 +235,12 @@ export const onCreateTicketOffer = `subscription OnCreateTicketOffer {
       endTime
       rules
     }
+    purchasedTickets {
+      items {
+        id
+      }
+      nextToken
+    }
   }
 }
 `;
@@ -271,6 +277,12 @@ export const onUpdateTicketOffer = `subscription OnUpdateTicketOffer {
       endTime
       rules
     }
+    purchasedTickets {
+      items {
+        id
+      }
+      nextToken
+    }
   }
 }
 `;
@@ -306,6 +318,177 @@ export const onDeleteTicketOffer = `subscription OnDeleteTicketOffer {
       startTime
       endTime
       rules
+    }
+    purchasedTickets {
+      items {
+        id
+      }
+      nextToken
+    }
+  }
+}
+`;
+export const onCreatePurchasedTicket = `subscription OnCreatePurchasedTicket {
+  onCreatePurchasedTicket {
+    id
+    ticketOffer {
+      id
+      title
+      description
+      capacity
+      expiration
+      price
+      event {
+        id
+        title
+        description
+        startTime
+        endTime
+        rules
+      }
+      purchasedTickets {
+        nextToken
+      }
+    }
+    user {
+      id
+      username
+      email
+      firstName
+      lastName
+      phoneNumber
+      dob
+      tickets {
+        nextToken
+      }
+    }
+  }
+}
+`;
+export const onUpdatePurchasedTicket = `subscription OnUpdatePurchasedTicket {
+  onUpdatePurchasedTicket {
+    id
+    ticketOffer {
+      id
+      title
+      description
+      capacity
+      expiration
+      price
+      event {
+        id
+        title
+        description
+        startTime
+        endTime
+        rules
+      }
+      purchasedTickets {
+        nextToken
+      }
+    }
+    user {
+      id
+      username
+      email
+      firstName
+      lastName
+      phoneNumber
+      dob
+      tickets {
+        nextToken
+      }
+    }
+  }
+}
+`;
+export const onDeletePurchasedTicket = `subscription OnDeletePurchasedTicket {
+  onDeletePurchasedTicket {
+    id
+    ticketOffer {
+      id
+      title
+      description
+      capacity
+      expiration
+      price
+      event {
+        id
+        title
+        description
+        startTime
+        endTime
+        rules
+      }
+      purchasedTickets {
+        nextToken
+      }
+    }
+    user {
+      id
+      username
+      email
+      firstName
+      lastName
+      phoneNumber
+      dob
+      tickets {
+        nextToken
+      }
+    }
+  }
+}
+`;
+export const onCreateUser = `subscription OnCreateUser {
+  onCreateUser {
+    id
+    username
+    email
+    firstName
+    lastName
+    phoneNumber
+    dob
+    tickets {
+      items {
+        id
+      }
+      nextToken
+    }
+  }
+}
+`;
+export const onUpdateUser = `subscription OnUpdateUser {
+  onUpdateUser {
+    id
+    username
+    email
+    firstName
+    lastName
+    phoneNumber
+    dob
+    tickets {
+      items {
+        id
+      }
+      nextToken
+    }
+  }
+}
+`;
+export const onDeleteUser = `subscription OnDeleteUser {
+  onDeleteUser {
+    id
+    username
+    email
+    firstName
+    lastName
+    phoneNumber
+    dob
+    tickets {
+      items {
+        id
+      }
+      nextToken
     }
   }
 }

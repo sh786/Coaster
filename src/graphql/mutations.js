@@ -256,6 +256,12 @@ export const createTicketOffer = `mutation CreateTicketOffer(
       endTime
       rules
     }
+    purchasedTickets {
+      items {
+        id
+      }
+      nextToken
+    }
   }
 }
 `;
@@ -295,6 +301,12 @@ export const updateTicketOffer = `mutation UpdateTicketOffer(
       endTime
       rules
     }
+    purchasedTickets {
+      items {
+        id
+      }
+      nextToken
+    }
   }
 }
 `;
@@ -333,6 +345,195 @@ export const deleteTicketOffer = `mutation DeleteTicketOffer(
       startTime
       endTime
       rules
+    }
+    purchasedTickets {
+      items {
+        id
+      }
+      nextToken
+    }
+  }
+}
+`;
+export const createPurchasedTicket = `mutation CreatePurchasedTicket(
+  $input: CreatePurchasedTicketInput!
+  $condition: ModelPurchasedTicketConditionInput
+) {
+  createPurchasedTicket(input: $input, condition: $condition) {
+    id
+    ticketOffer {
+      id
+      title
+      description
+      capacity
+      expiration
+      price
+      event {
+        id
+        title
+        description
+        startTime
+        endTime
+        rules
+      }
+      purchasedTickets {
+        nextToken
+      }
+    }
+    user {
+      id
+      username
+      email
+      firstName
+      lastName
+      phoneNumber
+      dob
+      tickets {
+        nextToken
+      }
+    }
+  }
+}
+`;
+export const updatePurchasedTicket = `mutation UpdatePurchasedTicket(
+  $input: UpdatePurchasedTicketInput!
+  $condition: ModelPurchasedTicketConditionInput
+) {
+  updatePurchasedTicket(input: $input, condition: $condition) {
+    id
+    ticketOffer {
+      id
+      title
+      description
+      capacity
+      expiration
+      price
+      event {
+        id
+        title
+        description
+        startTime
+        endTime
+        rules
+      }
+      purchasedTickets {
+        nextToken
+      }
+    }
+    user {
+      id
+      username
+      email
+      firstName
+      lastName
+      phoneNumber
+      dob
+      tickets {
+        nextToken
+      }
+    }
+  }
+}
+`;
+export const deletePurchasedTicket = `mutation DeletePurchasedTicket(
+  $input: DeletePurchasedTicketInput!
+  $condition: ModelPurchasedTicketConditionInput
+) {
+  deletePurchasedTicket(input: $input, condition: $condition) {
+    id
+    ticketOffer {
+      id
+      title
+      description
+      capacity
+      expiration
+      price
+      event {
+        id
+        title
+        description
+        startTime
+        endTime
+        rules
+      }
+      purchasedTickets {
+        nextToken
+      }
+    }
+    user {
+      id
+      username
+      email
+      firstName
+      lastName
+      phoneNumber
+      dob
+      tickets {
+        nextToken
+      }
+    }
+  }
+}
+`;
+export const createUser = `mutation CreateUser(
+  $input: CreateUserInput!
+  $condition: ModelUserConditionInput
+) {
+  createUser(input: $input, condition: $condition) {
+    id
+    username
+    email
+    firstName
+    lastName
+    phoneNumber
+    dob
+    tickets {
+      items {
+        id
+      }
+      nextToken
+    }
+  }
+}
+`;
+export const updateUser = `mutation UpdateUser(
+  $input: UpdateUserInput!
+  $condition: ModelUserConditionInput
+) {
+  updateUser(input: $input, condition: $condition) {
+    id
+    username
+    email
+    firstName
+    lastName
+    phoneNumber
+    dob
+    tickets {
+      items {
+        id
+      }
+      nextToken
+    }
+  }
+}
+`;
+export const deleteUser = `mutation DeleteUser(
+  $input: DeleteUserInput!
+  $condition: ModelUserConditionInput
+) {
+  deleteUser(input: $input, condition: $condition) {
+    id
+    username
+    email
+    firstName
+    lastName
+    phoneNumber
+    dob
+    tickets {
+      items {
+        id
+      }
+      nextToken
     }
   }
 }
