@@ -29,18 +29,17 @@ const PaymentScreen = ({navigation}) => {
     return null;
   }
 
+  // TODO: prefill inputs in webview
   return (
     <WebView
       originWhitelist={['*']}
-      source={{ html: stripeCheckoutRedirectHTML(user.id) }}
+      source={{ html: stripeCheckoutRedirectHTML(user.id, 1) }} // added quantity
       onLoadStart={onLoadStart}
       onNavigationStateChange={(state) => {
-          console.log(state, STRIPE.SUCCESS_URL, STRIPE.CANCELED_URL);
           if (state.url === STRIPE.SUCCESS_URL) {
-              console.log('attempting to navigate')
               navigation.navigate('CheckoutSuccess');
           } else if (state.url === STRIPE.CANCELED_URL) {
-              navigation.navigate('Event');
+              navigation.navigate('Event'); // need to change to event screen
           }
       }}
     />

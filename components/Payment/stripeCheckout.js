@@ -6,7 +6,7 @@ import { STRIPE } from './stripeSettings';
  * @param {String} userID
  * @returns {String}
  */
-export function stripeCheckoutRedirectHTML(userID) {
+export function stripeCheckoutRedirectHTML(userID, quantity) {
   if (!userID) {
     throw new Error('Invalid userID');
   }
@@ -25,7 +25,7 @@ export function stripeCheckoutRedirectHTML(userID) {
             // When the customer clicks on the button, redirect
             // them to Checkout.
             stripe.redirectToCheckout({
-              items: [{ sku: '${STRIPE.PLAN_NAME}', quantity: 1 }],
+              items: [{ sku: '${STRIPE.PRODUCT_NAME}', quantity: ${quantity} }],
               // Do not rely on the redirect to the successUrl for fulfilling
               // purchases, customers may not always reach the success_url after
               // a successful payment.
