@@ -40,7 +40,7 @@ const PaymentScreen = ({navigation}) => {
               navigation.navigate('CheckoutSuccess');
           } else if (state.url === STRIPE.CANCELED_URL) {
               navigation.navigate('Event'); // need to change to event screen
-          }
+          }g
       }}
     />
   );
