@@ -18,6 +18,7 @@ export const getBar = `query GetBar($id: ID!) {
     events {
       items {
         id
+        barId
         title
         description
         startTime
@@ -55,23 +56,7 @@ export const listBars = `query ListBars($filter: ModelBarFilterInput, $limit: In
 export const getEvent = `query GetEvent($id: ID!) {
   getEvent(id: $id) {
     id
-    bar {
-      id
-      name
-      address
-      city
-      state
-      phoneNumber
-      lat
-      lon
-      description
-      coverPhoto
-      socialLinks
-      rules
-      events {
-        nextToken
-      }
-    }
+    barId
     title
     description
     ticketOffers {
@@ -99,20 +84,7 @@ export const listEvents = `query ListEvents(
   listEvents(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       id
-      bar {
-        id
-        name
-        address
-        city
-        state
-        phoneNumber
-        lat
-        lon
-        description
-        coverPhoto
-        socialLinks
-        rules
-      }
+      barId
       title
       description
       ticketOffers {
@@ -136,20 +108,7 @@ export const getTicketOffer = `query GetTicketOffer($id: ID!) {
     price
     event {
       id
-      bar {
-        id
-        name
-        address
-        city
-        state
-        phoneNumber
-        lat
-        lon
-        description
-        coverPhoto
-        socialLinks
-        rules
-      }
+      barId
       title
       description
       ticketOffers {
@@ -183,6 +142,7 @@ export const listTicketOffers = `query ListTicketOffers(
       price
       event {
         id
+        barId
         title
         description
         startTime
@@ -209,6 +169,7 @@ export const getPurchasedTicket = `query GetPurchasedTicket($id: ID!) {
       price
       event {
         id
+        barId
         title
         description
         startTime
@@ -288,6 +249,68 @@ export const listUsers = `query ListUsers(
   $nextToken: String
 ) {
   listUsers(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      username
+      email
+      firstName
+      lastName
+      phoneNumber
+      dob
+      tickets {
+        nextToken
+      }
+    }
+    nextToken
+  }
+}
+`;
+export const getEventsByBarId = `query GetEventsByBarId(
+  $barId: ID
+  $id: ModelIDKeyConditionInput
+  $sortDirection: ModelSortDirection
+  $filter: ModelEventFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  getEventsByBarId(
+    barId: $barId
+    id: $id
+    sortDirection: $sortDirection
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      barId
+      title
+      description
+      ticketOffers {
+        nextToken
+      }
+      startTime
+      endTime
+      rules
+    }
+    nextToken
+  }
+}
+`;
+export const userByEmail = `query UserByEmail(
+  $email: String
+  $sortDirection: ModelSortDirection
+  $filter: ModelUserFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  userByEmail(
+    email: $email
+    sortDirection: $sortDirection
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
     items {
       id
       username

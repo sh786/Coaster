@@ -21,6 +21,7 @@ export const createBar = `mutation CreateBar(
     events {
       items {
         id
+        barId
         title
         description
         startTime
@@ -52,6 +53,7 @@ export const updateBar = `mutation UpdateBar(
     events {
       items {
         id
+        barId
         title
         description
         startTime
@@ -83,6 +85,7 @@ export const deleteBar = `mutation DeleteBar(
     events {
       items {
         id
+        barId
         title
         description
         startTime
@@ -100,23 +103,7 @@ export const createEvent = `mutation CreateEvent(
 ) {
   createEvent(input: $input, condition: $condition) {
     id
-    bar {
-      id
-      name
-      address
-      city
-      state
-      phoneNumber
-      lat
-      lon
-      description
-      coverPhoto
-      socialLinks
-      rules
-      events {
-        nextToken
-      }
-    }
+    barId
     title
     description
     ticketOffers {
@@ -142,23 +129,7 @@ export const updateEvent = `mutation UpdateEvent(
 ) {
   updateEvent(input: $input, condition: $condition) {
     id
-    bar {
-      id
-      name
-      address
-      city
-      state
-      phoneNumber
-      lat
-      lon
-      description
-      coverPhoto
-      socialLinks
-      rules
-      events {
-        nextToken
-      }
-    }
+    barId
     title
     description
     ticketOffers {
@@ -184,23 +155,7 @@ export const deleteEvent = `mutation DeleteEvent(
 ) {
   deleteEvent(input: $input, condition: $condition) {
     id
-    bar {
-      id
-      name
-      address
-      city
-      state
-      phoneNumber
-      lat
-      lon
-      description
-      coverPhoto
-      socialLinks
-      rules
-      events {
-        nextToken
-      }
-    }
+    barId
     title
     description
     ticketOffers {
@@ -233,20 +188,7 @@ export const createTicketOffer = `mutation CreateTicketOffer(
     price
     event {
       id
-      bar {
-        id
-        name
-        address
-        city
-        state
-        phoneNumber
-        lat
-        lon
-        description
-        coverPhoto
-        socialLinks
-        rules
-      }
+      barId
       title
       description
       ticketOffers {
@@ -278,20 +220,7 @@ export const updateTicketOffer = `mutation UpdateTicketOffer(
     price
     event {
       id
-      bar {
-        id
-        name
-        address
-        city
-        state
-        phoneNumber
-        lat
-        lon
-        description
-        coverPhoto
-        socialLinks
-        rules
-      }
+      barId
       title
       description
       ticketOffers {
@@ -323,20 +252,7 @@ export const deleteTicketOffer = `mutation DeleteTicketOffer(
     price
     event {
       id
-      bar {
-        id
-        name
-        address
-        city
-        state
-        phoneNumber
-        lat
-        lon
-        description
-        coverPhoto
-        socialLinks
-        rules
-      }
+      barId
       title
       description
       ticketOffers {
@@ -370,6 +286,7 @@ export const createPurchasedTicket = `mutation CreatePurchasedTicket(
       price
       event {
         id
+        barId
         title
         description
         startTime
@@ -410,6 +327,7 @@ export const updatePurchasedTicket = `mutation UpdatePurchasedTicket(
       price
       event {
         id
+        barId
         title
         description
         startTime
@@ -450,6 +368,7 @@ export const deletePurchasedTicket = `mutation DeletePurchasedTicket(
       price
       event {
         id
+        barId
         title
         description
         startTime

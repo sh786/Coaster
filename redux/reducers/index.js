@@ -1,7 +1,6 @@
 import { combineReducers } from "redux";
 
 const barsReducer = (state = [], { type, payload }) => {
-  console.log(payload);
   switch (type) {
     case "FETCH_BARS_SUCCESS":
       return payload;
@@ -19,7 +18,21 @@ const userReducer = (state = {}, { type, payload }) => {
   }
 };
 
+const eventReducer = (state = {}, { type, payload }) => {
+    switch (type) {
+        case "FETCH_EVENTS_SUCCESS":
+            // for (const bar of payload) {
+            //     state[bar.name] = payload; // change to bar name linked to event
+            // }
+            state['The Harp'] = payload;
+            return state;
+        default:
+          return state;
+      }
+}
+
 export default combineReducers({
   bars: barsReducer,
-  user: userReducer
+  user: userReducer,
+  events: eventReducer,
 });

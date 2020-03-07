@@ -11,11 +11,12 @@ type Bar @model {
   coverPhoto: String
   socialLinks: [String]
   rules: String
-  events: [Event] @connection(name: "BarEvents")
+  events: [Event] @connection(keyName: "byEventId", fields: ["id"])
 }
-type Event @model {
+type Event @model 
+  @key(name: "byEventId", fields: ["barId", "id"], queryField: "getEventsByBarId") {
   id: ID!
-  bar: Bar @connection(name: "BarEvents")
+  barId: ID!
   title: String!
   description: String
   ticketOffers: [TicketOffer] @connection(name: "EventTicketOffers")
@@ -40,7 +41,7 @@ type PurchasedTicket @model {
   user: User @connection(name: "UserPurchase")
 }
 
-type User @model {
+type User @model @key(fields: ["email"], name: "byEmail", queryField: "userByEmail") {
   id: ID!
   username: String!
   email: String!

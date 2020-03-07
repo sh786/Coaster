@@ -18,6 +18,7 @@ export const onCreateBar = `subscription OnCreateBar {
     events {
       items {
         id
+        barId
         title
         description
         startTime
@@ -46,6 +47,7 @@ export const onUpdateBar = `subscription OnUpdateBar {
     events {
       items {
         id
+        barId
         title
         description
         startTime
@@ -74,6 +76,7 @@ export const onDeleteBar = `subscription OnDeleteBar {
     events {
       items {
         id
+        barId
         title
         description
         startTime
@@ -88,23 +91,7 @@ export const onDeleteBar = `subscription OnDeleteBar {
 export const onCreateEvent = `subscription OnCreateEvent {
   onCreateEvent {
     id
-    bar {
-      id
-      name
-      address
-      city
-      state
-      phoneNumber
-      lat
-      lon
-      description
-      coverPhoto
-      socialLinks
-      rules
-      events {
-        nextToken
-      }
-    }
+    barId
     title
     description
     ticketOffers {
@@ -127,23 +114,7 @@ export const onCreateEvent = `subscription OnCreateEvent {
 export const onUpdateEvent = `subscription OnUpdateEvent {
   onUpdateEvent {
     id
-    bar {
-      id
-      name
-      address
-      city
-      state
-      phoneNumber
-      lat
-      lon
-      description
-      coverPhoto
-      socialLinks
-      rules
-      events {
-        nextToken
-      }
-    }
+    barId
     title
     description
     ticketOffers {
@@ -166,23 +137,7 @@ export const onUpdateEvent = `subscription OnUpdateEvent {
 export const onDeleteEvent = `subscription OnDeleteEvent {
   onDeleteEvent {
     id
-    bar {
-      id
-      name
-      address
-      city
-      state
-      phoneNumber
-      lat
-      lon
-      description
-      coverPhoto
-      socialLinks
-      rules
-      events {
-        nextToken
-      }
-    }
+    barId
     title
     description
     ticketOffers {
@@ -212,20 +167,7 @@ export const onCreateTicketOffer = `subscription OnCreateTicketOffer {
     price
     event {
       id
-      bar {
-        id
-        name
-        address
-        city
-        state
-        phoneNumber
-        lat
-        lon
-        description
-        coverPhoto
-        socialLinks
-        rules
-      }
+      barId
       title
       description
       ticketOffers {
@@ -254,20 +196,7 @@ export const onUpdateTicketOffer = `subscription OnUpdateTicketOffer {
     price
     event {
       id
-      bar {
-        id
-        name
-        address
-        city
-        state
-        phoneNumber
-        lat
-        lon
-        description
-        coverPhoto
-        socialLinks
-        rules
-      }
+      barId
       title
       description
       ticketOffers {
@@ -296,20 +225,7 @@ export const onDeleteTicketOffer = `subscription OnDeleteTicketOffer {
     price
     event {
       id
-      bar {
-        id
-        name
-        address
-        city
-        state
-        phoneNumber
-        lat
-        lon
-        description
-        coverPhoto
-        socialLinks
-        rules
-      }
+      barId
       title
       description
       ticketOffers {
@@ -340,6 +256,7 @@ export const onCreatePurchasedTicket = `subscription OnCreatePurchasedTicket {
       price
       event {
         id
+        barId
         title
         description
         startTime
@@ -377,6 +294,7 @@ export const onUpdatePurchasedTicket = `subscription OnUpdatePurchasedTicket {
       price
       event {
         id
+        barId
         title
         description
         startTime
@@ -414,6 +332,7 @@ export const onDeletePurchasedTicket = `subscription OnDeletePurchasedTicket {
       price
       event {
         id
+        barId
         title
         description
         startTime
