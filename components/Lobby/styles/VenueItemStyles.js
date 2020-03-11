@@ -77,6 +77,6 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   arrowIcon: {
-    color: Colors.primaryColorDark,
+    color: Colors.primaryColor,
   },
 });

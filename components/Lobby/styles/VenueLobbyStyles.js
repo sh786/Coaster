@@ -5,6 +5,11 @@ export const styles = StyleSheet.create({
   venueContainer: {
     flex: 1,
     backgroundColor: Colors.lightGrayColor,
-    paddingVertical: 15,
+    paddingBottom: 15,
+  },
+  dateHeader: {
+    padding: 8,
+    marginVertical: 2,
+    fontSize: 16,
   },
 });

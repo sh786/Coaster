@@ -1,5 +1,5 @@
 import React from 'react';
-import { Platform } from 'react-native';
+import { Platform, Text } from 'react-native';
 import { createStackNavigator } from 'react-navigation-stack';
 
 import VenueLobby from '../components/Lobby/VenueLobby';
@@ -8,6 +8,7 @@ import EventScreen from '../components/EventScreen/EventScreen';
 import PaymentScreen from '../components/Payment';
 import CheckoutSuccessScreen from '../components/Payment/CheckoutSuccessScreen';
 import Colors from '../constants/Colors';
+import HeaderTitle from '../components/Header/HeaderTitle';
 import Logo from '../components/Common/Logo';
 
 const config = Platform.select({
@@ -37,7 +38,7 @@ const MainTabNavigator = createStackNavigator(
       headerTitleStyle: {
         fontWeight: 'bold',
       },
-      headerTitle: <Logo />,
+      headerTitle: <HeaderTitle title='coaster' />,
     },
   },
   config,

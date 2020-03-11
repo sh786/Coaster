@@ -8,9 +8,12 @@ import { fetchBars } from '../../redux/actions';
 import VenueItem from './VenueItem';
 import { styles } from './styles/VenueLobbyStyles';
 import { commonStyles } from '../../common/CommonStyles';
+import HeaderTitle from '../Header/HeaderTitle';
 import Logo from '../Common/Logo';
 import Icon from '../Common/Icon';
 import SortView from './SortView';
+
+import moment from 'moment';
 
 const VenueLobby = ({ navigation }) => {
   const dispatch = useDispatch();
@@ -31,6 +34,9 @@ const VenueLobby = ({ navigation }) => {
           justifyContent: 'center',
         }}
       >
+        <View style={styles.dateHeader}>
+          <Text>{`Venues for ${moment().format('MMM Do, YYYY')}`}</Text>
+        </View>
         {[1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 2, 2, 2].map((b, i) => (
           <VenueItem
             key={i}
@@ -53,7 +59,7 @@ VenueLobby.propTypes = {
 };
 
 VenueLobby.navigationOptions = {
-  headerTitle: <Logo />,
+  headerTitle: <HeaderTitle title='coaster' />,
   headerLeft: (
     <Icon name='md-person' size={32} color='white' style={{ marginLeft: 20 }} />
   ),

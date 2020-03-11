@@ -16,8 +16,7 @@ const VenueItem = ({ venue, navigation }) => {
           <Text style={styles.venueItemStreetAddress}>{venue.address}</Text>
           <Text
             style={styles.venueItemStreetAddress}
-          >{`${venue.city}, ${venue.state}`}</Text>
-          <Text style={styles.venueItemDistance}>0.6mi</Text>
+          >{`${venue.city}, ${venue.state} • 0.6mi`}</Text>
         </View>
         <View style={styles.venueItemRightContent}>
           <Text style={styles.venueItemPrice}>{venue.description}</Text>
