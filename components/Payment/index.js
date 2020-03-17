@@ -8,6 +8,8 @@ const PaymentScreen = ({navigation}) => {
 
   // TODO: this should come from some service/state store
   const user = { id: 'someID' };
+  const ticketOffer = navigation.getParam("ticketOffer");
+  const venue = navigation.getParam("venue");
 
   const onSuccessHandler = () => { /* TODO: do something */ };
   const onCanceledHandler = () => { /* TODO: do something */ };
@@ -37,7 +39,7 @@ const PaymentScreen = ({navigation}) => {
       onLoadStart={onLoadStart}
       onNavigationStateChange={(state) => {
           if (state.url === STRIPE.SUCCESS_URL) {
-              navigation.navigate('CheckoutSuccess');
+              navigation.navigate('CheckoutSuccess', {ticketOffer, venue});
           } else if (state.url === STRIPE.CANCELED_URL) {
               navigation.navigate('Event'); // need to change to event screen
           }

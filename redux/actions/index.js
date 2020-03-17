@@ -9,6 +9,7 @@ import {
 } from '../../src/graphql/queries';
 import {
 	createUser,
+	createPurchasedTicket,
 } from '../../src/graphql/mutations';
 
 /* BAR ACTIONS */
@@ -124,7 +125,6 @@ export const fetchTicketOffersByEventId = (eventId) => {
 		});
 		return API.graphql(graphqlOperation(getTicketOffersByEventId, {eventId}))
 			.then((response) => {
-				console.log(response)
 				dispatch({
 					type: 'FETCH_TICKET_OFFERS_SUCCESS',
 					payload: {
@@ -139,18 +139,20 @@ export const fetchTicketOffersByEventId = (eventId) => {
 	}
 }
 
-// export const createNewPurchasedTicket = () => {
-//     return (dispatch) => {
-//         // best practice to dispatch on request but not handling it right now
-//         dispatch({ type: 'CREATE_PURCHASED_TICKET_REQUEST' });
+export const createNewPurchasedTicket = (ticketOfferId, eventId, userId) => {
+	const input = {
+		ticketOfferId, eventId, userId
+	};
+    return (dispatch) => {
+        // best practice to dispatch on request but not handling it right now
+        dispatch({ type: 'CREATE_PURCHASED_TICKET_REQUEST' });
 
-//         return API.graphql(graphqlOperation(ticketOffering))
-//             .then((ticket) => {
-//                 console.log(ticket, 'hahah')
-//                 dispatch({ type: 'CREATE_PURCHASED_TICKET_SUCCESS', payload: bars.data.listBars.items });
-//             }, e => {
-//               console.log(e)
-//               dispatch({ type: 'CREATE_PURCHASED_TICKET_FAILURE', payload: e });
-//             });
-//         }
-// }
+        return API.graphql(graphqlOperation(createPurchasedTicket, {input}))
+            .then((ticket) => {
+                // TODO: add to redux if necessary. Might want to do a fetch all purchased tickets for user
+                dispatch({ type: 'CREATE_PURCHASED_TICKET_SUCCESS', payload: ticket });
+            }, e => {
+              dispatch({ type: 'CREATE_PURCHASED_TICKET_FAILURE', payload: e });
+            });
+        }
+}
