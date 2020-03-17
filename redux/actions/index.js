@@ -4,16 +4,11 @@ import API, {
 import {
 	listBars,
 	listUsers,
-	listEvents,
-	listTicketOffers,
 	getEventsByBarId,
+	getTicketOffersByEventId
 } from '../../src/graphql/queries';
 import {
-	createBar,
 	createUser,
-	createEvent,
-	createTicketOffer,
-	updateEvent,
 } from '../../src/graphql/mutations';
 
 /* BAR ACTIONS */
@@ -38,38 +33,6 @@ export const fetchBars = () => {
 	}
 }
 
-export const createNewBar = ({
-	name,
-	address,
-	phoneNumber
-}) => {
-	const bar = {
-		name,
-		address,
-		phoneNumber,
-	};
-	return (dispatch) => {
-		dispatch({
-			type: 'CREATE_BAR_REQUEST'
-		});
-
-		return API.graphql(graphqlOperation(createBar, {
-				input: bar
-			}))
-			.then((d) => {
-				// should probably use the data here to add the bar to state
-				// can avoid api call, but let's figure out what our state should look like first
-				dispatch({
-					type: 'CREATE_BAR_SUCCESS',
-					payload: d
-				}); // reducer not handling
-				dispatch(fetchBars());
-			}, () => dispatch({
-				type: 'CREATE_BAR_FAILURE'
-			}));
-	}
-}
-
 /* USER ACTIONS */
 export const fetchUsers = () => {
 	return (dispatch) => {
@@ -85,10 +48,12 @@ export const fetchUsers = () => {
 			}, e => dispatch({
 				type: 'FETCH_USERS_FAILURE',
 				payload: e
-			}));
+		}));
 	}
 }
 
+
+// need to tweak when we do auth
 export const createNewUser = (
 	username,
 	email,
@@ -151,134 +116,26 @@ export const fetchEventsByBarId = (barId) => {
 	}
 }
 
-export const createNewEvent = (
-	title,
-	description,
-	startTime,
-	endTime,
-	rules,
-) => {
-	const event = {
-		title,
-		description,
-		startTime,
-		endTime,
-		rules,
-		barId: 1234
-	};
-	return (dispatch) => {
-		dispatch({
-			type: 'CREATE_EVENT_REQUEST'
-		});
-
-		return API.graphql(graphqlOperation(createEvent, {
-				input: event
-			}))
-			.then((d) => {
-				dispatch({
-					type: 'CREATE_EVENT_SUCCESS',
-					payload: d
-				});
-				// dispatch(fetchEvents());
-			}, () => {
-				dispatch({
-					type: 'CREATE_EVENT_FAILURE'
-				});
-			});
-	}
-}
-
-export const updateEventWithTicketOffer = ({
-	id,
-	title,
-	description,
-	startTime,
-	endTime,
-	rules,
-}, ticketOfferId) => {
-	const eventInput = {
-		id,
-		title,
-		description,
-		startTime,
-		endTime,
-		rules,
-	}
-	return (dispatch) => {
-		dispatch({
-			type: 'UPDATE_EVENT_REQUEST'
-		});
-
-		return API.graphql(graphqlOperation(updateEvent, {
-				input: eventInput,
-				condition: ticketOfferId
-			}))
-			.then((d) => {
-				dispatch({
-					type: 'UPDATE_EVENT_SUCCESS',
-					payload: d
-				});
-				// dispatch(fetchEvents());
-			}, e => {
-				dispatch({
-					type: 'UPDATE_EVENT_FAILURE'
-				});
-			});
-	}
-}
-
 /* TICKET OFFER ACTIONS */
-export const fetchTicketOffers = () => {
+export const fetchTicketOffersByEventId = (eventId) => {
 	return (dispatch) => {
 		dispatch({
 			type: 'FETCH_TICKET_OFFERS_REQUEST'
 		});
-		return API.graphql(graphqlOperation(listTicketOffers))
-			.then((data) => {
+		return API.graphql(graphqlOperation(getTicketOffersByEventId, {eventId}))
+			.then((response) => {
+				console.log(response)
 				dispatch({
 					type: 'FETCH_TICKET_OFFERS_SUCCESS',
-					payload: data 
+					payload: {
+						eventId,
+						ticketOffers: response.data.getTicketOffersByEventId.items,
+					} 
 				});
 			}, e => dispatch({
 				type: 'FETCH_TICKET_OFFERS_FAILURE',
 				payload: e
 			}));
-	}
-}
-
-export const createNewTicketOffer = (
-	title,
-	description,
-	capacity,
-	expiration,
-	price,
-) => {
-	const ticket = {
-		title,
-		description,
-		capacity,
-		expiration,
-		price,
-	};
-	return (dispatch) => {
-		dispatch({
-			type: 'CREATE_TICKET_OFFER_REQUEST'
-		});
-
-		return API.graphql(graphqlOperation(createTicketOffer, {
-				input: ticket
-			}))
-			.then((d) => {
-				dispatch({
-					type: 'CREATE_TICKET_OFFER_SUCCESS',
-					payload: d
-				});
-				dispatch(fetchTicketOffers());
-			}, () => {
-				dispatch({
-					type: 'CREATE_TICKET_OFFER_FAILURE'
-				});
-			});
 	}
 }
 

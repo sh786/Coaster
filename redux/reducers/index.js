@@ -28,8 +28,19 @@ const eventReducer = (state = {}, { type, payload }) => {
       }
 }
 
+const ticketOffersReducer = (state = {}, { type, payload }) => {
+    switch (type) {
+        case "FETCH_TICKET_OFFERS_SUCCESS":
+            state[payload.eventId] = payload.ticketOffers;
+            return state;
+        default:
+          return state;
+      }
+}
+
 export default combineReducers({
   bars: barsReducer,
   user: userReducer,
   events: eventReducer,
+  ticketOffers: ticketOffersReducer,
 });

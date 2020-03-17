@@ -8,32 +8,33 @@ import {
 } from "react-native";
 import HeaderTitle from "../Header/HeaderTitle";
 import {
-  createNewUser,
   fetchUsers,
-  createNewEvent,
-  createNewTicketOffer,
-  updateEventWithTicketOffer,
-  fetchTicketOffers,
+  fetchTicketOffersByEventId,
   fetchEventsByBarId
 } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 
 const EventScreen = ({ navigation }) => {
   const dispatch = useDispatch();
+  const venue = navigation.getParam("venue");
   const user = useSelector(state => {
     return state.user;
   });
   const event = useSelector(state => {
-      console.log(state)
-      return state.events;
+    console.log(state);
+    return state.events[venue.id];
   });
-  const venue = navigation.getParam("venue");
 
   useEffect(() => {
     dispatch(fetchUsers());
     dispatch(fetchEventsByBarId(venue.id));
-    dispatch(fetchTicketOffers());
   }, []);
+
+  useEffect(() => {
+    if (event && event.length) {
+      dispatch(fetchTicketOffersByEventId(event[0].id)); // should be calling on individual bar
+    }
+  });
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
@@ -42,60 +43,6 @@ const EventScreen = ({ navigation }) => {
         <Button
           title="checkout"
           onPress={() => navigation.navigate("Payment")}
-        />
-        <Button
-          title="add test user"
-          onPress={() => {
-            dispatch(
-              createNewUser(
-                "moneyman18",
-                "moneyman18@dk.com",
-                "jonny",
-                "levenfeld",
-                "999-214-2030",
-                "05/22/1996"
-              )
-            );
-          }}
-        />
-        <Button
-          title="add test event"
-          onPress={() => {
-            dispatch(
-              createNewEvent(
-                "St. Paddys Day",
-                "Drink like an Irishman",
-                "Saturday",
-                "Never",
-                "You do not talk about fight club"
-              )
-            );
-          }}
-        />
-        <Button
-          title="add test ticket offer"
-          onPress={() => {
-            dispatch(
-              createNewTicketOffer(
-                "Friday night cover",
-                "Come enjoy a friday night with dancing and cute chicas",
-                100,
-                "4/20/20",
-                10
-              )
-            );
-          }}
-        />
-        <Button
-          title="link test ticket offer to event"
-          onPress={() => {
-            dispatch(
-              updateEventWithTicketOffer(
-                event,
-                "2a559613-912e-48af-8c8f-1ac7ca2dfd4e"
-              )
-            );
-          }}
         />
       </View>
     </TouchableWithoutFeedback>
