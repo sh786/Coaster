@@ -26,7 +26,6 @@ export const fetchBars = () => {
  
 		return API.graphql(graphqlOperation(listBars))
 			.then((bars) => {
-				console.log(bars)
 				dispatch({
 					type: 'FETCH_BARS_SUCCESS',
 					payload: bars.data.listBars.items
@@ -135,10 +134,13 @@ export const fetchEventsByBarId = (barId) => {
 			type: 'FETCH_EVENTS_REQUEST'
 		});
 		return API.graphql(graphqlOperation(getEventsByBarId, {barId}))
-			.then((data) => {
+			.then((response) => {
 				dispatch({
 					type: 'FETCH_EVENTS_SUCCESS',
-					payload: data.data.listEvents.items[0]  //using first event right now
+					payload: {
+						barId,
+						events: response.data.getEventsByBarId.items,
+					}
 				});
 			}, e => {
 				dispatch({
@@ -177,7 +179,7 @@ export const createNewEvent = (
 					type: 'CREATE_EVENT_SUCCESS',
 					payload: d
 				});
-				dispatch(fetchEvents());
+				// dispatch(fetchEvents());
 			}, () => {
 				dispatch({
 					type: 'CREATE_EVENT_FAILURE'
@@ -212,14 +214,12 @@ export const updateEventWithTicketOffer = ({
 				condition: ticketOfferId
 			}))
 			.then((d) => {
-				console.log(d);
 				dispatch({
 					type: 'UPDATE_EVENT_SUCCESS',
 					payload: d
 				});
-				dispatch(fetchEvents());
+				// dispatch(fetchEvents());
 			}, e => {
-				console.log(e);
 				dispatch({
 					type: 'UPDATE_EVENT_FAILURE'
 				});

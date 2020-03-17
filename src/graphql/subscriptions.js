@@ -1,273 +1,207 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const onCreateBar = `subscription OnCreateBar {
-  onCreateBar {
-    id
-    name
-    address
-    city
-    state
-    phoneNumber
-    lat
-    lon
-    description
-    coverPhoto
-    socialLinks
-    rules
-    events {
-      items {
-        id
-        barId
-        title
-        description
-        startTime
-        endTime
-        rules
+export const onCreateBar = /* GraphQL */ `
+  subscription OnCreateBar {
+    onCreateBar {
+      id
+      name
+      address
+      city
+      state
+      phoneNumber
+      lat
+      lon
+      description
+      coverPhoto
+      socialLinks
+      rules
+      events {
+        items {
+          id
+          barId
+          title
+          description
+          startTime
+          endTime
+          rules
+        }
+        nextToken
       }
-      nextToken
     }
   }
-}
 `;
-export const onUpdateBar = `subscription OnUpdateBar {
-  onUpdateBar {
-    id
-    name
-    address
-    city
-    state
-    phoneNumber
-    lat
-    lon
-    description
-    coverPhoto
-    socialLinks
-    rules
-    events {
-      items {
-        id
-        barId
-        title
-        description
-        startTime
-        endTime
-        rules
+export const onUpdateBar = /* GraphQL */ `
+  subscription OnUpdateBar {
+    onUpdateBar {
+      id
+      name
+      address
+      city
+      state
+      phoneNumber
+      lat
+      lon
+      description
+      coverPhoto
+      socialLinks
+      rules
+      events {
+        items {
+          id
+          barId
+          title
+          description
+          startTime
+          endTime
+          rules
+        }
+        nextToken
       }
-      nextToken
     }
   }
-}
 `;
-export const onDeleteBar = `subscription OnDeleteBar {
-  onDeleteBar {
-    id
-    name
-    address
-    city
-    state
-    phoneNumber
-    lat
-    lon
-    description
-    coverPhoto
-    socialLinks
-    rules
-    events {
-      items {
-        id
-        barId
-        title
-        description
-        startTime
-        endTime
-        rules
+export const onDeleteBar = /* GraphQL */ `
+  subscription OnDeleteBar {
+    onDeleteBar {
+      id
+      name
+      address
+      city
+      state
+      phoneNumber
+      lat
+      lon
+      description
+      coverPhoto
+      socialLinks
+      rules
+      events {
+        items {
+          id
+          barId
+          title
+          description
+          startTime
+          endTime
+          rules
+        }
+        nextToken
       }
-      nextToken
     }
   }
-}
 `;
-export const onCreateEvent = `subscription OnCreateEvent {
-  onCreateEvent {
-    id
-    barId
-    title
-    description
-    ticketOffers {
-      items {
-        id
-        title
-        description
-        capacity
-        expiration
-        price
-      }
-      nextToken
-    }
-    startTime
-    endTime
-    rules
-  }
-}
-`;
-export const onUpdateEvent = `subscription OnUpdateEvent {
-  onUpdateEvent {
-    id
-    barId
-    title
-    description
-    ticketOffers {
-      items {
-        id
-        title
-        description
-        capacity
-        expiration
-        price
-      }
-      nextToken
-    }
-    startTime
-    endTime
-    rules
-  }
-}
-`;
-export const onDeleteEvent = `subscription OnDeleteEvent {
-  onDeleteEvent {
-    id
-    barId
-    title
-    description
-    ticketOffers {
-      items {
-        id
-        title
-        description
-        capacity
-        expiration
-        price
-      }
-      nextToken
-    }
-    startTime
-    endTime
-    rules
-  }
-}
-`;
-export const onCreateTicketOffer = `subscription OnCreateTicketOffer {
-  onCreateTicketOffer {
-    id
-    title
-    description
-    capacity
-    expiration
-    price
-    event {
+export const onCreateEvent = /* GraphQL */ `
+  subscription OnCreateEvent {
+    onCreateEvent {
       id
       barId
       title
       description
-      ticketOffers {
-        nextToken
-      }
       startTime
       endTime
       rules
     }
-    purchasedTickets {
-      items {
-        id
-      }
-      nextToken
-    }
   }
-}
 `;
-export const onUpdateTicketOffer = `subscription OnUpdateTicketOffer {
-  onUpdateTicketOffer {
-    id
-    title
-    description
-    capacity
-    expiration
-    price
-    event {
+export const onUpdateEvent = /* GraphQL */ `
+  subscription OnUpdateEvent {
+    onUpdateEvent {
       id
       barId
       title
       description
-      ticketOffers {
-        nextToken
-      }
       startTime
       endTime
       rules
     }
-    purchasedTickets {
-      items {
-        id
-      }
-      nextToken
-    }
   }
-}
 `;
-export const onDeleteTicketOffer = `subscription OnDeleteTicketOffer {
-  onDeleteTicketOffer {
-    id
-    title
-    description
-    capacity
-    expiration
-    price
-    event {
+export const onDeleteEvent = /* GraphQL */ `
+  subscription OnDeleteEvent {
+    onDeleteEvent {
       id
       barId
       title
       description
-      ticketOffers {
-        nextToken
-      }
       startTime
       endTime
       rules
     }
-    purchasedTickets {
-      items {
-        id
-      }
-      nextToken
-    }
   }
-}
 `;
-export const onCreatePurchasedTicket = `subscription OnCreatePurchasedTicket {
-  onCreatePurchasedTicket {
-    id
-    ticketOffer {
+export const onCreateTicketOffer = /* GraphQL */ `
+  subscription OnCreateTicketOffer {
+    onCreateTicketOffer {
       id
+      eventId
       title
       description
       capacity
       expiration
       price
-      event {
-        id
-        barId
-        title
-        description
-        startTime
-        endTime
-        rules
-      }
-      purchasedTickets {
-        nextToken
-      }
     }
-    user {
+  }
+`;
+export const onUpdateTicketOffer = /* GraphQL */ `
+  subscription OnUpdateTicketOffer {
+    onUpdateTicketOffer {
+      id
+      eventId
+      title
+      description
+      capacity
+      expiration
+      price
+    }
+  }
+`;
+export const onDeleteTicketOffer = /* GraphQL */ `
+  subscription OnDeleteTicketOffer {
+    onDeleteTicketOffer {
+      id
+      eventId
+      title
+      description
+      capacity
+      expiration
+      price
+    }
+  }
+`;
+export const onCreatePurchasedTicket = /* GraphQL */ `
+  subscription OnCreatePurchasedTicket {
+    onCreatePurchasedTicket {
+      id
+      ticketOfferId
+      eventId
+      userId
+    }
+  }
+`;
+export const onUpdatePurchasedTicket = /* GraphQL */ `
+  subscription OnUpdatePurchasedTicket {
+    onUpdatePurchasedTicket {
+      id
+      ticketOfferId
+      eventId
+      userId
+    }
+  }
+`;
+export const onDeletePurchasedTicket = /* GraphQL */ `
+  subscription OnDeletePurchasedTicket {
+    onDeletePurchasedTicket {
+      id
+      ticketOfferId
+      eventId
+      userId
+    }
+  }
+`;
+export const onCreateUser = /* GraphQL */ `
+  subscription OnCreateUser {
+    onCreateUser {
       id
       username
       email
@@ -276,36 +210,20 @@ export const onCreatePurchasedTicket = `subscription OnCreatePurchasedTicket {
       phoneNumber
       dob
       tickets {
+        items {
+          id
+          ticketOfferId
+          eventId
+          userId
+        }
         nextToken
       }
     }
   }
-}
 `;
-export const onUpdatePurchasedTicket = `subscription OnUpdatePurchasedTicket {
-  onUpdatePurchasedTicket {
-    id
-    ticketOffer {
-      id
-      title
-      description
-      capacity
-      expiration
-      price
-      event {
-        id
-        barId
-        title
-        description
-        startTime
-        endTime
-        rules
-      }
-      purchasedTickets {
-        nextToken
-      }
-    }
-    user {
+export const onUpdateUser = /* GraphQL */ `
+  subscription OnUpdateUser {
+    onUpdateUser {
       id
       username
       email
@@ -314,36 +232,20 @@ export const onUpdatePurchasedTicket = `subscription OnUpdatePurchasedTicket {
       phoneNumber
       dob
       tickets {
+        items {
+          id
+          ticketOfferId
+          eventId
+          userId
+        }
         nextToken
       }
     }
   }
-}
 `;
-export const onDeletePurchasedTicket = `subscription OnDeletePurchasedTicket {
-  onDeletePurchasedTicket {
-    id
-    ticketOffer {
-      id
-      title
-      description
-      capacity
-      expiration
-      price
-      event {
-        id
-        barId
-        title
-        description
-        startTime
-        endTime
-        rules
-      }
-      purchasedTickets {
-        nextToken
-      }
-    }
-    user {
+export const onDeleteUser = /* GraphQL */ `
+  subscription OnDeleteUser {
+    onDeleteUser {
       id
       username
       email
@@ -352,63 +254,14 @@ export const onDeletePurchasedTicket = `subscription OnDeletePurchasedTicket {
       phoneNumber
       dob
       tickets {
+        items {
+          id
+          ticketOfferId
+          eventId
+          userId
+        }
         nextToken
       }
     }
   }
-}
-`;
-export const onCreateUser = `subscription OnCreateUser {
-  onCreateUser {
-    id
-    username
-    email
-    firstName
-    lastName
-    phoneNumber
-    dob
-    tickets {
-      items {
-        id
-      }
-      nextToken
-    }
-  }
-}
-`;
-export const onUpdateUser = `subscription OnUpdateUser {
-  onUpdateUser {
-    id
-    username
-    email
-    firstName
-    lastName
-    phoneNumber
-    dob
-    tickets {
-      items {
-        id
-      }
-      nextToken
-    }
-  }
-}
-`;
-export const onDeleteUser = `subscription OnDeleteUser {
-  onDeleteUser {
-    id
-    username
-    email
-    firstName
-    lastName
-    phoneNumber
-    dob
-    tickets {
-      items {
-        id
-      }
-      nextToken
-    }
-  }
-}
 `;

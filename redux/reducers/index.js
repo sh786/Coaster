@@ -21,10 +21,7 @@ const userReducer = (state = {}, { type, payload }) => {
 const eventReducer = (state = {}, { type, payload }) => {
     switch (type) {
         case "FETCH_EVENTS_SUCCESS":
-            // for (const bar of payload) {
-            //     state[bar.name] = payload; // change to bar name linked to event
-            // }
-            state['The Harp'] = payload;
+            state[payload.barId] = payload.events;
             return state;
         default:
           return state;

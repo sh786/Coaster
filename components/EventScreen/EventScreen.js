@@ -24,15 +24,14 @@ const EventScreen = ({ navigation }) => {
     return state.user;
   });
   const event = useSelector(state => {
-    return state.events["The Harp"]; // test event
+      console.log(state)
+      return state.events;
   });
-  console.log(event);
-
   const venue = navigation.getParam("venue");
 
   useEffect(() => {
     dispatch(fetchUsers());
-    dispatch(fetchEventsByBarId("1234"));
+    dispatch(fetchEventsByBarId(venue.id));
     dispatch(fetchTicketOffers());
   }, []);
 

@@ -1,38 +1,9 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const getBar = `query GetBar($id: ID!) {
-  getBar(id: $id) {
-    id
-    name
-    address
-    city
-    state
-    phoneNumber
-    lat
-    lon
-    description
-    coverPhoto
-    socialLinks
-    rules
-    events {
-      items {
-        id
-        barId
-        title
-        description
-        startTime
-        endTime
-        rules
-      }
-      nextToken
-    }
-  }
-}
-`;
-export const listBars = `query ListBars($filter: ModelBarFilterInput, $limit: Int, $nextToken: String) {
-  listBars(filter: $filter, limit: $limit, nextToken: $nextToken) {
-    items {
+export const getBar = /* GraphQL */ `
+  query GetBar($id: ID!) {
+    getBar(id: $id) {
       id
       name
       address
@@ -46,22 +17,104 @@ export const listBars = `query ListBars($filter: ModelBarFilterInput, $limit: In
       socialLinks
       rules
       events {
+        items {
+          id
+          barId
+          title
+          description
+          startTime
+          endTime
+          rules
+        }
         nextToken
       }
     }
-    nextToken
   }
-}
 `;
-export const getEvent = `query GetEvent($id: ID!) {
-  getEvent(id: $id) {
-    id
-    barId
-    title
-    description
-    ticketOffers {
+export const listBars = /* GraphQL */ `
+  query ListBars(
+    $filter: ModelBarFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listBars(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
+        name
+        address
+        city
+        state
+        phoneNumber
+        lat
+        lon
+        description
+        coverPhoto
+        socialLinks
+        rules
+        events {
+          nextToken
+        }
+      }
+      nextToken
+    }
+  }
+`;
+export const getEvent = /* GraphQL */ `
+  query GetEvent($id: ID!) {
+    getEvent(id: $id) {
+      id
+      barId
+      title
+      description
+      startTime
+      endTime
+      rules
+    }
+  }
+`;
+export const listEvents = /* GraphQL */ `
+  query ListEvents(
+    $filter: ModelEventFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listEvents(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        barId
+        title
+        description
+        startTime
+        endTime
+        rules
+      }
+      nextToken
+    }
+  }
+`;
+export const getTicketOffer = /* GraphQL */ `
+  query GetTicketOffer($id: ID!) {
+    getTicketOffer(id: $id) {
+      id
+      eventId
+      title
+      description
+      capacity
+      expiration
+      price
+    }
+  }
+`;
+export const listTicketOffers = /* GraphQL */ `
+  query ListTicketOffers(
+    $filter: ModelTicketOfferFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listTicketOffers(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        eventId
         title
         description
         capacity
@@ -70,117 +123,42 @@ export const getEvent = `query GetEvent($id: ID!) {
       }
       nextToken
     }
-    startTime
-    endTime
-    rules
   }
-}
 `;
-export const listEvents = `query ListEvents(
-  $filter: ModelEventFilterInput
-  $limit: Int
-  $nextToken: String
-) {
-  listEvents(filter: $filter, limit: $limit, nextToken: $nextToken) {
-    items {
+export const getPurchasedTicket = /* GraphQL */ `
+  query GetPurchasedTicket($id: ID!) {
+    getPurchasedTicket(id: $id) {
       id
-      barId
-      title
-      description
-      ticketOffers {
-        nextToken
-      }
-      startTime
-      endTime
-      rules
+      ticketOfferId
+      eventId
+      userId
     }
-    nextToken
   }
-}
 `;
-export const getTicketOffer = `query GetTicketOffer($id: ID!) {
-  getTicketOffer(id: $id) {
-    id
-    title
-    description
-    capacity
-    expiration
-    price
-    event {
-      id
-      barId
-      title
-      description
-      ticketOffers {
-        nextToken
-      }
-      startTime
-      endTime
-      rules
-    }
-    purchasedTickets {
+export const listPurchasedTickets = /* GraphQL */ `
+  query ListPurchasedTickets(
+    $filter: ModelPurchasedTicketFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listPurchasedTickets(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
       items {
         id
+        ticketOfferId
+        eventId
+        userId
       }
       nextToken
     }
   }
-}
 `;
-export const listTicketOffers = `query ListTicketOffers(
-  $filter: ModelTicketOfferFilterInput
-  $limit: Int
-  $nextToken: String
-) {
-  listTicketOffers(filter: $filter, limit: $limit, nextToken: $nextToken) {
-    items {
-      id
-      title
-      description
-      capacity
-      expiration
-      price
-      event {
-        id
-        barId
-        title
-        description
-        startTime
-        endTime
-        rules
-      }
-      purchasedTickets {
-        nextToken
-      }
-    }
-    nextToken
-  }
-}
-`;
-export const getPurchasedTicket = `query GetPurchasedTicket($id: ID!) {
-  getPurchasedTicket(id: $id) {
-    id
-    ticketOffer {
-      id
-      title
-      description
-      capacity
-      expiration
-      price
-      event {
-        id
-        barId
-        title
-        description
-        startTime
-        endTime
-        rules
-      }
-      purchasedTickets {
-        nextToken
-      }
-    }
-    user {
+export const getUser = /* GraphQL */ `
+  query GetUser($id: ID!) {
+    getUser(id: $id) {
       id
       username
       email
@@ -189,29 +167,25 @@ export const getPurchasedTicket = `query GetPurchasedTicket($id: ID!) {
       phoneNumber
       dob
       tickets {
+        items {
+          id
+          ticketOfferId
+          eventId
+          userId
+        }
         nextToken
       }
     }
   }
-}
 `;
-export const listPurchasedTickets = `query ListPurchasedTickets(
-  $filter: ModelPurchasedTicketFilterInput
-  $limit: Int
-  $nextToken: String
-) {
-  listPurchasedTickets(filter: $filter, limit: $limit, nextToken: $nextToken) {
-    items {
-      id
-      ticketOffer {
-        id
-        title
-        description
-        capacity
-        expiration
-        price
-      }
-      user {
+export const listUsers = /* GraphQL */ `
+  query ListUsers(
+    $filter: ModelUserFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listUsers(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
         id
         username
         email
@@ -219,111 +193,129 @@ export const listPurchasedTickets = `query ListPurchasedTickets(
         lastName
         phoneNumber
         dob
-      }
-    }
-    nextToken
-  }
-}
-`;
-export const getUser = `query GetUser($id: ID!) {
-  getUser(id: $id) {
-    id
-    username
-    email
-    firstName
-    lastName
-    phoneNumber
-    dob
-    tickets {
-      items {
-        id
+        tickets {
+          nextToken
+        }
       }
       nextToken
     }
   }
-}
 `;
-export const listUsers = `query ListUsers(
-  $filter: ModelUserFilterInput
-  $limit: Int
-  $nextToken: String
-) {
-  listUsers(filter: $filter, limit: $limit, nextToken: $nextToken) {
-    items {
-      id
-      username
-      email
-      firstName
-      lastName
-      phoneNumber
-      dob
-      tickets {
-        nextToken
-      }
-    }
-    nextToken
-  }
-}
-`;
-export const getEventsByBarId = `query GetEventsByBarId(
-  $barId: ID
-  $id: ModelIDKeyConditionInput
-  $sortDirection: ModelSortDirection
-  $filter: ModelEventFilterInput
-  $limit: Int
-  $nextToken: String
-) {
-  getEventsByBarId(
-    barId: $barId
-    id: $id
-    sortDirection: $sortDirection
-    filter: $filter
-    limit: $limit
-    nextToken: $nextToken
+export const getEventsByBarId = /* GraphQL */ `
+  query GetEventsByBarId(
+    $barId: ID
+    $id: ModelIDKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelEventFilterInput
+    $limit: Int
+    $nextToken: String
   ) {
-    items {
-      id
-      barId
-      title
-      description
-      ticketOffers {
-        nextToken
+    getEventsByBarId(
+      barId: $barId
+      id: $id
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        barId
+        title
+        description
+        startTime
+        endTime
+        rules
       }
-      startTime
-      endTime
-      rules
+      nextToken
     }
-    nextToken
   }
-}
 `;
-export const userByEmail = `query UserByEmail(
-  $email: String
-  $sortDirection: ModelSortDirection
-  $filter: ModelUserFilterInput
-  $limit: Int
-  $nextToken: String
-) {
-  userByEmail(
-    email: $email
-    sortDirection: $sortDirection
-    filter: $filter
-    limit: $limit
-    nextToken: $nextToken
+export const getTicketOffersByEventId = /* GraphQL */ `
+  query GetTicketOffersByEventId(
+    $eventId: ID
+    $id: ModelIDKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelTicketOfferFilterInput
+    $limit: Int
+    $nextToken: String
   ) {
-    items {
-      id
-      username
-      email
-      firstName
-      lastName
-      phoneNumber
-      dob
-      tickets {
-        nextToken
+    getTicketOffersByEventId(
+      eventId: $eventId
+      id: $id
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        eventId
+        title
+        description
+        capacity
+        expiration
+        price
       }
+      nextToken
     }
-    nextToken
   }
-}
+`;
+export const getPurchasedTicketsByUser = /* GraphQL */ `
+  query GetPurchasedTicketsByUser(
+    $userId: ID
+    $id: ModelIDKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelPurchasedTicketFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    getPurchasedTicketsByUser(
+      userId: $userId
+      id: $id
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        ticketOfferId
+        eventId
+        userId
+      }
+      nextToken
+    }
+  }
+`;
+export const userByEmail = /* GraphQL */ `
+  query UserByEmail(
+    $email: String
+    $sortDirection: ModelSortDirection
+    $filter: ModelUserFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    userByEmail(
+      email: $email
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        username
+        email
+        firstName
+        lastName
+        phoneNumber
+        dob
+        tickets {
+          nextToken
+        }
+      }
+      nextToken
+    }
+  }
 `;
