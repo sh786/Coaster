@@ -1,0 +1,53 @@
+type Bar @model {
+  id: ID!
+  name: String!
+  address: String!
+  city: String!
+  state: String!
+  phoneNumber: String!
+  lat: String!
+  lon: String!
+  description: String!
+  coverPhoto: String
+  socialLinks: [String]
+  rules: String
+  events: [Event] @connection(keyName: "byBarId", fields: ["id"])
+}
+type Event @model 
+  @key(name: "byBarId", fields: ["barId", "id"], queryField: "getEventsByBarId") {
+  id: ID!
+  barId: ID!
+  title: String!
+  description: String
+  startTime: String!
+  endTime: String
+  rules: String
+}
+type TicketOffer @model 
+  @key (name: "byEvent", fields: ["eventId", "id"], queryField: "getTicketOffersByEventId") {
+  id: ID!
+  eventId: ID!
+  title: String!
+  description: String
+  capacity: Int
+  expiration: String
+  price: Int!
+}
+type PurchasedTicket @model 
+  @key (name: "byUser", fields: ["userId", "id"], queryField: "getPurchasedTicketsByUser") {
+  id: ID!
+  ticketOfferId: ID!
+  eventId: ID!
+  userId: ID!
+}
+type User @model
+  @key(fields: ["email"], name: "byEmail", queryField: "userByEmail") {
+  id: ID!
+  username: String!
+  email: String!
+  firstName: String!
+  lastName: String!
+  phoneNumber: String!
+  dob: String!
+  tickets: [PurchasedTicket] @connection(keyName: "byUser", fields: ["id"])
+}

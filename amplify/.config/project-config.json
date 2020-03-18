@@ -1,8 +1,5 @@
 {
-    "providers": [
-        "awscloudformation"
-    ],
-    "projectName": "BlizzardApp",
+    "projectName": "Coaster",
     "version": "3.0",
     "frontend": "javascript",
     "javascript": {
@@ -10,8 +7,11 @@
         "config": {
             "SourceDir": "/",
             "DistributionDir": "/",
-            "BuildCommand": "npm run-script build",
-            "StartCommand": "npm run-script start"
+            "BuildCommand": "npm run start",
+            "StartCommand": "npm run start"
         }
-    }
+    },
+    "providers": [
+        "awscloudformation"
+    ]
 }
