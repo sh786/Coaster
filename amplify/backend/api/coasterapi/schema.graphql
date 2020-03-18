@@ -23,7 +23,7 @@ type Event @model
   endTime: String
   rules: String
 }
-type TicketOffer @model 
+type TicketOffer @model
   @key (name: "byEvent", fields: ["eventId", "id"], queryField: "getTicketOffersByEventId") {
   id: ID!
   eventId: ID!

@@ -6,36 +6,44 @@ export const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     backgroundColor: Colors.whiteColor,
-    height: 80,
-    width: '95%',
-    padding: 10,
-    marginBottom: 20,
-    borderColor: '#ddd',
-    borderBottomWidth: 0,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 8,
-    borderRadius: 4,
+    marginTop: 16,
+    marginBottom: 16,
+    marginHorizontal: 20,
     fontFamily: 'san-francisco',
+  },
+  imageContainer: {
+    width: 120,
+    height: 100,
+  },
+  image: {
+    maxWidth: 110,
+    height: 100,
   },
   venueItemLeftContent: {
     display: 'flex',
     flex: 2,
     flexDirection: 'column',
     alignItems: 'flex-start',
+    justifyContent: 'center',
   },
-  venueItemName: {
+  venueItemNameContainer: {
     flex: 5,
-    fontSize: 18,
+    justifyContent: 'center',
   },
-  venueItemStreetAddress: {
-    flex: 3,
+  venueItemNameText: {
+    fontSize: 20,
+    fontFamily: 'san-francisco',
+    fontWeight: '600',
+  },
+  venueItemStreetAddressContainer: {
+    marginTop: 4,
+    flex: 2,
+    justifyContent: 'flex-end',
+  },
+  venueItemStreetAddressText: {
     fontSize: 12,
+    color: Colors.accentColor,
+    opacity: 0.6,
   },
   venueItemDistance: {
     flex: 3,
@@ -70,6 +78,15 @@ export const styles = StyleSheet.create({
     fontSize: 10,
     color: '#fff',
   },
+  socialLogoContainer: {
+    marginTop: 6,
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+  },
+  socialLogoIcon: {
+    marginRight: 12,
+  },
   arrowContainer: {
     flex: 0.4,
     display: 'flex',
@@ -77,6 +94,6 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   arrowIcon: {
-    color: Colors.primaryColorDark,
+    color: Colors.primaryColor,
   },
 });
