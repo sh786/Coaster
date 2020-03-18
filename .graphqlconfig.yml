@@ -1,8 +1,8 @@
 projects:
-  mothernature:
+  coasterapi:
     schemaPath: src/graphql/schema.json
     includes:
-      - src/graphql/**/*.js
+      - graphql/*.js
     excludes:
       - ./amplify/**
     extensions:

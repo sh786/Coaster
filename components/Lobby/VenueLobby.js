@@ -18,7 +18,7 @@ import moment from 'moment';
 const VenueLobby = ({ navigation }) => {
   const dispatch = useDispatch();
   const bars = useSelector(state => {
-    return state.bars.bars;
+    return state.bars;
   });
 
   useEffect(() => {
