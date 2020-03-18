@@ -1,9 +1,10 @@
 export default {
   headerColor: '#051622',
-  primaryColor: '#f96167',
+  primaryColor: '#ef5455',
   primaryColorDark: '#ef5455',
   accentColor: '#2b3252',
   lightGrayColor: '#fafafa',
   darkGrayColor: '#263238',
+  yellowColor: '#fad744',
   whiteColor: '#fff',
 };

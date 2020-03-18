@@ -4,12 +4,15 @@ import Colors from '../../../constants/Colors';
 export const styles = StyleSheet.create({
   venueContainer: {
     flex: 1,
-    backgroundColor: Colors.lightGrayColor,
+    backgroundColor: Colors.whiteColor,
     paddingBottom: 15,
   },
   dateHeader: {
-    padding: 8,
-    marginVertical: 2,
+    marginTop: 16,
     fontSize: 16,
+  },
+  dateHeaderText: {
+    color: Colors.accentColor,
+    fontWeight: '600',
   },
 });

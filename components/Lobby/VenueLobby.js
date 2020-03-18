@@ -35,7 +35,9 @@ const VenueLobby = ({ navigation }) => {
         }}
       >
         <View style={styles.dateHeader}>
-          <Text>{`Venues for ${moment().format('MMM Do, YYYY')}`}</Text>
+          <Text style={styles.dateHeaderText}>{`${moment().format(
+            'MMM Do, YYYY',
+          )}`}</Text>
         </View>
         {[1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 2, 2, 2].map((b, i) => (
           <VenueItem
