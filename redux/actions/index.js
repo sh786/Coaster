@@ -5,7 +5,8 @@ import {
 	listBars,
 	listUsers,
 	getEventsByBarId,
-	getTicketOffersByEventId
+	getTicketOffersByEventId,
+	getPurchasedTicketsByUser
 } from '../../src/graphql/queries';
 import {
 	createUser,
@@ -161,22 +162,19 @@ export const createNewPurchasedTicket = (ticketOfferId, eventId, userId) => {
         }
 }
 
-export const fetchPurchasedTicketsByUserIs = (eventId) => {
+export const fetchPurchasedTicketsByUserId = (userId) => {
 	return (dispatch) => {
 		dispatch({
-			type: 'FETCH_TICKET_OFFERS_REQUEST'
+			type: 'FETCH_PURCHASED_TICKETS_REQUEST'
 		});
-		return API.graphql(graphqlOperation(getTicketOffersByEventId, {eventId}))
+		return API.graphql(graphqlOperation(getPurchasedTicketsByUser, {userId}))
 			.then((response) => {
 				dispatch({
-					type: 'FETCH_TICKET_OFFERS_SUCCESS',
-					payload: {
-						eventId,
-						ticketOffers: response.data.getTicketOffersByEventId.items,
-					} 
+					type: 'FETCH_PURCHASED_TICKETS_SUCCESS',
+					payload: response.data.getPurchasedTicketsByUser.items, 
 				});
 			}, e => dispatch({
-				type: 'FETCH_TICKET_OFFERS_FAILURE',
+				type: 'FETCH_PURCHASED_TICKETSS_FAILURE',
 				payload: e
 			}));
 	}
