@@ -48,10 +48,20 @@ const ticketOffersReducer = (state = {}, { type, payload }) => {
   }
 };
 
+const purchasedTicketsReducer = (state = [], { type, payload }) => {
+  switch (type) {
+      case "FETCH_PURCHASED_TICKETS_SUCCESS":
+          return payload;
+      default:
+        return state;
+    }
+}
+
 export default combineReducers({
   location: locationReducer,
   bars: barsReducer,
   user: userReducer,
   events: eventReducer,
   ticketOffers: ticketOffersReducer,
+  purchasedTickets: purchasedTicketsReducer,
 });

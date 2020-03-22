@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from "react";
 import {
   Keyboard,
   View,
@@ -8,12 +8,21 @@ import {
 } from 'react-native';
 import HeaderTitle from '../Header/HeaderTitle';
 import EventItem from './EventItem';
-
+import { useDispatch, useSelector } from "react-redux";
+import {fetchEventsByBarId} from "../../redux/actions";
 import { styles } from './styles/VenueStyles';
 import { ScrollView } from 'react-native-gesture-handler';
 
 const VenueScreen = ({ navigation }) => {
   const venue = navigation.getParam('venue');
+  const event = useSelector(state => {
+		return state.events[venue.id];
+  });
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+		dispatch(fetchEventsByBarId(venue.id));
+	}, []);
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
@@ -22,7 +31,6 @@ const VenueScreen = ({ navigation }) => {
           style={styles.image}
           source={require('../../assets/poodlesPics.jpg')}
         />
-
         <Text numberOfLines={10} style={styles.description}>
           {venue.description}
         </Text>
@@ -36,10 +44,11 @@ const VenueScreen = ({ navigation }) => {
             width: '95%',
           }}
         >
-          {[1, 2, 13, 21, 12, 32, 25, 72, 92].map(
-            e => (
-              <EventItem key={e} event={venue} navigation={navigation} />
-            ), // TODO: hit event endpoint for venue
+          {event && event.map(
+            e => {
+              console.log(e)
+              return <EventItem key={e.id} event={e} venue={venue} navigation={navigation} />
+            },
           )}
         </ScrollView>
       </View>

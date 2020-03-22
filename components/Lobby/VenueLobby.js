@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import * as Location from 'expo-location';
 import * as Permissions from 'expo-permissions';
 
-import { fetchBars, setLocation } from '../../redux/actions';
+import { fetchBars, setLocation, fetchUsers, fetchPurchasedTicketsByUserId } from '../../redux/actions';
 
 import VenueItem from './VenueItem';
 import { styles } from './styles/VenueLobbyStyles';
@@ -34,6 +34,8 @@ const VenueLobby = ({ navigation }) => {
     let location = await Location.getCurrentPositionAsync({});
     dispatch(setLocation(location));
   };
+  // const user = useSelector(state => state.user); // TODO: move to my tix page
+  // const purchasedTickets = useSelector(state => state.purchasedTickets); // TODO: move to my tix page
 
   useEffect(() => {
     const fetchLocation = async () => {
@@ -42,7 +44,14 @@ const VenueLobby = ({ navigation }) => {
     fetchLocation();
 
     dispatch(fetchBars());
+    dispatch(fetchUsers());
   }, []);
+
+  // useEffect(() => {
+  //   if (user) {
+  //     dispatch(fetchPurchasedTicketsByUserId(user.id)); // TODO: move to my tix page
+  //   }
+  // }, [user])
 
   return (
     <View
