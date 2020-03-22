@@ -139,6 +139,8 @@ export const fetchTicketOffersByEventId = (eventId) => {
 	}
 }
 
+
+/* PURCHASED TICKET ACTIONS */
 export const createNewPurchasedTicket = (ticketOfferId, eventId, userId) => {
 	const input = {
 		ticketOfferId, eventId, userId
@@ -149,10 +151,33 @@ export const createNewPurchasedTicket = (ticketOfferId, eventId, userId) => {
 
         return API.graphql(graphqlOperation(createPurchasedTicket, {input}))
             .then((ticket) => {
+				console.log(ticket);
                 // TODO: add to redux if necessary. Might want to do a fetch all purchased tickets for user
                 dispatch({ type: 'CREATE_PURCHASED_TICKET_SUCCESS', payload: ticket });
             }, e => {
-              dispatch({ type: 'CREATE_PURCHASED_TICKET_FAILURE', payload: e });
+				console.log(e);
+              	dispatch({ type: 'CREATE_PURCHASED_TICKET_FAILURE', payload: e });
             });
         }
+}
+
+export const fetchPurchasedTicketsByUserIs = (eventId) => {
+	return (dispatch) => {
+		dispatch({
+			type: 'FETCH_TICKET_OFFERS_REQUEST'
+		});
+		return API.graphql(graphqlOperation(getTicketOffersByEventId, {eventId}))
+			.then((response) => {
+				dispatch({
+					type: 'FETCH_TICKET_OFFERS_SUCCESS',
+					payload: {
+						eventId,
+						ticketOffers: response.data.getTicketOffersByEventId.items,
+					} 
+				});
+			}, e => dispatch({
+				type: 'FETCH_TICKET_OFFERS_FAILURE',
+				payload: e
+			}));
+	}
 }

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { ScrollView } from 'react-native-gesture-handler';
 import { Text, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchBars } from '../../redux/actions';
+import { fetchBars, fetchUsers } from '../../redux/actions';
 
 import VenueItem from './VenueItem';
 import { styles } from './styles/VenueLobbyStyles';
@@ -23,6 +23,7 @@ const VenueLobby = ({ navigation }) => {
 
   useEffect(() => {
     dispatch(fetchBars());
+    dispatch(fetchUsers());
   }, []);
 
   return (

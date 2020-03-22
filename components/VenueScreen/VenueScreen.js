@@ -31,7 +31,6 @@ const VenueScreen = ({ navigation }) => {
           style={styles.image}
           source={require('../../assets/poodlesPics.jpg')}
         />
-
         <Text numberOfLines={10} style={styles.description}>
           {venue.description}
         </Text>
@@ -45,10 +44,11 @@ const VenueScreen = ({ navigation }) => {
             width: '95%',
           }}
         >
-          {event.map(
-            e => (
-              <EventItem key={e} event={e} venue={venue} navigation={navigation} />
-            ),
+          {event && event.map(
+            e => {
+              console.log(e)
+              return <EventItem key={e.id} event={e} venue={venue} navigation={navigation} />
+            },
           )}
         </ScrollView>
       </View>

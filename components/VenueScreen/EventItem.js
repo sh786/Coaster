@@ -5,9 +5,8 @@ import { Text, View, TouchableWithoutFeedback } from 'react-native';
 import {styles} from './styles/EventItemStyles';
 
 const EventItem = ({event, venue, navigation}) => {
-  console.log(event)
   return (
-    <TouchableWithoutFeedback onPress={() => navigation.navigate('Event', {venue: navigation.getParam("venue")})}>
+    <TouchableWithoutFeedback onPress={() => navigation.navigate('Event', {venue, event})}>
       <View style={styles.eventItemContainer} >
         <View style={styles.eventItemLeftContent}>
           <Text style={styles.eventItemName}>{event.title}</Text>
@@ -26,10 +25,9 @@ const EventItem = ({event, venue, navigation}) => {
 };
 
 EventItem.propTypes = {
-  event: PropTypes.object,
+  event: PropTypes.object.isRequired,
+  venue: PropTypes.object.isRequired,
+  navigation: PropTypes.object.isRequired,
 }
 
-EventItem.defaultProps = {
-  event: {},
-}
 export default EventItem;
