@@ -1,8 +1,8 @@
 import { Asset } from 'expo-asset';
 import * as Font from 'expo-font';
 
-import React, { useState } from 'react';
-import { ActivityIndicator } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { ActivityIndicator, Image } from 'react-native';
 import { Provider } from 'react-redux';
 import rootReducer from './redux/reducers';
 import thunkMiddleware from 'redux-thunk';
@@ -31,9 +31,12 @@ export default function App() {
       Asset.loadAsync([
         require('./assets/images/robot-dev.png'),
         require('./assets/images/robot-prod.png'),
+        require('./assets/images/CoasterSplash.png'),
+        require('./assets/images/logoWhite.png'),
         require('./assets/poodlesPics.jpg'),
         require('./assets/bar_stock.jpg'),
       ]),
+      // TODO: Query all image asset URLs we need and do Image.prefetch(url) for each
       Font.loadAsync({
         // This is the font that we are using for our tab bar
         ...Ionicons.font,
@@ -41,16 +44,22 @@ export default function App() {
         // remove this if you are not using it in your app
         'space-mono': require('./assets/fonts/SpaceMono-Regular.ttf'),
         'san-francisco': require('./assets/fonts/SF-UI-Display-Regular.otf'),
-        'new-york': require('./assets/fonts/NewYorkMedium-Regular.otf'),
-        'new-york-bold': require('./assets/fonts/NewYorkMedium-Bold.otf'),
-        'new-york-semibold': require('./assets/fonts/NewYorkMedium-Semibold.otf'),
+        'san-francisco-medium': require('./assets/fonts/SF-Pro-Display-Medium.otf'),
+        'san-francisco-semibold': require('./assets/fonts/SF-Pro-Display-Semibold.otf'),
+        'san-francisco-bold': require('./assets/fonts/SF-Pro-Display-Bold.otf'),
       }),
     ]);
-    setIsLoaded(true);
   }
 
   const [isLoaded, setIsLoaded] = useState(false);
-  loadResourcesAsync();
+
+  useEffect(() => {
+    const loadAll = async () => {
+      await Promise.all([loadResourcesAsync()]);
+      setIsLoaded(true);
+    };
+    loadAll();
+  }, []);
 
   return isLoaded ? (
     <Provider store={store}>
