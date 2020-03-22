@@ -1,6 +1,6 @@
 projects:
   coasterapi:
-    schemaPath: src/graphql/schema.json
+    schemaPath: amplify/backend/api/coasterapi/build/schema.graphql
     includes:
       - graphql/*.js
     excludes:

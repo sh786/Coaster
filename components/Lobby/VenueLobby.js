@@ -1,9 +1,12 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { ScrollView } from 'react-native-gesture-handler';
-import { Text, View } from 'react-native';
+import { Dimensions, Text, View, ImageBackground } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchBars, fetchUsers, fetchPurchasedTicketsByUserId } from '../../redux/actions';
+import * as Location from 'expo-location';
+import * as Permissions from 'expo-permissions';
+
+import { fetchBars, setLocation, fetchUsers, fetchPurchasedTicketsByUserId } from '../../redux/actions';
 
 import VenueItem from './VenueItem';
 import { styles } from './styles/VenueLobbyStyles';
@@ -12,6 +15,7 @@ import HeaderTitle from '../Header/HeaderTitle';
 import Logo from '../Common/Logo';
 import Icon from '../Common/Icon';
 import SortView from './SortView';
+import CoasterLogo from '../../assets/images/Coaster.png';
 
 import moment from 'moment';
 
@@ -21,10 +25,24 @@ const VenueLobby = ({ navigation }) => {
     return state.bars;
   });
 
+  const getLocationAsync = async () => {
+    let { status } = await Permissions.askAsync(Permissions.LOCATION);
+    if (status !== 'granted') {
+      console.log('location access denied.');
+    }
+
+    let location = await Location.getCurrentPositionAsync({});
+    dispatch(setLocation(location));
+  };
   // const user = useSelector(state => state.user); // TODO: move to my tix page
   // const purchasedTickets = useSelector(state => state.purchasedTickets); // TODO: move to my tix page
 
   useEffect(() => {
+    const fetchLocation = async () => {
+      await getLocationAsync();
+    };
+    fetchLocation();
+
     dispatch(fetchBars());
     dispatch(fetchUsers());
   }, []);
@@ -36,7 +54,12 @@ const VenueLobby = ({ navigation }) => {
   // }, [user])
 
   return (
-    <View style={{ flex: 1 }}>
+    <View
+      style={{
+        flex: 1,
+        backgroundColor: '#fafafa',
+      }}
+    >
       <ScrollView
         style={styles.venueContainer}
         contentContainerStyle={{
@@ -49,19 +72,27 @@ const VenueLobby = ({ navigation }) => {
             'MMM Do, YYYY',
           )}`}</Text>
         </View>
-        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 2, 2, 2].map((b, i) => (
-          <VenueItem
-            key={i}
-            venue={bars.length ? bars[0] : {}}
-            navigation={navigation}
-          />
+        {bars.map((b, i) => (
+          <VenueItem key={i} venue={b} navigation={navigation} />
         ))}
       </ScrollView>
+      <ImageBackground
+        source={require('../../assets/images/CoasterSplash.png')}
+        style={{
+          width: Dimensions.get('window').width,
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          zIndex: -1,
+        }}
+      />
       {/* Not totally sure how I feel about doing it this way, but we do need
       to made it clear what page a user is currently on */}
-      <View style={commonStyles.screenLabelContainer}>
-        <Text style={commonStyles.screenLabelText}>LOBBY</Text>
-      </View>
+      {/* <View style={commonStyles.screenLabelContainer}>
+          <Text style={commonStyles.screenLabelText}>LOBBY</Text>
+        </View> */}
     </View>
   );
 };

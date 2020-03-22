@@ -4,8 +4,8 @@ import Colors from '../../../constants/Colors';
 export const styles = StyleSheet.create({
   venueContainer: {
     flex: 1,
-    backgroundColor: Colors.whiteColor,
     paddingBottom: 15,
+    backgroundColor: 'transparent',
   },
   dateHeader: {
     marginTop: 16,

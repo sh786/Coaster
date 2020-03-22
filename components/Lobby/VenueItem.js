@@ -1,54 +1,74 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Text, View, TouchableWithoutFeedback, Image } from 'react-native';
+import {
+  Text,
+  View,
+  TouchableWithoutFeedback,
+  Image,
+  Linking,
+} from 'react-native';
+import { useSelector } from 'react-redux';
+import haversine from 'haversine';
 
 import { styles } from './styles/VenueItemStyles';
 import Icon from '../Common/Icon';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const VenueItem = ({ venue, navigation }) => {
+  const openURL = url => {
+    console.log(url);
+    Linking.openURL(url).catch(err => console.error('An error occurred', err));
+  };
+
+  const location = useSelector(state => {
+    return state.location;
+  });
+
   return (
     <TouchableWithoutFeedback
       onPress={() => navigation.navigate('Venue', { venue })}
     >
       <View style={styles.venueItemContainer}>
         <View style={styles.imageContainer}>
-          <Image
-            style={styles.image}
-            source={require('../../assets/bar_stock.jpg')}
-          />
+          <Image style={styles.image} source={{ uri: venue.coverPhoto }} />
         </View>
         <View style={styles.venueItemLeftContent}>
-          <View style={styles.venueItemNameContainer}>
+          <View style={styles.venueItemNameAddressContainer}>
             <Text style={styles.venueItemNameText}>{venue.name}</Text>
+            <Text style={styles.venueItemStreetAddressText}>{`${
+              venue.address
+            } • ${venue.city}, ${venue.state} • ${haversine(
+              {
+                latitude: location.coords.latitude,
+                longitude: location.coords.longitude,
+              },
+              {
+                latitude: venue.lat,
+                longitude: venue.lon,
+              },
+              { unit: 'mile' },
+            ).toFixed(1)} mi`}</Text>
           </View>
-          <View style={styles.venueItemStreetAddressContainer}>
-            <Text
-              style={styles.venueItemStreetAddressText}
-            >{`${venue.address} • ${venue.city}, ${venue.state} • 0.6mi`}</Text>
-            <View style={styles.socialLogoContainer}>
-              {/* Facebook */}
-              {/* Instagram show if has */}
-              {/* Maps/GoogleMaps */}
-              {/* Twitter show if has */}
-              {/* Will not use Ionicons, but shown below */}
+          <View style={styles.socialLogoContainer}>
+            <TouchableOpacity onPress={() => openURL(venue.socialLinks[0])}>
               <Icon
                 style={styles.socialLogoIcon}
                 name='logo-facebook'
                 size={20}
               />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => openURL(venue.socialLinks[1])}>
               <Icon
                 style={styles.socialLogoIcon}
                 name='logo-instagram'
                 size={20}
               />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => openURL(venue.socialLinks[2])}>
               <Icon style={styles.socialLogoIcon} name='md-map' size={20} />
-            </View>
+            </TouchableOpacity>
           </View>
         </View>
-        {/* SO OUT ON ARROWS, what apps have that shit? */}
-        {/* <View style={styles.arrowContainer}>
-          <Icon name='ios-arrow-forward' size={20} style={styles.arrowIcon} />
-        </View> */}
       </View>
     </TouchableWithoutFeedback>
   );
