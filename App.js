@@ -10,16 +10,15 @@ import { createStore, applyMiddleware } from 'redux';
 
 import { Ionicons } from '@expo/vector-icons';
 // AWS
-import API from '@aws-amplify/api';
+// import API from '@aws-amplify/api';
 import Amplify from 'aws-amplify';
-import PubSub from '@aws-amplify/pubsub';
+// import PubSub from '@aws-amplify/pubsub';
 import AppNavigator from './navigation/AppNavigator';
 
 import config from './aws-exports';
 Amplify.configure(config);
-
-API.configure(config); // Configure Amplify
-PubSub.configure(config);
+// API.configure(config); // Configure Amplify
+// PubSub.configure(config);
 
 const store = createStore(
   rootReducer,

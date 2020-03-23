@@ -5,6 +5,7 @@ import { createStackNavigator } from 'react-navigation-stack';
 import Colors from '../constants/Colors';
 import HeaderTitle from '../components/Header/HeaderTitle';
 import SignInScreen from '../components/Auth/SignIn';
+import SignUpScreen from '../components/Auth/SignUp';
 
 const config = Platform.select({
   web: { headerMode: 'screen' },
@@ -13,7 +14,8 @@ const config = Platform.select({
 
 const AuthNavigator = createStackNavigator(
   {
-    SignIn: SignInScreen
+    SignIn: SignInScreen,
+    SignUp: SignUpScreen
   },
   {
     initialRouteName: 'SignIn',
