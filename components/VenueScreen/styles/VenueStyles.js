@@ -1,10 +1,11 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
 import Colors from '../../../constants/Colors';
 
 export const styles = StyleSheet.create({
   container: {
     backgroundColor: Colors.lightGrayColor,
     alignItems: 'center',
+    display: 'flex',
     flex: 1,
     width: '100%',
   },
@@ -18,11 +19,11 @@ export const styles = StyleSheet.create({
     fontFamily: 'san-francisco',
     fontSize: 16,
     textAlign: 'center',
-    color: '#fff',
+    color: Colors.darkGrayColor,
     marginHorizontal: 10,
   },
   partition: {
-    backgroundColor: Colors.accentColor,
+    backgroundColor: Colors.darkGrayColor,
     height: 1,
     width: '95%',
     marginVertical: 5,
@@ -31,17 +32,20 @@ export const styles = StyleSheet.create({
     fontFamily: 'san-francisco',
     fontSize: 20,
     textAlign: 'center',
-    color: '#fff',
+    color: Colors.darkGrayColor,
     fontWeight: 'bold',
     marginBottom: 5,
   },
-  eventContainer: {
+  eventsContainer: {
     display: 'flex',
     flex: 1,
     width: '95%',
-    height: 'auto',
     paddingVertical: 5,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  mapStyle: {
+    width: Dimensions.get('window').width,
+    height: 240,
   },
 });

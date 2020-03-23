@@ -1,8 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { WebView } from 'react-native-webview';
 import { STRIPE } from './stripeSettings';
 import { stripeCheckoutRedirectHTML } from './stripeCheckout';
-
 
 const PaymentScreen = ({navigation}) => {
 
@@ -10,6 +10,8 @@ const PaymentScreen = ({navigation}) => {
   const user = { id: 'someID' };
   const ticketOffer = navigation.getParam("ticketOffer");
   const venue = navigation.getParam("venue");
+  const quantity = navigation.getParam("quantity");
+  const event = navigation.getParam('event');
 
   const onSuccessHandler = () => { /* TODO: do something */ };
   const onCanceledHandler = () => { /* TODO: do something */ };
@@ -35,18 +37,21 @@ const PaymentScreen = ({navigation}) => {
   return (
     <WebView
       originWhitelist={['*']}
-      source={{ html: stripeCheckoutRedirectHTML(user.id, 1) }} // added quantity
+      source={{ html: stripeCheckoutRedirectHTML(user.id, quantity) }} // added quantity
       onLoadStart={onLoadStart}
       onNavigationStateChange={(state) => {
           if (state.url === STRIPE.SUCCESS_URL) {
-              navigation.navigate('CheckoutSuccess', {ticketOffer, venue});
+              navigation.navigate('CheckoutSuccess', {ticketOffer, venue, quantity, event});
           } else if (state.url === STRIPE.CANCELED_URL) {
-              navigation.navigate('Event'); // need to change to event screen
+              navigation.navigate('Event');
           }
       }}
     />
   );
+};
 
+PaymentScreen.propTypes = {
+  navigation: PropTypes.object.isRequired,
 };
 
 export default PaymentScreen; 
