@@ -37,17 +37,19 @@ const VenueItem = ({ venue, navigation }) => {
             <Text style={styles.venueItemNameText}>{venue.name}</Text>
             <Text style={styles.venueItemStreetAddressText}>{`${
               venue.address
-            } • ${venue.city}, ${venue.state} • ${haversine(
-              {
-                latitude: location.coords.latitude,
-                longitude: location.coords.longitude,
-              },
-              {
-                latitude: venue.lat,
-                longitude: venue.lon,
-              },
-              { unit: 'mile' },
-            ).toFixed(1)} mi`}</Text>
+            } • ${venue.city}, ${venue.state} • ${location &&
+              location.coords &&
+              haversine(
+                {
+                  latitude: location.coords.latitude,
+                  longitude: location.coords.longitude,
+                },
+                {
+                  latitude: venue.lat,
+                  longitude: venue.lon,
+                },
+                { unit: 'mile' },
+              ).toFixed(1)} mi`}</Text>
           </View>
           <View style={styles.socialLogoContainer}>
             <TouchableOpacity onPress={() => openURL(venue.socialLinks[0])}>

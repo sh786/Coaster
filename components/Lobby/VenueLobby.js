@@ -10,12 +10,10 @@ import { fetchBars, setLocation } from '../../redux/actions';
 
 import VenueItem from './VenueItem';
 import { styles } from './styles/VenueLobbyStyles';
-import { commonStyles } from '../../common/CommonStyles';
 import HeaderTitle from '../Header/HeaderTitle';
-import Logo from '../Common/Logo';
 import Icon from '../Common/Icon';
 import SortView from './SortView';
-import CoasterLogo from '../../assets/images/Coaster.png';
+import CoasterSplash from '../../assets/images/CoasterSplash.png';
 
 import moment from 'moment';
 
@@ -48,7 +46,6 @@ const VenueLobby = ({ navigation }) => {
     <View
       style={{
         flex: 1,
-        backgroundColor: '#fafafa',
       }}
     >
       <ScrollView
@@ -68,7 +65,7 @@ const VenueLobby = ({ navigation }) => {
         ))}
       </ScrollView>
       <ImageBackground
-        source={require('../../assets/images/CoasterSplash.png')}
+        source={CoasterSplash}
         style={{
           width: Dimensions.get('window').width,
           position: 'absolute',
