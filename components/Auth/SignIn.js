@@ -71,8 +71,9 @@ export default class SignIn extends React.Component {
     const { username, password } = this.state
     await Auth.signIn(username, password)
     .then(user => {
-      this.setState({ user })
-      this.props.navigation.navigate('Authloading')
+	  this.setState({ user })
+	  console.log(user)
+      this.props.navigation.navigate('Lobby', {user});
     })
     .catch(err => {
       if (! err.message) {

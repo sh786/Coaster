@@ -18,12 +18,16 @@ import SortView from './SortView';
 import CoasterLogo from '../../assets/images/Coaster.png';
 
 import moment from 'moment';
+import { Button } from 'native-base';
 
 const VenueLobby = ({ navigation }) => {
   const dispatch = useDispatch();
   const bars = useSelector(state => {
     return state.bars;
   });
+
+  const user = navigation.getParam("user");
+  console.log(user)
 
   const getLocationAsync = async () => {
     let { status } = await Permissions.askAsync(Permissions.LOCATION);
@@ -60,6 +64,7 @@ const VenueLobby = ({ navigation }) => {
         backgroundColor: '#fafafa',
       }}
     >
+      <Button title="account" onPress={() => navigation.navigate('Account')} />
       <ScrollView
         style={styles.venueContainer}
         contentContainerStyle={{

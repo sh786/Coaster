@@ -23,6 +23,9 @@ const VenueItem = ({ venue, navigation }) => {
   const location = useSelector(state => {
     return state.location;
   });
+  
+  const latitude = location.coords ? location.coords.latitude : null;
+  const longitude = location.coords ? location.coords.longitude : null;
 
   return (
     <TouchableWithoutFeedback
@@ -37,10 +40,10 @@ const VenueItem = ({ venue, navigation }) => {
             <Text style={styles.venueItemNameText}>{venue.name}</Text>
             <Text style={styles.venueItemStreetAddressText}>{`${
               venue.address
-            } • ${venue.city}, ${venue.state} • ${haversine(
+            } • ${venue.city}, ${venue.state} • ${latitude && longitude && haversine(
               {
-                latitude: location.coords.latitude,
-                longitude: location.coords.longitude,
+                latitude,
+                longitude,
               },
               {
                 latitude: venue.lat,
