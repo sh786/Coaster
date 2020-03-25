@@ -29,7 +29,7 @@ const userReducer = (state = {}, { type, payload }) => {
       state.username = payload.payload.username;
       return state;
     // on log out
-    case 'CLEAR_USER_DATE':
+    case 'CLEAR_USER_DATA':
       return {};
     default:
       return state;

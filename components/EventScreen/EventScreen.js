@@ -49,9 +49,9 @@ const EventScreen = ({ navigation }) => {
 					onPress={() => {
 						console.log('trying to purhcase ticket', user);
 						if (user.username) {
-							navigation.navigate("Payment", {ticketOffer, venue, quantity, event})
+							navigation.navigate("Payment", {ticketOffer, venue, quantity, event, user})
 						} else {
-							navigation.navigate("SignIn");
+							navigation.navigate("SignIn", {ticketOffer, venue, quantity, event, user, returnScreen: 'Payment'});
 						}
 					}}>
 					<Text style={styles.buttonText}>{`Purchase ${quantity} Tickets`}</Text>
