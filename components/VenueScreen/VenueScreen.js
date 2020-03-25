@@ -4,7 +4,7 @@ import {
   View,
   Text,
   TouchableWithoutFeedback,
-  Image,
+  ImageBackground,
 } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { ScrollView } from 'react-native-gesture-handler';
@@ -37,11 +37,16 @@ const VenueScreen = ({ navigation }) => {
             alignItems: 'center',
           }}
         >
-          <Image style={styles.image} source={{ uri: venue.coverPhoto }} />
+          <ImageBackground
+            style={styles.image}
+            source={{ uri: venue.coverPhoto }}
+          />
+          <View style={styles.imageOverlay}>
+            <Text style={styles.venueName}>{venue.name}</Text>
+          </View>
           <Text numberOfLines={10} style={styles.description}>
             {venue.description}
           </Text>
-          <View style={styles.partition}></View>
           <Text style={styles.eventListTitle}>Upcoming Events</Text>
           <ScrollView
             styles={styles.eventsContainer}
@@ -63,54 +68,57 @@ const VenueScreen = ({ navigation }) => {
                 );
               })}
           </ScrollView>
-          <MapView
-            style={styles.mapStyle}
-            provider={PROVIDER_GOOGLE}
-            initialRegion={{
-              latitude: parseFloat(venue.lat),
-              longitude: parseFloat(venue.lon),
-              latitudeDelta: 0.02,
-              longitudeDelta: 0.0421,
-            }}
-          >
-            <Marker
-              coordinate={{
+          <View style={styles.mapContainer}>
+            <Text style={styles.venuePageHeading}>Location</Text>
+            <MapView
+              style={styles.mapStyle}
+              provider={PROVIDER_GOOGLE}
+              initialRegion={{
                 latitude: parseFloat(venue.lat),
                 longitude: parseFloat(venue.lon),
-              }}
-            ></Marker>
-            <Marker
-              coordinate={{
-                latitude: parseFloat(venue.lat),
-                longitude: parseFloat(venue.lon),
+                latitudeDelta: 0.02,
+                longitudeDelta: 0.0421,
               }}
             >
-              <View
-                style={{
-                  shadowColor: '#000',
-                  shadowOffset: {
-                    width: 0,
-                    height: 1,
-                  },
-                  shadowOpacity: 0.32,
-                  shadowRadius: 3,
-                  elevation: 3,
+              <Marker
+                coordinate={{
+                  latitude: parseFloat(venue.lat),
+                  longitude: parseFloat(venue.lon),
+                }}
+              ></Marker>
+              <Marker
+                coordinate={{
+                  latitude: parseFloat(venue.lat),
+                  longitude: parseFloat(venue.lon),
                 }}
               >
-                <Text
+                <View
                   style={{
-                    backgroundColor: Colors.whiteColor,
-                    marginBottom: 46,
-                    padding: 5,
-                    borderRadius: 3,
-                    overflow: 'hidden',
+                    shadowColor: '#000',
+                    shadowOffset: {
+                      width: 0,
+                      height: 1,
+                    },
+                    shadowOpacity: 0.32,
+                    shadowRadius: 3,
+                    elevation: 3,
                   }}
                 >
-                  {venue.name}
-                </Text>
-              </View>
-            </Marker>
-          </MapView>
+                  <Text
+                    style={{
+                      backgroundColor: Colors.whiteColor,
+                      marginBottom: 46,
+                      padding: 5,
+                      borderRadius: 3,
+                      overflow: 'hidden',
+                    }}
+                  >
+                    {venue.name}
+                  </Text>
+                </View>
+              </Marker>
+            </MapView>
+          </View>
         </ScrollView>
       </View>
     </TouchableWithoutFeedback>

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {
   Text,
   View,
+  TouchableOpacity,
   TouchableWithoutFeedback,
   Image,
   Linking,
@@ -12,7 +13,6 @@ import haversine from 'haversine';
 
 import { styles } from './styles/VenueItemStyles';
 import Icon from '../Common/Icon';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const VenueItem = ({ venue, navigation }) => {
   const openURL = url => {
@@ -52,21 +52,36 @@ const VenueItem = ({ venue, navigation }) => {
               ).toFixed(1)} mi`}</Text>
           </View>
           <View style={styles.socialLogoContainer}>
-            <TouchableOpacity onPress={() => openURL(venue.socialLinks[0])}>
+            <TouchableOpacity
+              onPress={e => {
+                e.stopPropagation();
+                openURL(venue.socialLinks[0]);
+              }}
+            >
               <Icon
                 style={styles.socialLogoIcon}
                 name='logo-facebook'
                 size={20}
               />
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => openURL(venue.socialLinks[1])}>
+            <TouchableOpacity
+              onPress={e => {
+                e.stopPropagation();
+                openURL(venue.socialLinks[1]);
+              }}
+            >
               <Icon
                 style={styles.socialLogoIcon}
                 name='logo-instagram'
                 size={20}
               />
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => openURL(venue.socialLinks[2])}>
+            <TouchableOpacity
+              onPress={e => {
+                e.stopPropagation();
+                openURL(venue.socialLinks[2]);
+              }}
+            >
               <Icon style={styles.socialLogoIcon} name='md-map' size={20} />
             </TouchableOpacity>
           </View>

@@ -1,12 +1,16 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { ScrollView } from 'react-native-gesture-handler';
-import { Dimensions, Text, View, ImageBackground } from 'react-native';
+import { Dimensions, Text, View, Image, ScrollView } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import * as Location from 'expo-location';
 import * as Permissions from 'expo-permissions';
 
-import { fetchBars, setLocation, fetchUsers, fetchPurchasedTicketsByUserId } from '../../redux/actions';
+import {
+  fetchBars,
+  setLocation,
+  fetchUsers,
+  fetchPurchasedTicketsByUserId,
+} from '../../redux/actions';
 
 import VenueItem from './VenueItem';
 import { styles } from './styles/VenueLobbyStyles';
@@ -70,21 +74,20 @@ const VenueLobby = ({ navigation }) => {
           )}`}</Text>
         </View>
         {bars.map((b, i) => (
-          <VenueItem key={i} venue={b} navigation={navigation} />
+          <VenueItem
+            key={i}
+            venue={b}
+            navigation={navigation}
+            onPress={() => navigation.navigate('Venue', { b })}
+          />
         ))}
+        <Image
+          source={CoasterSplash}
+          style={{ width: Dimensions.get('window').width, height: 100 }}
+        />
       </ScrollView>
-      <ImageBackground
-        source={CoasterSplash}
-        style={{
-          width: Dimensions.get('window').width,
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          zIndex: -1,
-        }}
-      />
+      <View></View>
+
       {/* Not totally sure how I feel about doing it this way, but we do need
       to made it clear what page a user is currently on */}
       {/* <View style={commonStyles.screenLabelContainer}>
