@@ -16,6 +16,9 @@ import {styles} from './styles/EventScreenStyles';
 
 const EventScreen = ({ navigation }) => {
 	const [quantity, setQuantity] = useState(1);
+	const user = useSelector(state => {
+		return state.user;
+	});
 
 	const venue = navigation.getParam('venue');
 	const event = navigation.getParam('event');
@@ -41,11 +44,16 @@ const EventScreen = ({ navigation }) => {
 				onValueChange={(i) => setQuantity(i)}>
 				{[1,2,3,4,5,6,7,8,9,10].map(i => <Picker.Item key={i} label={i.toString()} value={i} />)}
 			</Picker>
-			<View
-				style={styles.checkoutButton}
-				onPress={() => navigation.navigate("Payment", {ticketOffer, venue, quantity, event})}
-			>
-				<TouchableOpacity onPress={() => navigation.navigate("Payment", {ticketOffer, venue, quantity, event})}>
+			<View style={styles.checkoutButton}>
+				<TouchableOpacity 
+					onPress={() => {
+						console.log('trying to purhcase ticket', user);
+						if (user.username) {
+							navigation.navigate("Payment", {ticketOffer, venue, quantity, event})
+						} else {
+							navigation.navigate("SignIn");
+						}
+					}}>
 					<Text style={styles.buttonText}>{`Purchase ${quantity} Tickets`}</Text>
 				</TouchableOpacity>
 			</View>

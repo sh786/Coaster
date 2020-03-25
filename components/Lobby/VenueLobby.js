@@ -28,7 +28,6 @@ const VenueLobby = ({ navigation }) => {
   const user = useSelector(state => {
     return state.user;
   });
-  console.log(user)
 
   const getLocationAsync = async () => {
     let { status } = await Permissions.askAsync(Permissions.LOCATION);

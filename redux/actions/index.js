@@ -25,7 +25,6 @@ export const setLocation = location => {
 
 /* USER TOKEN */
 export const getUserToken = () => {
-  console.log('getting token')
   return dispatch => {
     dispatch({ type: 'GET_USER_TOKEN_REQUEST' });
 
@@ -47,6 +46,12 @@ export const getUserToken = () => {
         });
       })
     }
+}
+
+export const clearUserData = () => {
+  return dispatch => {
+    dispatch({ type: 'CLEAR_USER_DATA' });
+  }
 }
 
 /* BAR ACTIONS */

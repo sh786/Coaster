@@ -28,6 +28,9 @@ const userReducer = (state = {}, { type, payload }) => {
       state.token = payload.jwtToken;
       state.username = payload.payload.username;
       return state;
+    // on log out
+    case 'CLEAR_USER_DATE':
+      return {};
     default:
       return state;
   }
