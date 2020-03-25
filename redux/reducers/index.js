@@ -21,8 +21,13 @@ const barsReducer = (state = [], { type, payload }) => {
 
 const userReducer = (state = {}, { type, payload }) => {
   switch (type) {
-    case 'FETCH_USERS_SUCCESS':
-      return payload;
+    case 'FETCH_USER_SUCCESS':
+      console.log(payload, 'reducer')
+      return Object.assign({}, state, payload);
+    case 'GET_USER_TOKEN_SUCCESS':
+      state.token = payload.jwtToken;
+      state.username = payload.payload.username;
+      return state;
     default:
       return state;
   }

@@ -1,24 +1,53 @@
 import API, { graphqlOperation } from '@aws-amplify/api';
 import {
 	listBars,
-	listUsers,
 	getEventsByBarId,
 	getTicketOffersByEventId,
-	getPurchasedTicketsByUser
+  getPurchasedTicketsByUser,
+  userByUsername,
+  listUsers,
 } from '../../src/graphql/queries';
 import { createUser, createPurchasedTicket } from '../../src/graphql/mutations';
+import Auth from '@aws-amplify/auth';
 
 /* USER LOCATION */
 export const setLocation = location => {
   return dispatch => {
     dispatch({ type: 'SET_LOCATION_REQUEST' });
 
+    // TODO: add failure action
     return dispatch({
       type: 'SET_LOCATION_SUCCESS',
       payload: location,
     });
   };
 };
+
+/* USER TOKEN */
+export const getUserToken = () => {
+  console.log('getting token')
+  return dispatch => {
+    dispatch({ type: 'GET_USER_TOKEN_REQUEST' });
+
+    return Auth.currentAuthenticatedUser()
+			.then(user => {
+          console.log(user);
+          const {accessToken} = user.signInUserSession;
+          console.log(accessToken);
+          dispatch({
+            type: 'GET_USER_TOKEN_SUCCESS',
+            payload: accessToken,
+          });
+				})
+			.catch(err => {
+        console.log(err)
+        dispatch({
+          type: 'GET_USER_TOKEN_FAILURE',
+          payload: err,
+        });
+      })
+    }
+}
 
 /* BAR ACTIONS */
 export const fetchBars = () => {
@@ -63,6 +92,27 @@ export const fetchUsers = () => {
       e =>
         dispatch({
           type: 'FETCH_USERS_FAILURE',
+          payload: e,
+        }),
+    );
+  };
+};
+
+export const fetchUserByUsername = (username) => {
+  return dispatch => {
+    dispatch({
+      type: 'FETCH_USER_REQUEST',
+    });
+    return API.graphql(graphqlOperation(userByUsername, {username})).then(
+      data => {
+        dispatch({
+          type: 'FETCH_USER_SUCCESS',
+          payload: data.data.userByUsername.items[0],
+        });
+      },
+      e =>
+        dispatch({
+          type: 'FETCH_USER_FAILURE',
           payload: e,
         }),
     );

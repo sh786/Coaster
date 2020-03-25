@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import * as Location from 'expo-location';
 import * as Permissions from 'expo-permissions';
 
-import { fetchBars, setLocation, fetchUsers, fetchPurchasedTicketsByUserId } from '../../redux/actions';
+import { fetchBars, setLocation, fetchUserByUsername, getUserToken } from '../../redux/actions';
 
 import VenueItem from './VenueItem';
 import { styles } from './styles/VenueLobbyStyles';
@@ -16,7 +16,7 @@ import Logo from '../Common/Logo';
 import Icon from '../Common/Icon';
 import SortView from './SortView';
 import CoasterLogo from '../../assets/images/Coaster.png';
-
+import Auth from '@aws-amplify/auth';
 import moment from 'moment';
 import { Button } from 'native-base';
 
@@ -25,8 +25,9 @@ const VenueLobby = ({ navigation }) => {
   const bars = useSelector(state => {
     return state.bars;
   });
-
-  const user = navigation.getParam("user");
+  const user = useSelector(state => {
+    return state.user;
+  });
   console.log(user)
 
   const getLocationAsync = async () => {
@@ -42,20 +43,19 @@ const VenueLobby = ({ navigation }) => {
   // const purchasedTickets = useSelector(state => state.purchasedTickets); // TODO: move to my tix page
 
   useEffect(() => {
+    dispatch(getUserToken());
     const fetchLocation = async () => {
       await getLocationAsync();
     };
     fetchLocation();
-
     dispatch(fetchBars());
-    dispatch(fetchUsers());
   }, []);
 
-  // useEffect(() => {
-  //   if (user) {
-  //     dispatch(fetchPurchasedTicketsByUserId(user.id)); // TODO: move to my tix page
-  //   }
-  // }, [user])
+  useEffect(() => {
+    if (user.username) {
+      dispatch(fetchUserByUsername(user.username));
+    }
+  }, [user.username])
 
   return (
     <View
