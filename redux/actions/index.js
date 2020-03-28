@@ -30,16 +30,13 @@ export const getUserToken = () => {
 
     return Auth.currentAuthenticatedUser()
 			.then(user => {
-          console.log(user);
           const {accessToken} = user.signInUserSession;
-          console.log(accessToken);
           dispatch({
             type: 'GET_USER_TOKEN_SUCCESS',
             payload: accessToken,
           });
 				})
 			.catch(err => {
-        console.log(err)
         dispatch({
           type: 'GET_USER_TOKEN_FAILURE',
           payload: err,
@@ -56,7 +53,6 @@ export const clearUserData = () => {
 
 /* BAR ACTIONS */
 export const fetchBars = () => {
-  console.log('fetch bars');
   return dispatch => {
     // best practice to dispatch on request but not handling it right now
     dispatch({
@@ -71,7 +67,6 @@ export const fetchBars = () => {
         });
       },
       e => {
-        console.log('err ', e);
         dispatch({
           type: 'FETCH_BARS_FAILURE',
           payload: e,
@@ -110,7 +105,6 @@ export const fetchUserByUsername = (username) => {
     });
     return API.graphql(graphqlOperation(userByUsername, {username})).then(
       data => {
-        console.log(data, username, 'ahhhhhhhhsldfkj2222');
         dispatch({
           type: 'FETCH_USER_SUCCESS',
           payload: data.data.userByUsername.items[0],
@@ -142,7 +136,6 @@ export const createNewUser = (
     phoneNumber,
     dob,
   };
-  console.log(user)
   return dispatch => {
     dispatch({
       type: 'CREATE_USER_REQUEST',
@@ -154,7 +147,6 @@ export const createNewUser = (
       }),
     ).then(
       d => {
-        console.log('create usersuccess', d);
         dispatch({
           type: 'CREATE_USER_SUCCESS',
           payload: d,
@@ -162,7 +154,6 @@ export const createNewUser = (
         dispatch(fetchBars());
       },
       (e) => {
-        console.log('create usersuccess', e);
         dispatch({
           type: 'CREATE_USER_FAILURE',
         });
@@ -238,11 +229,9 @@ export const createNewPurchasedTicket = (ticketOfferId, eventId, userId) => {
 
         return API.graphql(graphqlOperation(createPurchasedTicket, {input}))
             .then((ticket) => {
-				console.log(ticket);
                 // TODO: add to redux if necessary. Might want to do a fetch all purchased tickets for user
                 dispatch({ type: 'CREATE_PURCHASED_TICKET_SUCCESS', payload: ticket });
             }, e => {
-				console.log(e);
               	dispatch({ type: 'CREATE_PURCHASED_TICKET_FAILURE', payload: e });
             });
         }

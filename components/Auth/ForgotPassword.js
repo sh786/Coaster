@@ -73,10 +73,8 @@ export default class ForgetPasswordScreen extends React.Component {
     .then(data => console.log('New code sent', data))
     .catch(err => {
       if (! err.message) {
-        console.log('Error while setting up the new password: ', err)
         Alert.alert('Error while setting up the new password: ', err)
       } else {
-        console.log('Error while setting up the new password: ', err.message)
         Alert.alert('Error while setting up the new password: ', err.message)
       }
     })
@@ -86,16 +84,12 @@ export default class ForgetPasswordScreen extends React.Component {
     const { username, authCode, newPassword } = this.state
     await Auth.forgotPasswordSubmit(username, authCode, newPassword)
     .then((user) => {
-		console.log(user)
 		this.props.navigation.navigate('SignIn')
-		console.log('the New password submitted successfully')
     })
     .catch(err => {
       if (! err.message) {
-        console.log('Error while confirming the new password: ', err)
         Alert.alert('Error while confirming the new password: ', err)
       } else {
-        console.log('Error while confirming the new password: ', err.message)
         Alert.alert('Error while confirming the new password: ', err.message)
       }
     })

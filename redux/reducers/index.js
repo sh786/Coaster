@@ -3,7 +3,6 @@ import { combineReducers } from 'redux';
 const locationReducer = (state = {}, { type, payload }) => {
   switch (type) {
     case 'SET_LOCATION_SUCCESS':
-      console.log('set location success', payload);
       return payload;
     default:
       return state;
@@ -22,7 +21,6 @@ const barsReducer = (state = [], { type, payload }) => {
 const userReducer = (state = {}, { type, payload }) => {
   switch (type) {
     case 'FETCH_USER_SUCCESS':
-      console.log(payload, 'reducer')
       return Object.assign({}, state, payload);
     case 'GET_USER_TOKEN_SUCCESS':
       state.token = payload.jwtToken;

@@ -13,8 +13,6 @@ import {
   Keyboard,
   View,
   Alert,
-  Modal,
-  FlatList,
   Animated
 } from "react-native";
 
@@ -76,22 +74,22 @@ class SignUpScreen extends React.Component {
   async signUp() {
     const { username, password, email, phoneNumber } = this.state;
     // rename variable to conform with Amplify Auth field phone attribute
-    const phone_number = phoneNumber;
+    let phone_number = phoneNumber;
+    if (phone_number.length === 10) {
+      phone_number = `1${phone_number}`;
+    }
     await Auth.signUp({
       username,
       password,
       attributes: { email, phone_number: `+${phone_number}` }
     })
       .then(() => {
-        console.log("sign up successful!");
         Alert.alert("Enter the confirmation code you received.");
       })
       .catch(err => {
         if (!err.message) {
-          console.log("Error when signing up: ", err);
           Alert.alert("Error when signing up: ", err);
         } else {
-          console.log("Error when signing up: ", err.message);
           Alert.alert("Error when signing up: ", err.message);
         }
       });
@@ -100,7 +98,6 @@ class SignUpScreen extends React.Component {
   // also create user in our backend
   async confirmSignUp() {
     const { username, authCode, email, phoneNumber, dob, firstname, lastname } = this.state;
-    console.log(username, email, firstname, lastname, phoneNumber, dob, 'signup')
     await Auth.confirmSignUp(username, authCode)
       .then(() => {
         // adding user to backend
@@ -111,14 +108,11 @@ class SignUpScreen extends React.Component {
         const quantity = this.props.navigation.getParam('quantity');
         const ticketOffer = this.props.navigation.getParam('ticketOffer');
         this.props.navigation.navigate("SignIn", {appDestinationScreen, venue, event, quantity, ticketOffer});
-        console.log("Confirm sign up successful");
       })
       .catch(err => {
         if (!err.message) {
-          console.log("Error when entering confirmation code: ", err);
           Alert.alert("Error when entering confirmation code: ", err);
         } else {
-          console.log("Error when entering confirmation code: ", err.message);
           Alert.alert("Error when entering confirmation code: ", err.message);
         }
       });
@@ -130,10 +124,8 @@ class SignUpScreen extends React.Component {
       .then(() => console.log("Confirmation code resent successfully"))
       .catch(err => {
         if (!err.message) {
-          console.log("Error requesting new confirmation code: ", err);
           Alert.alert("Error requesting new confirmation code: ", err);
         } else {
-          console.log("Error requesting new confirmation code: ", err.message);
           Alert.alert("Error requesting new confirmation code: ", err.message);
         }
       });

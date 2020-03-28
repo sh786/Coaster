@@ -80,10 +80,8 @@ export default class SignIn extends React.Component {
     })
     .catch(err => {
       if (! err.message) {
-        console.log('Error when signing in: ', err)
         Alert.alert('Error when signing in: ', err)
       } else {
-        console.log('Error when signing in: ', err.message)
         Alert.alert('Error when signing in: ', err.message)
       }
     })
@@ -96,7 +94,6 @@ export default class SignIn extends React.Component {
     const event = this.props.navigation.getParam('event');
     const quantity = this.props.navigation.getParam('quantity');
     const ticketOffer = this.props.navigation.getParam('ticketOffer');
-    console.log(appDestinationScreen, venue, event, quantity, ticketOffer);
     return (
       <SafeAreaView style={styles.container}>
         <StatusBar/>

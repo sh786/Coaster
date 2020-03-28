@@ -17,7 +17,6 @@ const CheckoutSuccessScreen = ({ navigation }) => {
         return state.user;
     });
 
-    console.log(ticket, ticketOffer.id, event.id, user.id)
     useEffect(() => {
         for (let i = 0; i < quantity; i++) {
             dispatch(createNewPurchasedTicket(ticketOffer.id, event.id, user.id));

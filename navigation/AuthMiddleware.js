@@ -31,13 +31,16 @@ const AuthMiddleware = ({navigation}) => {
 	const dispatch = useDispatch();
 	const userInfo = useSelector(state => state.user);
 	// we have successfully fetched our user's info and can redirect to the app
-	console.log(userInfo, appDestinationScreen, 'hmmmmmmmmm')
 	if (userInfo && userInfo.email && appDestinationScreen) {
-		navigation.navigate(appDestinationScreen, {user: userInfo, venue, event, quantity, ticketOffer});
+		// user is in venues group so redirect them to the venue portal
+		if (user && user.signInUserSession.accessToken.payload['cognito:groups'].includes('Venues')) {
+			navigation.navigate('VenuePortal', {user: userInfo})
+		} else {
+			navigation.navigate(appDestinationScreen, {user: userInfo, venue, event, quantity, ticketOffer});
+		}
 	}
 
 	useEffect(() => {
-		console.log(user, 'auth middleware')
 		if (user && user.signInUserSession.accessToken.jwtToken) {
 			dispatch(fetchUserByUsername(user.username));
 		}

@@ -3,6 +3,7 @@ import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import MainTabNavigator from './MainTabNavigator';
 import AuthNavigator from './AuthNavigator';
 import AuthMiddlewareScreen from './AuthMiddleware';
+import VenueNavigator from './VenueNavigator';
 
 export default createAppContainer(
   createSwitchNavigator({
@@ -11,5 +12,6 @@ export default createAppContainer(
     Main: MainTabNavigator,
     Auth: AuthNavigator,
     AuthMiddleware: AuthMiddlewareScreen,
+    Venue: VenueNavigator,
   })
 );

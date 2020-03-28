@@ -16,7 +16,6 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const VenueItem = ({ venue, navigation }) => {
   const openURL = url => {
-    console.log(url);
     Linking.openURL(url).catch(err => console.error('An error occurred', err));
   };
 
