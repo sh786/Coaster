@@ -6,10 +6,9 @@ import {
 } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchUserByUsername } from '../redux/actions';
-
+import PropTypes from 'prop-types';
 
 import Colors from '../constants/Colors';
-import Auth from '@aws-amplify/auth';
 
 const AuthMiddleware = ({navigation}) => {
 	let appDestinationScreen = navigation.getParam('appDestinationScreen');
@@ -61,5 +60,9 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 	},
 });
+
+AuthMiddleware.propTypes = {
+	navigation: PropTypes.object.isRequired,
+}
 
 export default AuthMiddleware;
