@@ -10,6 +10,7 @@ import CheckoutSuccessScreen from '../components/Payment/CheckoutSuccessScreen';
 import Colors from '../constants/Colors';
 import HeaderTitle from '../components/Header/HeaderTitle';
 import Logo from '../components/Common/Logo';
+import AccountScreen from '../components/Account';
 
 const config = Platform.select({
   web: { headerMode: 'screen' },
@@ -23,6 +24,7 @@ const MainTabNavigator = createStackNavigator(
     Event: EventScreen,
     Payment: PaymentScreen,
     CheckoutSuccess: CheckoutSuccessScreen,
+    Account: AccountScreen,
   },
   {
     initialRouteName: 'Lobby',

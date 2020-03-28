@@ -10,6 +10,13 @@
             "StackName": "amplify-coaster-dev-213401",
             "StackId": "arn:aws:cloudformation:us-east-1:885195653239:stack/amplify-coaster-dev-213401/45270b20-626f-11ea-85a8-0a5afd1032bb",
             "AmplifyAppId": "d3iko7m2yqqd54"
+        },
+        "categories": {
+            "auth": {
+                "coasterbbb6d16c": {
+                    "hostedUIProviderCreds": "[]"
+                }
+            }
         }
     },
     "prod": {

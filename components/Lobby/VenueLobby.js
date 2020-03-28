@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import * as Location from 'expo-location';
 import * as Permissions from 'expo-permissions';
 
-import { fetchBars, setLocation, fetchUsers, fetchPurchasedTicketsByUserId } from '../../redux/actions';
+import { fetchBars, setLocation, fetchUserByUsername, getUserToken } from '../../redux/actions';
 
 import VenueItem from './VenueItem';
 import { styles } from './styles/VenueLobbyStyles';
@@ -16,13 +16,17 @@ import Logo from '../Common/Logo';
 import Icon from '../Common/Icon';
 import SortView from './SortView';
 import CoasterLogo from '../../assets/images/Coaster.png';
-
+import Auth from '@aws-amplify/auth';
 import moment from 'moment';
+import LogInButton from '../Common/LogInButton';
 
 const VenueLobby = ({ navigation }) => {
   const dispatch = useDispatch();
   const bars = useSelector(state => {
     return state.bars;
+  });
+  const user = useSelector(state => {
+    return state.user;
   });
 
   const getLocationAsync = async () => {
@@ -38,20 +42,19 @@ const VenueLobby = ({ navigation }) => {
   // const purchasedTickets = useSelector(state => state.purchasedTickets); // TODO: move to my tix page
 
   useEffect(() => {
+    dispatch(getUserToken());
     const fetchLocation = async () => {
       await getLocationAsync();
     };
     fetchLocation();
-
     dispatch(fetchBars());
-    dispatch(fetchUsers());
   }, []);
 
-  // useEffect(() => {
-  //   if (user) {
-  //     dispatch(fetchPurchasedTicketsByUserId(user.id)); // TODO: move to my tix page
-  //   }
-  // }, [user])
+  useEffect(() => {
+    if (user.username) {
+      dispatch(fetchUserByUsername(user.username));
+    }
+  }, [user.username])
 
   return (
     <View
@@ -76,6 +79,7 @@ const VenueLobby = ({ navigation }) => {
           <VenueItem key={i} venue={b} navigation={navigation} />
         ))}
       </ScrollView>
+      {!user.email && <LogInButton style={{marginBottom: 100}} navigation={navigation} />}
       <ImageBackground
         source={require('../../assets/images/CoasterSplash.png')}
         style={{
@@ -101,12 +105,13 @@ VenueLobby.propTypes = {
   navigation: PropTypes.object,
 };
 
-VenueLobby.navigationOptions = {
+VenueLobby.navigationOptions = ({navigation}) => ({
   headerTitle: <HeaderTitle title='coaster' />,
   headerLeft: (
-    <Icon name='md-person' size={32} color='white' style={{ marginLeft: 20 }} />
+    <Icon name='md-person' size={32} color='white' style={{ marginLeft: 20 }}
+      onPress={() => navigation.navigate('Account')}/>
   ),
   headerRight: <SortView />,
-};
+});
 
 export default VenueLobby;

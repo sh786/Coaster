@@ -41,7 +41,7 @@ type PurchasedTicket @model
   userId: ID!
 }
 type User @model
-  @key(fields: ["email"], name: "byEmail", queryField: "userByEmail") {
+  @key(fields: ["username"], name: "byUsername", queryField: "userByUsername") {
   id: ID!
   username: String!
   email: String!
@@ -49,5 +49,4 @@ type User @model
   lastName: String!
   phoneNumber: String!
   dob: String!
-  tickets: [PurchasedTicket] @connection(keyName: "byUser", fields: ["id"])
 }

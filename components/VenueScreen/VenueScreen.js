@@ -46,7 +46,6 @@ const VenueScreen = ({ navigation }) => {
         >
           {event && event.map(
             e => {
-              console.log(e)
               return <EventItem key={e.id} event={e} venue={venue} navigation={navigation} />
             },
           )}

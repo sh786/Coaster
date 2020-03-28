@@ -166,15 +166,6 @@ export const getUser = /* GraphQL */ `
       lastName
       phoneNumber
       dob
-      tickets {
-        items {
-          id
-          ticketOfferId
-          eventId
-          userId
-        }
-        nextToken
-      }
     }
   }
 `;
@@ -193,9 +184,6 @@ export const listUsers = /* GraphQL */ `
         lastName
         phoneNumber
         dob
-        tickets {
-          nextToken
-        }
       }
       nextToken
     }
@@ -288,16 +276,16 @@ export const getPurchasedTicketsByUser = /* GraphQL */ `
     }
   }
 `;
-export const userByEmail = /* GraphQL */ `
-  query UserByEmail(
-    $email: String
+export const userByUsername = /* GraphQL */ `
+  query UserByUsername(
+    $username: String
     $sortDirection: ModelSortDirection
     $filter: ModelUserFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    userByEmail(
-      email: $email
+    userByUsername(
+      username: $username
       sortDirection: $sortDirection
       filter: $filter
       limit: $limit
@@ -311,9 +299,6 @@ export const userByEmail = /* GraphQL */ `
         lastName
         phoneNumber
         dob
-        tickets {
-          nextToken
-        }
       }
       nextToken
     }
