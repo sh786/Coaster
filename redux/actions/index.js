@@ -110,6 +110,7 @@ export const fetchUserByUsername = (username) => {
     });
     return API.graphql(graphqlOperation(userByUsername, {username})).then(
       data => {
+        console.log(data, username, 'ahhhhhhhhsldfkj2222');
         dispatch({
           type: 'FETCH_USER_SUCCESS',
           payload: data.data.userByUsername.items[0],

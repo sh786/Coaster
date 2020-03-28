@@ -6,6 +6,7 @@ import Colors from '../constants/Colors';
 import HeaderTitle from '../components/Header/HeaderTitle';
 import SignInScreen from '../components/Auth/SignIn';
 import SignUpScreen from '../components/Auth/SignUp';
+import ForgotPasswordScreen from '../components/Auth/ForgotPassword';
 
 const config = Platform.select({
   web: { headerMode: 'screen' },
@@ -15,7 +16,8 @@ const config = Platform.select({
 const AuthNavigator = createStackNavigator(
   {
     SignIn: SignInScreen,
-    SignUp: SignUpScreen
+    SignUp: SignUpScreen,
+    ForgotPassword: ForgotPasswordScreen,
   },
   {
     initialRouteName: 'SignIn',

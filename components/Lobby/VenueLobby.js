@@ -18,7 +18,7 @@ import SortView from './SortView';
 import CoasterLogo from '../../assets/images/Coaster.png';
 import Auth from '@aws-amplify/auth';
 import moment from 'moment';
-import { Button } from 'native-base';
+import LogInButton from '../Common/LogInButton';
 
 const VenueLobby = ({ navigation }) => {
   const dispatch = useDispatch();
@@ -79,6 +79,7 @@ const VenueLobby = ({ navigation }) => {
           <VenueItem key={i} venue={b} navigation={navigation} />
         ))}
       </ScrollView>
+      {!user.email && <LogInButton style={{marginBottom: 100}} navigation={navigation} />}
       <ImageBackground
         source={require('../../assets/images/CoasterSplash.png')}
         style={{

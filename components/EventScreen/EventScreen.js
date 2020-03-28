@@ -47,11 +47,10 @@ const EventScreen = ({ navigation }) => {
 			<View style={styles.checkoutButton}>
 				<TouchableOpacity 
 					onPress={() => {
-						console.log('trying to purhcase ticket', user);
 						if (user.username) {
 							navigation.navigate("Payment", {ticketOffer, venue, quantity, event, user})
 						} else {
-							navigation.navigate("SignIn", {ticketOffer, venue, quantity, event, user, returnScreen: 'Payment'});
+							navigation.navigate("AuthMiddleware", {ticketOffer, venue, quantity, event, authDestinationScreen: 'SignIn', appDestinationScreen: 'Payment'});
 						}
 					}}>
 					<Text style={styles.buttonText}>{`Purchase ${quantity} Tickets`}</Text>

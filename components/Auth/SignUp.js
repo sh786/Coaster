@@ -1,4 +1,7 @@
 import React from "react";
+import {connect} from 'react-redux';
+import { createNewUser } from '../../redux/actions';
+
 import {
   TouchableOpacity,
   TouchableWithoutFeedback,
@@ -17,7 +20,8 @@ import {
 
 import { Ionicons } from "@expo/vector-icons";
 
-import { Container, Item, Input } from "native-base";
+import { Container, Item, Input, DatePicker } from "native-base";
+import moment from 'moment';
 
 // AWS Amplify modular import
 import Auth from "@aws-amplify/auth";
@@ -26,7 +30,7 @@ import Auth from "@aws-amplify/auth";
 const logo = require("../../assets/images/Coaster.png");
 import Colors from "../../constants/Colors";
 
-export default class SignUpScreen extends React.Component {
+class SignUpScreen extends React.Component {
   state = {
 	firstName: "",
 	lastName: "",
@@ -39,7 +43,8 @@ export default class SignUpScreen extends React.Component {
     isHidden: false,
     flag: "",
     modalVisible: false,
-    authCode: ""
+    authCode: "",
+    dob: new Date(1996, 5, 22),
   };
   // Get user input
   onChangeText(key, value) {
@@ -70,7 +75,6 @@ export default class SignUpScreen extends React.Component {
   // Sign up user with AWS Amplify Auth
   async signUp() {
     const { username, password, email, phoneNumber } = this.state;
-    console.log("attempting signup", username, password, email, phoneNumber);
     // rename variable to conform with Amplify Auth field phone attribute
     const phone_number = phoneNumber;
     await Auth.signUp({
@@ -92,12 +96,20 @@ export default class SignUpScreen extends React.Component {
         }
       });
   }
-  // Confirm users and redirect them to the SignIn page
+  // Confirm users and redirect them to the SignIn page 
+  // also create user in our backend
   async confirmSignUp() {
-    const { username, authCode } = this.state;
+    const { username, authCode, email, phoneNumber, dob, firstName, lastName } = this.state;
     await Auth.confirmSignUp(username, authCode)
       .then(() => {
-        this.props.navigation.navigate("SignIn");
+        // adding user to backend
+        this.props.createNewUser(username, email, firstName, lastName, phoneNumber, dob);
+        const appDestinationScreen = this.props.navigation.getParam('appDestinationScreen');
+        const venue = this.props.navigation.getParam('venue');
+        const event = this.props.navigation.getParam('event');
+        const quantity = this.props.navigation.getParam('quantity');
+        const ticketOffer = this.props.navigation.getParam('ticketOffer');
+        this.props.navigation.navigate("SignIn", {appDestinationScreen, venue, event, quantity, ticketOffer});
         console.log("Confirm sign up successful");
       })
       .catch(err => {
@@ -196,6 +208,26 @@ export default class SignUpScreen extends React.Component {
                       onEndEditing={() => this.fadeIn()}
                     />
                   </Item>
+                <Item style={styles.itemStyle}>
+                  <DatePicker
+                      defaultDate={new Date(1996, 5, 22)}
+                      minimumDate={new Date(1930, 1, 1)}
+                      maximumDate={new Date(2018, 12, 31)}
+                      locale={"en-US"}
+                      formatChosenDate={date => moment(date).format('MM/DD/YYYY')}
+                      timeZoneOffsetInMinutes={undefined}
+                      modalTransparent={false}
+                      animationType={"fade"}
+                      androidMode={"default"}
+                      placeHolderText="Select your date of birth"
+                      textStyle={{ marginLeft: 30, color: Colors.darkGrayColor, textAlign: 'center', fontSize: 17,
+                        fontWeight: "bold" }}
+                      placeHolderTextStyle={{ marginLeft: 30, color: '#adb4bc', textAlign: 'center', fontSize: 17,
+                        fontWeight: "bold" }}
+                      onDateChange={value => this.onChangeText('dob', value)}
+                      disabled={false}
+                      />
+                </Item>
                   {/* username section  */}
                   <Item style={styles.itemStyle}>
                     <Ionicons name="ios-person" style={styles.iconStyle} />
@@ -413,3 +445,16 @@ const styles = StyleSheet.create({
     backgroundColor: "#b44666"
   }
 });
+
+const mapDispatchToProps = dispatch => ({
+  createNewUser: (
+    username,
+    email,
+    firstName,
+    lastName,
+    phoneNumber,
+    dob
+  ) => dispatch(createNewUser(username, email, firstName, lastName, phoneNumber, dob)),
+});
+
+export default connect(null, mapDispatchToProps)(SignUpScreen);

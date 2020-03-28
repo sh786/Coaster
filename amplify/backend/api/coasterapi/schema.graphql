@@ -41,7 +41,6 @@ type PurchasedTicket @model
   userId: ID!
 }
 type User @model
-  @key(fields: ["email"], name: "byEmail", queryField: "userByEmail") 
   @key(fields: ["username"], name: "byUsername", queryField: "userByUsername") {
   id: ID!
   username: String!

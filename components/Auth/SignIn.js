@@ -71,17 +71,12 @@ export default class SignIn extends React.Component {
     const { username, password } = this.state
     await Auth.signIn(username, password)
       .then(user => {
-        this.setState({ user })
-        const returnScreen = this.props.navigation.getParam('returnScreen');
-        if (returnScreen) {
-          const venue = this.props.navigation.getParam('venue');
-          const event = this.props.navigation.getParam('event');
-          const quantity = this.props.navigation.getParam('quantity');
-	        const ticketOffer = this.props.navigation.getParam('ticketOffer');
-          this.props.navigation.navigate(returnScreen, {user, venue, event, quantity, ticketOffer});
-        } else {
-          this.props.navigation.navigate('Lobby', {user});
-        }
+        const appDestinationScreen = this.props.navigation.getParam('appDestinationScreen');
+        const venue = this.props.navigation.getParam('venue');
+        const event = this.props.navigation.getParam('event');
+        const quantity = this.props.navigation.getParam('quantity');
+        const ticketOffer = this.props.navigation.getParam('ticketOffer');
+        this.props.navigation.navigate('AuthMiddleware', {appDestinationScreen, user, venue, event, quantity, ticketOffer});
     })
     .catch(err => {
       if (! err.message) {
@@ -95,6 +90,13 @@ export default class SignIn extends React.Component {
   }
   render() {
     let { fadeOut, fadeIn, isHidden } = this.state
+
+    const appDestinationScreen = this.props.navigation.getParam('appDestinationScreen');
+    const venue = this.props.navigation.getParam('venue');
+    const event = this.props.navigation.getParam('event');
+    const quantity = this.props.navigation.getParam('quantity');
+    const ticketOffer = this.props.navigation.getParam('ticketOffer');
+    console.log(appDestinationScreen, venue, event, quantity, ticketOffer);
     return (
       <SafeAreaView style={styles.container}>
         <StatusBar/>
@@ -157,7 +159,17 @@ export default class SignIn extends React.Component {
                       Sign In
                     </Text>
                   </TouchableOpacity>
-				  <Text onPress={() => this.props.navigation.navigate('SignUp')}>Sign Up</Text>
+                  <TouchableOpacity
+                    onPress={() => this.props.navigation.navigate('SignUp', {appDestinationScreen, venue, event, quantity, ticketOffer})}
+                    style={styles.buttonStyle}>
+                    <Text style={styles.buttonText}>
+                      Sign Up
+                    </Text>
+                  </TouchableOpacity>
+                  <Text style={{flex: 1, textAlign: 'center', color: Colors.darkGrayColor, borderColor: Colors.primaryColor}}
+                    onPress={() => this.props.navigation.navigate('ForgotPassword', {appDestinationScreen, venue, event, quantity, ticketOffer})}>
+                      Forgot password?
+                  </Text>
                 </View>
               </Container>
             </View>
@@ -184,7 +196,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     left: 0,
     right: 0,
-    height: 200,
+    height: 300,
     bottom: 25,
     flexDirection: 'row',
     justifyContent: 'center',
