@@ -63,7 +63,6 @@ const VenueLobby = ({ navigation }) => {
         backgroundColor: '#fafafa',
       }}
     >
-      <Button title="account" onPress={() => navigation.navigate('Account')} />
       <ScrollView
         style={styles.venueContainer}
         contentContainerStyle={{
@@ -105,12 +104,13 @@ VenueLobby.propTypes = {
   navigation: PropTypes.object,
 };
 
-VenueLobby.navigationOptions = {
+VenueLobby.navigationOptions = ({navigation}) => ({
   headerTitle: <HeaderTitle title='coaster' />,
   headerLeft: (
-    <Icon name='md-person' size={32} color='white' style={{ marginLeft: 20 }} />
+    <Icon name='md-person' size={32} color='white' style={{ marginLeft: 20 }}
+      onPress={() => navigation.navigate('Account')}/>
   ),
   headerRight: <SortView />,
-};
+});
 
 export default VenueLobby;
