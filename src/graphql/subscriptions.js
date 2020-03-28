@@ -209,15 +209,6 @@ export const onCreateUser = /* GraphQL */ `
       lastName
       phoneNumber
       dob
-      tickets {
-        items {
-          id
-          ticketOfferId
-          eventId
-          userId
-        }
-        nextToken
-      }
     }
   }
 `;
@@ -231,15 +222,6 @@ export const onUpdateUser = /* GraphQL */ `
       lastName
       phoneNumber
       dob
-      tickets {
-        items {
-          id
-          ticketOfferId
-          eventId
-          userId
-        }
-        nextToken
-      }
     }
   }
 `;
@@ -253,15 +235,6 @@ export const onDeleteUser = /* GraphQL */ `
       lastName
       phoneNumber
       dob
-      tickets {
-        items {
-          id
-          ticketOfferId
-          eventId
-          userId
-        }
-        nextToken
-      }
     }
   }
 `;

@@ -32,8 +32,8 @@ import Colors from "../../constants/Colors";
 
 class SignUpScreen extends React.Component {
   state = {
-	firstName: "",
-	lastName: "",
+	  firstname: "",
+	  lastname: "",
     username: "",
     password: "",
     email: "",
@@ -99,11 +99,12 @@ class SignUpScreen extends React.Component {
   // Confirm users and redirect them to the SignIn page 
   // also create user in our backend
   async confirmSignUp() {
-    const { username, authCode, email, phoneNumber, dob, firstName, lastName } = this.state;
+    const { username, authCode, email, phoneNumber, dob, firstname, lastname } = this.state;
+    console.log(username, email, firstname, lastname, phoneNumber, dob, 'signup')
     await Auth.confirmSignUp(username, authCode)
       .then(() => {
         // adding user to backend
-        this.props.createNewUser(username, email, firstName, lastName, phoneNumber, dob);
+        this.props.createNewUser(username, email, firstname, lastname, phoneNumber, dob);
         const appDestinationScreen = this.props.navigation.getParam('appDestinationScreen');
         const venue = this.props.navigation.getParam('venue');
         const event = this.props.navigation.getParam('event');
@@ -447,14 +448,7 @@ const styles = StyleSheet.create({
 });
 
 const mapDispatchToProps = dispatch => ({
-  createNewUser: (
-    username,
-    email,
-    firstName,
-    lastName,
-    phoneNumber,
-    dob
-  ) => dispatch(createNewUser(username, email, firstName, lastName, phoneNumber, dob)),
+  createNewUser: (username, email, firstName, lastName, phoneNumber, dob) => dispatch(createNewUser(username, email, firstName, lastName, phoneNumber, dob)),
 });
 
 export default connect(null, mapDispatchToProps)(SignUpScreen);

@@ -248,15 +248,6 @@ export const createUser = /* GraphQL */ `
       lastName
       phoneNumber
       dob
-      tickets {
-        items {
-          id
-          ticketOfferId
-          eventId
-          userId
-        }
-        nextToken
-      }
     }
   }
 `;
@@ -273,15 +264,6 @@ export const updateUser = /* GraphQL */ `
       lastName
       phoneNumber
       dob
-      tickets {
-        items {
-          id
-          ticketOfferId
-          eventId
-          userId
-        }
-        nextToken
-      }
     }
   }
 `;
@@ -298,15 +280,6 @@ export const deleteUser = /* GraphQL */ `
       lastName
       phoneNumber
       dob
-      tickets {
-        items {
-          id
-          ticketOfferId
-          eventId
-          userId
-        }
-        nextToken
-      }
     }
   }
 `;

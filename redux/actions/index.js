@@ -142,6 +142,7 @@ export const createNewUser = (
     phoneNumber,
     dob,
   };
+  console.log(user)
   return dispatch => {
     dispatch({
       type: 'CREATE_USER_REQUEST',
@@ -153,13 +154,15 @@ export const createNewUser = (
       }),
     ).then(
       d => {
+        console.log('create usersuccess', d);
         dispatch({
           type: 'CREATE_USER_SUCCESS',
           payload: d,
         });
         dispatch(fetchBars());
       },
-      () => {
+      (e) => {
+        console.log('create usersuccess', e);
         dispatch({
           type: 'CREATE_USER_FAILURE',
         });
