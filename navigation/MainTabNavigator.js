@@ -11,6 +11,7 @@ import Colors from '../constants/Colors';
 import HeaderTitle from '../components/Header/HeaderTitle';
 import Logo from '../components/Common/Logo';
 import AccountScreen from '../components/Account';
+import MyTixScreen from '../components/Account/MyTix';
 
 const config = Platform.select({
   web: { headerMode: 'screen' },
@@ -25,6 +26,7 @@ const MainTabNavigator = createStackNavigator(
     Payment: PaymentScreen,
     CheckoutSuccess: CheckoutSuccessScreen,
     Account: AccountScreen,
+    MyTix: MyTixScreen,
   },
   {
     initialRouteName: 'Lobby',
