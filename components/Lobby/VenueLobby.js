@@ -8,8 +8,8 @@ import * as Permissions from 'expo-permissions';
 import {
   fetchBars,
   setLocation,
-  fetchUsers,
-  fetchPurchasedTicketsByUserId,
+  fetchUserByUsername,
+  getUserToken,
 } from '../../redux/actions';
 
 import VenueItem from './VenueItem';
@@ -18,13 +18,17 @@ import HeaderTitle from '../Header/HeaderTitle';
 import Icon from '../Common/Icon';
 import SortView from './SortView';
 import CoasterSplash from '../../assets/images/CoasterSplash.png';
-
+import Auth from '@aws-amplify/auth';
 import moment from 'moment';
+import LogInButton from '../Common/LogInButton';
 
 const VenueLobby = ({ navigation }) => {
   const dispatch = useDispatch();
   const bars = useSelector(state => {
     return state.bars;
+  });
+  const user = useSelector(state => {
+    return state.user;
   });
 
   const getLocationAsync = async () => {
@@ -40,20 +44,19 @@ const VenueLobby = ({ navigation }) => {
   // const purchasedTickets = useSelector(state => state.purchasedTickets); // TODO: move to my tix page
 
   useEffect(() => {
+    dispatch(getUserToken());
     const fetchLocation = async () => {
       await getLocationAsync();
     };
     fetchLocation();
-
     dispatch(fetchBars());
-    dispatch(fetchUsers());
   }, []);
 
-  // useEffect(() => {
-  //   if (user) {
-  //     dispatch(fetchPurchasedTicketsByUserId(user.id)); // TODO: move to my tix page
-  //   }
-  // }, [user])
+  useEffect(() => {
+    if (user.username) {
+      dispatch(fetchUserByUsername(user.username));
+    }
+  }, [user.username]);
 
   return (
     <View
@@ -86,8 +89,9 @@ const VenueLobby = ({ navigation }) => {
           style={{ width: Dimensions.get('window').width, height: 100 }}
         />
       </ScrollView>
-      <View></View>
-
+      {!user.email && (
+        <LogInButton style={{ marginBottom: 100 }} navigation={navigation} />
+      )}
       {/* Not totally sure how I feel about doing it this way, but we do need
       to made it clear what page a user is currently on */}
       {/* <View style={commonStyles.screenLabelContainer}>
@@ -101,12 +105,18 @@ VenueLobby.propTypes = {
   navigation: PropTypes.object,
 };
 
-VenueLobby.navigationOptions = {
+VenueLobby.navigationOptions = ({ navigation }) => ({
   headerTitle: <HeaderTitle title='coaster' />,
   headerLeft: (
-    <Icon name='md-person' size={32} color='white' style={{ marginLeft: 20 }} />
+    <Icon
+      name='md-person'
+      size={32}
+      color='white'
+      style={{ marginLeft: 20 }}
+      onPress={() => navigation.navigate('Account')}
+    />
   ),
   headerRight: <SortView />,
-};
+});
 
 export default VenueLobby;

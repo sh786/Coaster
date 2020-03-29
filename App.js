@@ -10,13 +10,15 @@ import { createStore, applyMiddleware } from 'redux';
 
 import { Ionicons } from '@expo/vector-icons';
 // AWS
-import API from '@aws-amplify/api';
-import PubSub from '@aws-amplify/pubsub';
+// import API from '@aws-amplify/api';
+import Amplify from 'aws-amplify';
+// import PubSub from '@aws-amplify/pubsub';
 import AppNavigator from './navigation/AppNavigator';
 
 import config from './aws-exports';
-API.configure(config); // Configure Amplify
-PubSub.configure(config);
+Amplify.configure(config);
+// API.configure(config); // Configure Amplify
+// PubSub.configure(config);
 
 const store = createStore(
   rootReducer,
@@ -25,7 +27,7 @@ const store = createStore(
   ),
 );
 
-export default function App() {
+function App() {
   async function loadResourcesAsync() {
     await Promise.all([
       Asset.loadAsync([
@@ -63,9 +65,11 @@ export default function App() {
 
   return isLoaded ? (
     <Provider store={store}>
-      <AppNavigator />
+        <AppNavigator />
     </Provider>
   ) : (
     <ActivityIndicator />
   );
 }
+
+export default App;

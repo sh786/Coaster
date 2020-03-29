@@ -16,13 +16,15 @@ import Icon from '../Common/Icon';
 
 const VenueItem = ({ venue, navigation }) => {
   const openURL = url => {
-    console.log(url);
     Linking.openURL(url).catch(err => console.error('An error occurred', err));
   };
 
   const location = useSelector(state => {
     return state.location;
   });
+
+  const latitude = location.coords ? location.coords.latitude : null;
+  const longitude = location.coords ? location.coords.longitude : null;
 
   return (
     <TouchableWithoutFeedback
@@ -37,12 +39,12 @@ const VenueItem = ({ venue, navigation }) => {
             <Text style={styles.venueItemNameText}>{venue.name}</Text>
             <Text style={styles.venueItemStreetAddressText}>{`${
               venue.address
-            } • ${venue.city}, ${venue.state} • ${location &&
-              location.coords &&
+            } • ${venue.city}, ${venue.state} • ${latitude &&
+              longitude &&
               haversine(
                 {
-                  latitude: location.coords.latitude,
-                  longitude: location.coords.longitude,
+                  latitude,
+                  longitude,
                 },
                 {
                   latitude: venue.lat,

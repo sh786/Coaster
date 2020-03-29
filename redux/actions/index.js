@@ -1,18 +1,21 @@
 import API, { graphqlOperation } from '@aws-amplify/api';
 import {
   listBars,
-  listUsers,
   getEventsByBarId,
   getTicketOffersByEventId,
   getPurchasedTicketsByUser,
+  userByUsername,
+  listUsers,
 } from '../../src/graphql/queries';
 import { createUser, createPurchasedTicket } from '../../src/graphql/mutations';
+import Auth from '@aws-amplify/auth';
 
 /* USER LOCATION */
 export const setLocation = location => {
   return dispatch => {
     dispatch({ type: 'SET_LOCATION_REQUEST' });
 
+    // TODO: add failure action
     return dispatch({
       type: 'SET_LOCATION_SUCCESS',
       payload: location,
@@ -20,9 +23,36 @@ export const setLocation = location => {
   };
 };
 
+/* USER TOKEN */
+export const getUserToken = () => {
+  return dispatch => {
+    dispatch({ type: 'GET_USER_TOKEN_REQUEST' });
+
+    return Auth.currentAuthenticatedUser()
+      .then(user => {
+        const { accessToken } = user.signInUserSession;
+        dispatch({
+          type: 'GET_USER_TOKEN_SUCCESS',
+          payload: accessToken,
+        });
+      })
+      .catch(err => {
+        dispatch({
+          type: 'GET_USER_TOKEN_FAILURE',
+          payload: err,
+        });
+      });
+  };
+};
+
+export const clearUserData = () => {
+  return dispatch => {
+    dispatch({ type: 'CLEAR_USER_DATA' });
+  };
+};
+
 /* BAR ACTIONS */
 export const fetchBars = () => {
-  console.log('fetch bars');
   return dispatch => {
     // best practice to dispatch on request but not handling it right now
     dispatch({
@@ -37,7 +67,6 @@ export const fetchBars = () => {
         });
       },
       e => {
-        console.log('err ', e);
         dispatch({
           type: 'FETCH_BARS_FAILURE',
           payload: e,
@@ -63,6 +92,27 @@ export const fetchUsers = () => {
       e =>
         dispatch({
           type: 'FETCH_USERS_FAILURE',
+          payload: e,
+        }),
+    );
+  };
+};
+
+export const fetchUserByUsername = username => {
+  return dispatch => {
+    dispatch({
+      type: 'FETCH_USER_REQUEST',
+    });
+    return API.graphql(graphqlOperation(userByUsername, { username })).then(
+      data => {
+        dispatch({
+          type: 'FETCH_USER_SUCCESS',
+          payload: data.data.userByUsername.items[0],
+        });
+      },
+      e =>
+        dispatch({
+          type: 'FETCH_USER_FAILURE',
           payload: e,
         }),
     );
@@ -103,7 +153,7 @@ export const createNewUser = (
         });
         dispatch(fetchBars());
       },
-      () => {
+      e => {
         dispatch({
           type: 'CREATE_USER_FAILURE',
         });
@@ -178,12 +228,10 @@ export const createNewPurchasedTicket = (ticketOfferId, eventId, userId) => {
 
     return API.graphql(graphqlOperation(createPurchasedTicket, { input })).then(
       ticket => {
-        console.log(ticket);
         // TODO: add to redux if necessary. Might want to do a fetch all purchased tickets for user
         dispatch({ type: 'CREATE_PURCHASED_TICKET_SUCCESS', payload: ticket });
       },
       e => {
-        console.log(e);
         dispatch({ type: 'CREATE_PURCHASED_TICKET_FAILURE', payload: e });
       },
     );
