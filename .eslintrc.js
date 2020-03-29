@@ -21,6 +21,7 @@ module.exports = {
       'warn',
       { vars: 'all', args: 'after-used', ignoreRestSiblings: false },
     ],
+    'react/prop-types': ['off'],
   },
   extends: ['eslint:recommended', 'plugin:react/recommended'],
 };

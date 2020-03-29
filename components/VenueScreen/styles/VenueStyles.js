@@ -1,18 +1,32 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
 import Colors from '../../../constants/Colors';
 
 export const styles = StyleSheet.create({
   container: {
-    backgroundColor: Colors.lightGrayColor,
+    backgroundColor: Colors.whiteColor,
     alignItems: 'center',
+    display: 'flex',
     flex: 1,
     width: '100%',
   },
-
   image: {
-    width: '90%',
+    width: Dimensions.get('window').width,
     height: 200,
-    marginVertical: '4%',
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+  },
+  imageOverlay: {
+    display: 'flex',
+    alignItems: 'flex-start',
+    justifyContent: 'flex-end',
+    height: 200,
+    width: Dimensions.get('window').width,
+  },
+  venueName: {
+    fontSize: 26,
+    color: Colors.whiteColor,
   },
   description: {
     fontFamily: 'san-francisco',
@@ -35,13 +49,26 @@ export const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 5,
   },
-  eventContainer: {
+  eventsContainer: {
     display: 'flex',
     flex: 1,
     width: '95%',
-    height: 'auto',
     paddingVertical: 5,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  mapContainer: {
+    display: 'flex',
+    flex: 1,
+  },
+  venuePageHeading: {
+    fontSize: 20,
+    fontFamily: 'san-francisco-semibold',
+    paddingHorizontal: 20,
+    marginBottom: 10,
+  },
+  mapStyle: {
+    width: Dimensions.get('window').width,
+    height: 240,
   },
 });

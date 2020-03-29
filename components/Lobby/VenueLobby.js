@@ -1,21 +1,23 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { ScrollView } from 'react-native-gesture-handler';
-import { Dimensions, Text, View, ImageBackground } from 'react-native';
+import { Dimensions, Text, View, Image, ScrollView } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import * as Location from 'expo-location';
 import * as Permissions from 'expo-permissions';
 
-import { fetchBars, setLocation, fetchUserByUsername, getUserToken } from '../../redux/actions';
+import {
+  fetchBars,
+  setLocation,
+  fetchUserByUsername,
+  getUserToken,
+} from '../../redux/actions';
 
 import VenueItem from './VenueItem';
 import { styles } from './styles/VenueLobbyStyles';
-import { commonStyles } from '../../common/CommonStyles';
 import HeaderTitle from '../Header/HeaderTitle';
-import Logo from '../Common/Logo';
 import Icon from '../Common/Icon';
 import SortView from './SortView';
-import CoasterLogo from '../../assets/images/Coaster.png';
+import CoasterSplash from '../../assets/images/CoasterSplash.png';
 import Auth from '@aws-amplify/auth';
 import moment from 'moment';
 import LogInButton from '../Common/LogInButton';
@@ -54,13 +56,12 @@ const VenueLobby = ({ navigation }) => {
     if (user.username) {
       dispatch(fetchUserByUsername(user.username));
     }
-  }, [user.username])
+  }, [user.username]);
 
   return (
     <View
       style={{
         flex: 1,
-        backgroundColor: '#fafafa',
       }}
     >
       <ScrollView
@@ -76,22 +77,21 @@ const VenueLobby = ({ navigation }) => {
           )}`}</Text>
         </View>
         {bars.map((b, i) => (
-          <VenueItem key={i} venue={b} navigation={navigation} />
+          <VenueItem
+            key={i}
+            venue={b}
+            navigation={navigation}
+            onPress={() => navigation.navigate('Venue', { b })}
+          />
         ))}
+        <Image
+          source={CoasterSplash}
+          style={{ width: Dimensions.get('window').width, height: 100 }}
+        />
       </ScrollView>
-      {!user.email && <LogInButton style={{marginBottom: 100}} navigation={navigation} />}
-      <ImageBackground
-        source={require('../../assets/images/CoasterSplash.png')}
-        style={{
-          width: Dimensions.get('window').width,
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          zIndex: -1,
-        }}
-      />
+      {!user.email && (
+        <LogInButton style={{ marginBottom: 100 }} navigation={navigation} />
+      )}
       {/* Not totally sure how I feel about doing it this way, but we do need
       to made it clear what page a user is currently on */}
       {/* <View style={commonStyles.screenLabelContainer}>
@@ -105,11 +105,16 @@ VenueLobby.propTypes = {
   navigation: PropTypes.object,
 };
 
-VenueLobby.navigationOptions = ({navigation}) => ({
+VenueLobby.navigationOptions = ({ navigation }) => ({
   headerTitle: <HeaderTitle title='coaster' />,
   headerLeft: (
-    <Icon name='md-person' size={32} color='white' style={{ marginLeft: 20 }}
-      onPress={() => navigation.navigate('Account')}/>
+    <Icon
+      name='md-person'
+      size={32}
+      color='white'
+      style={{ marginLeft: 20 }}
+      onPress={() => navigation.navigate('Account')}
+    />
   ),
   headerRight: <SortView />,
 });

@@ -1,8 +1,8 @@
 import API, { graphqlOperation } from '@aws-amplify/api';
 import {
-	listBars,
-	getEventsByBarId,
-	getTicketOffersByEventId,
+  listBars,
+  getEventsByBarId,
+  getTicketOffersByEventId,
   getPurchasedTicketsByUser,
   userByUsername,
   listUsers,
@@ -29,27 +29,27 @@ export const getUserToken = () => {
     dispatch({ type: 'GET_USER_TOKEN_REQUEST' });
 
     return Auth.currentAuthenticatedUser()
-			.then(user => {
-          const {accessToken} = user.signInUserSession;
-          dispatch({
-            type: 'GET_USER_TOKEN_SUCCESS',
-            payload: accessToken,
-          });
-				})
-			.catch(err => {
+      .then(user => {
+        const { accessToken } = user.signInUserSession;
+        dispatch({
+          type: 'GET_USER_TOKEN_SUCCESS',
+          payload: accessToken,
+        });
+      })
+      .catch(err => {
         dispatch({
           type: 'GET_USER_TOKEN_FAILURE',
           payload: err,
         });
-      })
-    }
-}
+      });
+  };
+};
 
 export const clearUserData = () => {
   return dispatch => {
     dispatch({ type: 'CLEAR_USER_DATA' });
-  }
-}
+  };
+};
 
 /* BAR ACTIONS */
 export const fetchBars = () => {
@@ -98,12 +98,12 @@ export const fetchUsers = () => {
   };
 };
 
-export const fetchUserByUsername = (username) => {
+export const fetchUserByUsername = username => {
   return dispatch => {
     dispatch({
       type: 'FETCH_USER_REQUEST',
     });
-    return API.graphql(graphqlOperation(userByUsername, {username})).then(
+    return API.graphql(graphqlOperation(userByUsername, { username })).then(
       data => {
         dispatch({
           type: 'FETCH_USER_SUCCESS',
@@ -153,7 +153,7 @@ export const createNewUser = (
         });
         dispatch(fetchBars());
       },
-      (e) => {
+      e => {
         dispatch({
           type: 'CREATE_USER_FAILURE',
         });
@@ -215,7 +215,6 @@ export const fetchTicketOffersByEventId = eventId => {
   };
 };
 
-
 /* PURCHASED TICKET ACTIONS */
 export const createNewPurchasedTicket = (ticketOfferId, eventId, userId) => {
   const input = {
@@ -227,30 +226,37 @@ export const createNewPurchasedTicket = (ticketOfferId, eventId, userId) => {
     // best practice to dispatch on request but not handling it right now
     dispatch({ type: 'CREATE_PURCHASED_TICKET_REQUEST' });
 
-        return API.graphql(graphqlOperation(createPurchasedTicket, {input}))
-            .then((ticket) => {
-                // TODO: add to redux if necessary. Might want to do a fetch all purchased tickets for user
-                dispatch({ type: 'CREATE_PURCHASED_TICKET_SUCCESS', payload: ticket });
-            }, e => {
-              	dispatch({ type: 'CREATE_PURCHASED_TICKET_FAILURE', payload: e });
-            });
-        }
-}
+    return API.graphql(graphqlOperation(createPurchasedTicket, { input })).then(
+      ticket => {
+        // TODO: add to redux if necessary. Might want to do a fetch all purchased tickets for user
+        dispatch({ type: 'CREATE_PURCHASED_TICKET_SUCCESS', payload: ticket });
+      },
+      e => {
+        dispatch({ type: 'CREATE_PURCHASED_TICKET_FAILURE', payload: e });
+      },
+    );
+  };
+};
 
-export const fetchPurchasedTicketsByUserId = (userId) => {
-	return (dispatch) => {
-		dispatch({
-			type: 'FETCH_PURCHASED_TICKETS_REQUEST'
-		});
-		return API.graphql(graphqlOperation(getPurchasedTicketsByUser, {userId}))
-			.then((response) => {
-				dispatch({
-					type: 'FETCH_PURCHASED_TICKETS_SUCCESS',
-					payload: response.data.getPurchasedTicketsByUser.items, 
-				});
-			}, e => dispatch({
-				type: 'FETCH_PURCHASED_TICKETSS_FAILURE',
-				payload: e
-			}));
-	}
-}
+export const fetchPurchasedTicketsByUserId = userId => {
+  return dispatch => {
+    dispatch({
+      type: 'FETCH_PURCHASED_TICKETS_REQUEST',
+    });
+    return API.graphql(
+      graphqlOperation(getPurchasedTicketsByUser, { userId }),
+    ).then(
+      response => {
+        dispatch({
+          type: 'FETCH_PURCHASED_TICKETS_SUCCESS',
+          payload: response.data.getPurchasedTicketsByUser.items,
+        });
+      },
+      e =>
+        dispatch({
+          type: 'FETCH_PURCHASED_TICKETSS_FAILURE',
+          payload: e,
+        }),
+    );
+  };
+};
