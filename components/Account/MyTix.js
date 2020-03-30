@@ -4,6 +4,7 @@ import {View, Text, Button} from 'react-native';
 import { fetchPurchasedTicketsByUserId } from '../../redux/actions';
 import QRCode from 'qrcode';
 import SvgUri from 'react-native-svg-uri-reborn';
+import Ticket from '../Ticket';
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -37,7 +38,11 @@ const MyTix = ({navigation}) => {
 	return (
 		<View>
 			{
-				tickets.map(t => <Text key={t.id}>{t.id}</Text>)
+				tickets.map(t => {
+					const ret = <Ticket key={t.id} purchasedTicket={t} />;
+					console.log(ret)
+					return ret;
+				})
 			}
 			<SvgUri
 				fill="#fff"
