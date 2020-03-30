@@ -51,98 +51,88 @@ const VenueScreen = ({ navigation }) => {
   }, [location]);
 
   return (
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-      <View style={styles.container}>
-        <ScrollView style={{ display: 'flex', flex: 1 }}>
-          <ImageBackground
-            style={styles.image}
-            source={{ uri: venue.coverPhoto }}
+    <View style={styles.container}>
+      <ScrollView style={{ display: 'flex', flex: 1 }}>
+        <ImageBackground
+          style={styles.image}
+          source={{ uri: venue.coverPhoto }}
+        />
+        <View style={styles.imageOverlay}>
+          <Text style={styles.venueName}>{venue.name}</Text>
+          <Text style={styles.venueAddress}>{venue.address}</Text>
+          <Text style={styles.venueAddress}>
+            {venue.city}, {venue.state} •{' '}
+            {latitude &&
+              longitude &&
+              haversine(
+                {
+                  latitude,
+                  longitude,
+                },
+                {
+                  latitude: venue.lat,
+                  longitude: venue.lon,
+                },
+                { unit: 'mile' },
+              ).toFixed(1)}{' '}
+            mi
+          </Text>
+        </View>
+        <View style={styles.headingContainer}>
+          <Icon
+            style={styles.headingIcon}
+            name='md-calendar'
+            size={20}
+            color='black'
           />
-          <View style={styles.imageOverlay}>
-            <Text style={styles.venueName}>{venue.name}</Text>
-            <Text style={styles.venueAddress}>{venue.address}</Text>
-            <Text style={styles.venueAddress}>
-              {venue.city}, {venue.state} •{' '}
-              {latitude &&
-                longitude &&
-                haversine(
-                  {
-                    latitude,
-                    longitude,
-                  },
-                  {
-                    latitude: venue.lat,
-                    longitude: venue.lon,
-                  },
-                  { unit: 'mile' },
-                ).toFixed(1)}{' '}
-              mi
+          <Text style={styles.venuePageHeading}>Events</Text>
+          <View style={styles.dateContainer}>
+            <Text style={styles.dateText}>
+              {new Date().toLocaleDateString([], { dateStyle: 'long' })}
             </Text>
           </View>
-          <View style={styles.headingContainer}>
-            <Icon
-              style={styles.headingIcon}
-              name='md-calendar'
-              size={20}
-              color='black'
-            />
-            <Text style={styles.venuePageHeading}>Events</Text>
-            <View style={styles.dateContainer}>
-              <Text style={styles.dateText}>
-                {new Date().toLocaleDateString([], { dateStyle: 'long' })}
-              </Text>
-            </View>
-          </View>
-          {/* TOOD: Change from ScrollView */}
-          <ScrollView
-            styles={styles.eventsContainer}
-            contentContainerStyle={{
-              alignItems: 'center',
-              justifyContent: 'center',
-              marginTop: -7,
-              marginRight: 20,
-              marginLeft: 40,
-              marginBottom: 20,
-            }}
-          >
-            {events &&
-              events.map(event => {
-                return (
+        </View>
+        {/* TOOD: Change from ScrollView */}
+        <View styles={styles.eventsContainer}>
+          {events &&
+            events.map(event => {
+              return (
+                <TouchableOpacity key={event.id}>
                   <EventItem
-                    key={event.id}
                     event={event}
                     venue={venue}
                     navigation={navigation}
                   />
-                );
-              })}
-          </ScrollView>
+                </TouchableOpacity>
+              );
+            })}
+        </View>
 
-          <View style={styles.aboutContainer}>
-            <View style={styles.headingContainer}>
-              <Icon
-                style={styles.headingIcon}
-                name='md-information-circle'
-                size={20}
-                color='black'
-              />
-              <Text style={styles.venuePageHeading}>About</Text>
-            </View>
-            <Text style={styles.description}>{venue.description}</Text>
-          </View>
-
-          <View style={styles.mapContainer}>
-            <View style={styles.headingContainer}>
-              <Icon
-                style={styles.headingIcon}
-                name='md-compass'
-                size={20}
-                color='black'
-              />
-              <Text style={styles.venuePageHeading}>Map</Text>
-            </View>
+        <View style={styles.aboutContainer}>
+          <View style={styles.headingContainer}>
             <Icon
-              style={styles.mapDirections}
+              style={styles.headingIcon}
+              name='md-information-circle'
+              size={20}
+              color='black'
+            />
+            <Text style={styles.venuePageHeading}>About</Text>
+          </View>
+          <Text style={styles.description}>{venue.description}</Text>
+        </View>
+
+        <View style={styles.mapContainer}>
+          <View style={styles.headingContainer}>
+            <Icon
+              style={styles.headingIcon}
+              name='md-compass'
+              size={20}
+              color='black'
+            />
+            <Text style={styles.venuePageHeading}>Map</Text>
+          </View>
+          <TouchableOpacity style={styles.mapDirections}>
+            <Icon
               name='md-navigate'
               size={20}
               color='black'
@@ -152,104 +142,105 @@ const VenueScreen = ({ navigation }) => {
                 )
               }
             />
-            <MapView
-              style={styles.mapStyle}
-              provider={PROVIDER_GOOGLE}
-              initialRegion={{
+          </TouchableOpacity>
+
+          <MapView
+            style={styles.mapStyle}
+            provider={PROVIDER_GOOGLE}
+            initialRegion={{
+              latitude: parseFloat(venue.lat),
+              longitude: parseFloat(venue.lon),
+              latitudeDelta: 0.02,
+              longitudeDelta: 0.0421,
+            }}
+          >
+            <Marker
+              coordinate={{
                 latitude: parseFloat(venue.lat),
                 longitude: parseFloat(venue.lon),
-                latitudeDelta: 0.02,
-                longitudeDelta: 0.0421,
+              }}
+            ></Marker>
+            <Marker
+              coordinate={{
+                latitude: parseFloat(venue.lat),
+                longitude: parseFloat(venue.lon),
               }}
             >
-              <Marker
-                coordinate={{
-                  latitude: parseFloat(venue.lat),
-                  longitude: parseFloat(venue.lon),
-                }}
-              ></Marker>
-              <Marker
-                coordinate={{
-                  latitude: parseFloat(venue.lat),
-                  longitude: parseFloat(venue.lon),
+              <View
+                style={{
+                  shadowColor: '#000',
+                  shadowOffset: {
+                    width: 0,
+                    height: 1,
+                  },
+                  shadowOpacity: 0.32,
+                  shadowRadius: 3,
+                  elevation: 3,
                 }}
               >
-                <View
+                <Text
                   style={{
-                    shadowColor: '#000',
-                    shadowOffset: {
-                      width: 0,
-                      height: 1,
-                    },
-                    shadowOpacity: 0.32,
-                    shadowRadius: 3,
-                    elevation: 3,
+                    backgroundColor: Colors.whiteColor,
+                    marginBottom: 46,
+                    padding: 5,
+                    borderRadius: 3,
+                    overflow: 'hidden',
                   }}
                 >
-                  <Text
-                    style={{
-                      backgroundColor: Colors.whiteColor,
-                      marginBottom: 46,
-                      padding: 5,
-                      borderRadius: 3,
-                      overflow: 'hidden',
-                    }}
-                  >
-                    {venue.name}
-                  </Text>
-                </View>
-              </Marker>
-            </MapView>
-          </View>
+                  {venue.name}
+                </Text>
+              </View>
+            </Marker>
+          </MapView>
+        </View>
 
-          <View style={styles.exploreContainer}>
-            <View style={styles.headingContainer}>
-              <Icon
-                style={styles.headingIcon}
-                name='md-people'
-                size={20}
-                color='black'
-              />
-              <Text style={styles.venuePageHeading}>Social</Text>
-            </View>
-            <View style={styles.exploreIconContainer}>
-              <TouchableOpacity
-                onPress={e => {
-                  e.stopPropagation();
-                  openURL(venue.socialLinks[0]);
-                }}
-              >
-                <Icon
-                  style={styles.socialLogoIcon}
-                  name='logo-facebook'
-                  size={50}
-                />
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={e => {
-                  e.stopPropagation();
-                  openURL(venue.socialLinks[1]);
-                }}
-              >
-                <Icon
-                  style={styles.socialLogoIcon}
-                  name='logo-instagram'
-                  size={50}
-                />
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={e => {
-                  e.stopPropagation();
-                  openURL(venue.socialLinks[2]);
-                }}
-              >
-                <Icon style={styles.socialLogoIcon} name='md-map' size={50} />
-              </TouchableOpacity>
-            </View>
+        <View style={styles.exploreContainer}>
+          <View style={styles.headingContainer}>
+            <Icon
+              style={styles.headingIcon}
+              name='md-people'
+              size={20}
+              color='black'
+            />
+            <Text style={styles.venuePageHeading}>Social</Text>
           </View>
-        </ScrollView>
-      </View>
-    </TouchableWithoutFeedback>
+          <View style={styles.exploreIconContainer}>
+            <TouchableOpacity
+              onPress={e => {
+                e.stopPropagation();
+                openURL(venue.socialLinks[0]);
+              }}
+            >
+              <Icon
+                style={styles.socialLogoIcon}
+                name='logo-facebook'
+                size={50}
+              />
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={e => {
+                e.stopPropagation();
+                openURL(venue.socialLinks[1]);
+              }}
+            >
+              <Icon
+                style={styles.socialLogoIcon}
+                name='logo-instagram'
+                size={50}
+              />
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={e => {
+                e.stopPropagation();
+                openURL(venue.socialLinks[2]);
+              }}
+            >
+              <Icon style={styles.socialLogoIcon} name='md-map' size={50} />
+            </TouchableOpacity>
+          </View>
+        </View>
+      </ScrollView>
+    </View>
   );
 };
 
