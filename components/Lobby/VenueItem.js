@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import {
   Text,
@@ -23,8 +23,15 @@ const VenueItem = ({ venue, navigation }) => {
     return state.location;
   });
 
-  const latitude = location.coords ? location.coords.latitude : null;
-  const longitude = location.coords ? location.coords.longitude : null;
+  const [latitude, setLatitude] = useState();
+  const [longitude, setLongitude] = useState();
+
+  useEffect(() => {
+    if (location.coords) {
+      setLatitude(location.coords.latitude);
+      setLongitude(location.coords.longitude);
+    }
+  }, [location]);
 
   return (
     <TouchableWithoutFeedback
