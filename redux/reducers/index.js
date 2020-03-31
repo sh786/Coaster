@@ -63,6 +63,19 @@ const purchasedTicketsReducer = (state = [], { type, payload }) => {
     }
 }
 
+const venuePortalReducer = (state = {}, { type, payload }) => {
+  switch (type) {
+    case "FETCH_PURCHASED_TICKET_SUCCESS":
+        return Object.assign(
+          {},
+          state,
+          {currScannedTicket: payload},
+        );
+    default:
+      return state;
+    }
+}
+
 export default combineReducers({
   location: locationReducer,
   bars: barsReducer,
@@ -70,4 +83,5 @@ export default combineReducers({
   events: eventReducer,
   ticketOffers: ticketOffersReducer,
   purchasedTickets: purchasedTicketsReducer,
+  venuePortal: venuePortalReducer,
 });

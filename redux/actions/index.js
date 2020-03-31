@@ -6,8 +6,9 @@ import {
   getPurchasedTicketsByUser,
   userByUsername,
   listUsers,
+  getPurchasedTicket,
 } from '../../src/graphql/queries';
-import { createUser, createPurchasedTicket } from '../../src/graphql/mutations';
+import { createUser, createPurchasedTicket, updatePurchasedTicket } from '../../src/graphql/mutations';
 import Auth from '@aws-amplify/auth';
 
 /* USER LOCATION */
@@ -249,8 +250,52 @@ export const fetchPurchasedTicketsByUserId = (userId) => {
 					payload: response.data.getPurchasedTicketsByUser.items, 
 				});
 			}, e => dispatch({
-				type: 'FETCH_PURCHASED_TICKETSS_FAILURE',
+				type: 'FETCH_PURCHASED_TICKETS_FAILURE',
 				payload: e
 			}));
+	}
+}
+
+
+/* VENUE PORTAL ACTIONS */
+export const fetchPurchasedTicketById = (id) => {
+	return (dispatch) => {
+		dispatch({
+			type: 'FETCH_PURCHASED_TICKET_REQUEST'
+		});
+		return API.graphql(graphqlOperation(getPurchasedTicket, {id}))
+			.then((response) => {
+        console.log(response)
+				dispatch({
+					type: 'FETCH_PURCHASED_TICKET_SUCCESS',
+					payload: response.data.getPurchasedTicket, 
+				});
+			}, e => dispatch({
+				type: 'FETCH_PURCHASED_TICKET_FAILURE',
+				payload: e
+			}));
+	}
+}
+
+export const redeemPurchasedTicket = (ticket) => {
+  return dispatch => {
+    dispatch({
+			type: 'REDEEM_TICKET_REQUEST'
+    });
+    const input = {...ticket, redeemed: true};
+		return API.graphql(graphqlOperation(updatePurchasedTicket, {input}))
+			.then((response) => {
+        console.log(response)
+				dispatch({
+					type: 'REDEEM_TICKET_SUCCESS',
+					payload: response.data, 
+				});
+			}, e => {
+        console.log(e);
+        dispatch({
+          type: 'REDEEM_TICKET_FAILURE',
+          payload: e
+        })
+    });
 	}
 }

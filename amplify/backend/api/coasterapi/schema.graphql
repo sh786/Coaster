@@ -34,11 +34,13 @@ type TicketOffer @model
   price: Int!
 }
 type PurchasedTicket @model 
-  @key (name: "byUser", fields: ["userId", "id"], queryField: "getPurchasedTicketsByUser") {
+  @key (name: "byUser", fields: ["userId", "id"], queryField: "getPurchasedTicketsByUser")
+  @key (name: "byEvent", fields: ["eventId", "id"], queryField: "getPurchasedTicketsByEvent") {
   id: ID!
   ticketOfferId: ID!
   eventId: ID!
   userId: ID!
+  redeemed: Boolean
 }
 type User @model
   @key(fields: ["username"], name: "byUsername", queryField: "userByUsername") {
@@ -49,4 +51,5 @@ type User @model
   lastName: String!
   phoneNumber: String!
   dob: String!
+  barId: String
 }

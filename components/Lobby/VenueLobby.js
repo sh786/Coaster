@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { ScrollView } from 'react-native-gesture-handler';
-import { Dimensions, Text, View, ImageBackground } from 'react-native';
+import { Dimensions, Button, Text, View, ImageBackground } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import * as Location from 'expo-location';
 import * as Permissions from 'expo-permissions';
@@ -80,6 +80,7 @@ const VenueLobby = ({ navigation }) => {
         ))}
       </ScrollView>
       {!user.email && <LogInButton style={{marginBottom: 100}} navigation={navigation} />}
+      {user.barId && <Button title="VenuePortal" onPress={() => navigation.navigate('VenuePortal')} />}
       <ImageBackground
         source={require('../../assets/images/CoasterSplash.png')}
         style={{

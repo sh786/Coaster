@@ -176,6 +176,7 @@ export const onCreatePurchasedTicket = /* GraphQL */ `
       ticketOfferId
       eventId
       userId
+      redeemed
     }
   }
 `;
@@ -186,6 +187,7 @@ export const onUpdatePurchasedTicket = /* GraphQL */ `
       ticketOfferId
       eventId
       userId
+      redeemed
     }
   }
 `;
@@ -196,6 +198,7 @@ export const onDeletePurchasedTicket = /* GraphQL */ `
       ticketOfferId
       eventId
       userId
+      redeemed
     }
   }
 `;
@@ -209,6 +212,7 @@ export const onCreateUser = /* GraphQL */ `
       lastName
       phoneNumber
       dob
+      barId
     }
   }
 `;
@@ -222,6 +226,7 @@ export const onUpdateUser = /* GraphQL */ `
       lastName
       phoneNumber
       dob
+      barId
     }
   }
 `;
@@ -235,6 +240,7 @@ export const onDeleteUser = /* GraphQL */ `
       lastName
       phoneNumber
       dob
+      barId
     }
   }
 `;
