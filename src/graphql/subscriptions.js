@@ -206,6 +206,23 @@ export const onCreatePurchasedTicket = /* GraphQL */ `
         expiration
         price
       }
+      venue {
+        id
+        name
+        address
+        city
+        state
+        phoneNumber
+        lat
+        lon
+        description
+        coverPhoto
+        socialLinks
+        rules
+        events {
+          nextToken
+        }
+      }
     }
   }
 `;
@@ -246,6 +263,23 @@ export const onUpdatePurchasedTicket = /* GraphQL */ `
         expiration
         price
       }
+      venue {
+        id
+        name
+        address
+        city
+        state
+        phoneNumber
+        lat
+        lon
+        description
+        coverPhoto
+        socialLinks
+        rules
+        events {
+          nextToken
+        }
+      }
     }
   }
 `;
@@ -285,6 +319,23 @@ export const onDeletePurchasedTicket = /* GraphQL */ `
         capacity
         expiration
         price
+      }
+      venue {
+        id
+        name
+        address
+        city
+        state
+        phoneNumber
+        lat
+        lon
+        description
+        coverPhoto
+        socialLinks
+        rules
+        events {
+          nextToken
+        }
       }
     }
   }
