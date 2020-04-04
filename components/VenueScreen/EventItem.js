@@ -16,11 +16,6 @@ const EventItem = ({ event, venue, navigation, handleEventClick }) => {
           <Text style={styles.eventItemStreetAddress}>{venue.address}</Text>
         </View>
         <View style={styles.eventItemRightContent}>
-          {/* <Text style={styles.eventItemDate}>
-            {new Date(event.startTime).toLocaleDateString([], {
-              dateStyle: 'long',
-            })}
-          </Text> */}
           <Text style={styles.eventItemTime}>
             {new Date(event.startTime).toLocaleTimeString([], {
               timeStyle: 'short',

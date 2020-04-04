@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { createNewPurchasedTicket } from '../../redux/actions';
 import Icon from '../Common/Icon';
 import Colors from '../../constants/Colors';
-import { HeaderTitle } from '../Header/HeaderTitle';
+import HeaderTitle from '../Header/HeaderTitle';
 
 const CheckoutSuccessScreen = ({ navigation }) => {
   const [ticket, setTicket] = useState(null);
@@ -64,7 +64,7 @@ const CheckoutSuccessScreen = ({ navigation }) => {
 };
 
 CheckoutSuccessScreen.navigationOptions = ({ navigation }) => ({
-  headerTitle: <HeaderTitle />,
+  headerTitle: <HeaderTitle title='coaster' />,
   headerLeft: null,
 });
 
