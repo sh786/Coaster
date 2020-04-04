@@ -46,11 +46,11 @@ const MainTabNavigator = createStackNavigator(
   config,
 );
 
-MainTabNavigator.navigationOptions = {
+MainTabNavigator.navigationOptions = ({
   headerStyle: {
     backgroundColor: '#fff',
   },
-};
+});
 
 MainTabNavigator.path = '';
 
