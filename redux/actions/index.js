@@ -7,6 +7,8 @@ import {
   userByUsername,
   listUsers,
   getPurchasedTicket,
+  getBar,
+  getPurchasedTicketsByEvent,
 } from '../../src/graphql/queries';
 import { createUser, createPurchasedTicket, updatePurchasedTicket } from '../../src/graphql/mutations';
 import Auth from '@aws-amplify/auth';
@@ -70,6 +72,30 @@ export const fetchBars = () => {
       e => {
         dispatch({
           type: 'FETCH_BARS_FAILURE',
+          payload: e,
+        });
+      },
+    );
+  };
+};
+
+export const fetchBar = (id) => {
+  return dispatch => {
+    // best practice to dispatch on request but not handling it right now
+    dispatch({
+      type: 'FETCH_BAR_REQUEST',
+    });
+
+    return API.graphql(graphqlOperation(getBar, {id})).then(
+      bar => {
+        dispatch({
+          type: 'FETCH_BAR_SUCCESS',
+          payload: bar.data.getBar,
+        });
+      },
+      e => {
+        dispatch({
+          type: 'FETCH_BAR_FAILURE',
           payload: e,
         });
       },
@@ -304,6 +330,26 @@ export const redeemPurchasedTicket = (ticket) => {
           type: 'REDEEM_TICKET_FAILURE',
           payload: e
         })
+    });
+	}
+}
+
+export const fetchPurchasedTicketsByEventId = (eventId) => {
+	return (dispatch) => {
+		dispatch({
+			type: 'FETCH_PURCHASED_TICKETS_FOR_EVENT_REQUEST'
+		});
+		return API.graphql(graphqlOperation(getPurchasedTicketsByEvent, {eventId}))
+			.then((response) => {
+				dispatch({
+					type: 'FETCH_PURCHASED_TICKETS_FOR_EVENT_SUCCESS',
+					payload: {tickets: response.data.getPurchasedTicketsByEvent.items, eventId}, 
+				});
+			}, e => {
+          dispatch({
+            type: 'FETCH_PURCHASED_TICKETS_FOR_EVENT_FAILURE',
+            payload: e
+          })
     });
 	}
 }

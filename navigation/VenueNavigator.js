@@ -5,6 +5,8 @@ import { createStackNavigator } from 'react-navigation-stack';
 import Colors from '../constants/Colors';
 import HeaderTitle from '../components/Header/HeaderTitle';
 import VenuePortalScreen from '../components/VenuePortal';
+import ScannerScreen from '../components/VenuePortal/Scanner';
+import EventListScreen from '../components/VenuePortal/EventList';
 
 const config = Platform.select({
   web: { headerMode: 'screen' },
@@ -14,6 +16,8 @@ const config = Platform.select({
 const VenueNavigator = createStackNavigator(
   {
     VenuePortal: VenuePortalScreen,
+    EventList: EventListScreen,
+    Scanner: ScannerScreen,
   },
   {
     initialRouteName: 'VenuePortal',
