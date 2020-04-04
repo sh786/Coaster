@@ -10,6 +10,31 @@ export const styles = StyleSheet.create({
     width: '100%',
     marginBottom: 20,
   },
+  modal: {
+    flex: 1,
+    display: 'flex',
+    backgroundColor: 'white',
+    shadowOpacity: 1,
+    shadowColor: 'rgba(0,0,0, 0.2)',
+    shadowRadius: 2,
+    shadowOffset: { width: 0, height: -2 },
+    borderRadius: 20,
+  },
+  overlay: modalVisible => {
+    if (modalVisible)
+      return {
+        flex: 1,
+        position: 'absolute',
+        left: 0,
+        top: 0,
+        opacity: 0.5,
+        height: Dimensions.get('window').height,
+        width: Dimensions.get('window').width,
+        backgroundColor: '#000',
+        zIndex: 1,
+      };
+    return {};
+  },
   image: {
     width: Dimensions.get('window').width,
     height: 200,

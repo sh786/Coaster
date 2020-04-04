@@ -4,10 +4,11 @@ import { Text, View, TouchableWithoutFeedback } from 'react-native';
 
 import { styles } from './styles/EventItemStyles';
 
-const EventItem = ({ event, venue, navigation }) => {
+const EventItem = ({ event, venue, navigation, handleEventClick }) => {
   return (
     <TouchableWithoutFeedback
-      onPress={() => navigation.navigate('Event', { venue, event })}
+      // onPress={() => navigation.navigate('Event', { venue, event })}
+      onPress={() => handleEventClick(true, event)}
     >
       <View style={styles.eventItemContainer}>
         <View style={styles.eventItemLeftContent}>
