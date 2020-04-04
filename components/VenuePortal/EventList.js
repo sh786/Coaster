@@ -36,7 +36,7 @@ const EventList = ({navigation}) => {
 			<Button title="Scan Tickets"
 				onPress={() => navigation.navigate('Scanner')} />
 			<Button title="Refresh List"
-				onPress={() => refreshList} />
+				onPress={() => refreshList()} />
 		</View>
 	);
 };

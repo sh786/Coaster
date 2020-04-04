@@ -19,7 +19,7 @@ const Scanner = ({navigation}) => {
 			.then(({status}) => setHasPermission(status === 'granted'));
 	}, []);
 
-	if (currScannedTicket && currScannedTicket.id) {
+	if (currScannedTicket && currScannedTicket.id && currScannedTicket.user) {
 		navigation.navigate('PostScan');
 	}
 
