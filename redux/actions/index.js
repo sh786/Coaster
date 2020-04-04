@@ -252,7 +252,6 @@ export const createNewPurchasedTicket = (ticketOfferId, eventId, userId, venueId
     venueId,
     redeemed: false,
   };
-  console.log(input)
   return dispatch => {
     // best practice to dispatch on request but not handling it right now
     dispatch({ type: 'CREATE_PURCHASED_TICKET_REQUEST' });
@@ -316,7 +315,14 @@ export const redeemPurchasedTicket = (ticket) => {
     dispatch({
 			type: 'REDEEM_TICKET_REQUEST'
     });
-    const input = {...ticket, redeemed: true};
+    const input = {
+      id: ticket.id,
+      ticketOfferId: ticket.ticketOfferId,
+      eventId: ticket.eventId,
+      userId: ticket.userId,
+      venueId: ticket.venueId,
+      redeemed: true
+    };
 		return API.graphql(graphqlOperation(updatePurchasedTicket, {input}))
 			.then((response) => {
         console.log(response)
@@ -352,4 +358,12 @@ export const fetchPurchasedTicketsByEventId = (eventId) => {
           })
     });
 	}
+}
+
+export const clearCurrScannedTicket = () => {
+  return dispatch => {
+    dispatch({
+      type: 'CLEAR_CURR_SCANNED_TICKET',
+    });
+  }
 }

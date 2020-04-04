@@ -1,5 +1,6 @@
-import React, {useState, useEffect} from 'react';
-import {View, Text, Button, StyleSheet} from 'react-native';
+import React, {useEffect} from 'react';
+import PropTypes from 'prop-types';
+import {View, Button} from 'react-native';
 import { fetchBar } from '../../redux/actions';
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -11,7 +12,6 @@ const VenuePortal = ({navigation}) => {
 	});
 
 	const venue = useSelector(state => state.venuePortal.venue);
-	console.log(venue, 'ahahah')
 
 	useEffect(() => {
 		dispatch(fetchBar(user.barId));
@@ -23,8 +23,14 @@ const VenuePortal = ({navigation}) => {
 				venue.events.map(e => 
 					<Button title={e.description} key={e.id} onPress={() => navigation.navigate('EventList', {event: e})}/>)
 			}
+			<Button title="Lobby"
+				onPress={() => navigation.navigate('Lobby')} />
 		</View>
 	);
 };
+
+VenuePortal.propTypes = {
+	navigation: PropTypes.object.isRequired,
+}
 
 export default VenuePortal;

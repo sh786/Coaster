@@ -1,31 +1,26 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, Button, StyleSheet} from 'react-native';
+import PropTypes from 'prop-types';
+import {View, Text, StyleSheet} from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
-import { fetchPurchasedTicketById, redeemPurchasedTicket } from '../../redux/actions';
+import { fetchPurchasedTicketById, clearCurrScannedTicket } from '../../redux/actions';
 
 
 import { useDispatch, useSelector } from 'react-redux';
 
 const Scanner = ({navigation}) => {
 	const [hasPermission, setHasPermission] = useState(null);
-	const [scanned, setScanned] = useState(false);
 	const dispatch = useDispatch();
-	const user = useSelector(state => {
-		return state.user;
-	});
 
 	const currScannedTicket = useSelector(state => state.venuePortal.currScannedTicket);
-	console.log(currScannedTicket)
 
-	useEffect(async () => {
-		const { status } = await BarCodeScanner.requestPermissionsAsync();
-		setHasPermission(status === 'granted');
+	useEffect(() => {
+		dispatch(clearCurrScannedTicket());
+		BarCodeScanner.requestPermissionsAsync()
+			.then(({status}) => setHasPermission(status === 'granted'));
 	}, []);
 
-	if (currScannedTicket && currScannedTicket.id && !currScannedTicket.redeemed) {
-		dispatch(redeemPurchasedTicket(currScannedTicket));
-	} else if (currScannedTicket && currScannedTicket.id && currScannedTicket.redeemed) {
-		return <Text>This ticket has already been redeemed.</Text>;
+	if (currScannedTicket && currScannedTicket.id) {
+		navigation.navigate('PostScan');
 	}
 
 	if (hasPermission === null) {
@@ -35,8 +30,7 @@ const Scanner = ({navigation}) => {
 		return <Text>No access to camera</Text>;
 	}
 
-	const handleBarCodeScanned = ({type, data}) => {
-		setScanned(true);
+	const handleBarCodeScanned = ({data}) => {
 		dispatch(fetchPurchasedTicketById(data));
 	}
 
@@ -46,15 +40,12 @@ const Scanner = ({navigation}) => {
 				onBarCodeScanned={handleBarCodeScanned}
 				style={StyleSheet.absoluteFillObject}
 			/>
-			{scanned && (
-				<Button title={'Tap to Scan Again'} onPress={() => setScanned(false)} />
-			)}
-			<Button title="Venue"
-			onPress={() => {
-				console.log('yo')
-			}} />
 		</View>
 	);
 };
+
+Scanner.propTypes = {
+	navigation: PropTypes.object.isRequired,
+}
 
 export default Scanner;

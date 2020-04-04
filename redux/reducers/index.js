@@ -72,6 +72,13 @@ const venuePortalReducer = (state = {currScannedTicket: {}, venue: {}}, { type, 
         {currScannedTicket: payload},
       );
     }
+    case "CLEAR_CURR_SCANNED_TICKET": {
+      return Object.assign(
+        {},
+        state,
+        {currScannedTicket: {}},
+      );
+    }
     case "FETCH_BAR_SUCCESS": {
       const venueCopy = {...payload};
       venueCopy.events = payload.events.items;
@@ -86,6 +93,18 @@ const venuePortalReducer = (state = {currScannedTicket: {}, venue: {}}, { type, 
       const events = venueCopy.events;
       const currEvent = events.find(e => e.id === payload.eventId);
       currEvent.tickets = payload.tickets;
+      return Object.assign(
+        {},
+        state,
+        {venue: venueCopy},
+      );
+    }
+    case "REDEEM_TICKET_SUCCESS": {
+      const venueCopy = {...state.venue};
+      const events = venueCopy.events;
+      const currEvent = events.find(e => e.id === payload.eventId);
+      const currTicket = currEvent.tickets ? currEvent.tickets.find(t => t.id === payload.id) : {};
+      currTicket.redeemed === true;
       return Object.assign(
         {},
         state,

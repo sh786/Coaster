@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, Button, StyleSheet} from 'react-native';
+import PropTypes from 'prop-types';
+import {View, Text, Button} from 'react-native';
 import { fetchPurchasedTicketsByEventId } from '../../redux/actions';
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -10,12 +11,17 @@ const EventList = ({navigation}) => {
 
 	const tickets = useSelector(state => {
 		const events = state.venuePortal.venue.events;
-		const currEvent = events.find(e => e.id === event.id);
+		const currEvent = events ? events.find(e => e.id === event.id) : {};
 		return currEvent.tickets;
 	});
-	console.log(tickets);
 
+	const refreshList = () => {
+		console.log('fetching')
+		dispatch(fetchPurchasedTicketsByEventId(event.id));
+	}
+	
 	useEffect(() => {
+		console.log('fetching purchased tix')
 		dispatch(fetchPurchasedTicketsByEventId(event.id));
 	}, []);
 
@@ -23,14 +29,20 @@ const EventList = ({navigation}) => {
 		<View style={{flex:1}} >
 			<Text>The following users are on the list for your event</Text>
 			{
-				tickets.map((t) => (
-					<Text key={t.id}>{t.user.firstName} {t.user.lastName}</Text>
+				tickets && tickets.map((t) => (
+					<Text key={t.id}>{t.user.firstName} {t.user.lastName} | {t.redeemed ? 'Admitted' : 'Not Admitted'}</Text>
 				))
 			}
 			<Button title="Scan Tickets"
 				onPress={() => navigation.navigate('Scanner')} />
+			<Button title="Refresh List"
+				onPress={() => refreshList} />
 		</View>
 	);
 };
+
+EventList.propTypes = {
+	navigation: PropTypes.object.isRequired,
+}
 
 export default EventList;
