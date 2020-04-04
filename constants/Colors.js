@@ -8,5 +8,6 @@ export default {
   yellowColor: '#fad744',
   whiteColor: '#fff',
   accentBlue: '#009DDC',
+  successColor: '#6cc070',
   greyDisabled: 'rgba(0,0,0,0.3)',
 };

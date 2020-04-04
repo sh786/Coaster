@@ -33,7 +33,7 @@ const AuthNavigator = createStackNavigator(
       headerTitleStyle: {
         fontWeight: 'bold',
       },
-      headerTitle: <HeaderTitle title='coaster' navigation={this} />,
+      headerTitle: <HeaderTitle title='coaster' />,
     },
   },
   config,
