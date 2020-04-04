@@ -24,7 +24,7 @@ const CheckoutSuccessScreen = ({ navigation }) => {
     for (let i = 0; i < quantity; i++) {
       dispatch(createNewPurchasedTicket(ticketOffer.id, event.id, user.id));
     }
-    navigation.navigate('AccountScreen');
+    navigation.navigate('Account');
   }, []);
 
   return (
