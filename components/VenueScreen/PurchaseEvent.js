@@ -118,9 +118,9 @@ const PurchaseEvent = ({ event, navigation, closeModal }) => {
             }}
           >
             <View style={styles.checkoutButton}>
-              <Text
-                style={styles.buttonText}
-              >{`Purchase ${quantity} Tickets`}</Text>
+              <Text style={styles.buttonText}>{`Purchase ${quantity} Ticket${
+                quantity > 1 ? 's' : ''
+              }`}</Text>
             </View>
           </TouchableOpacity>
         </View>
