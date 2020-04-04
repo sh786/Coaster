@@ -1,11 +1,13 @@
 import React from 'react';
-import { View, Text, Image, TouchableWithoutFeedback } from 'react-native';
+import PropTypes from 'prop-types';
+import { View, Image, TouchableWithoutFeedback } from 'react-native';
 import { styles } from './styles/HeaderStyles';
 import logoWhite from '../../assets/images/logoWhite.png';
+import { withNavigation } from 'react-navigation';
 
-const HeaderTitle = props => {
+const HeaderTitle = ({ navigation }) => {
   return (
-    <TouchableWithoutFeedback>
+    <TouchableWithoutFeedback onPress={() => navigation.navigate('Lobby')}>
       <View style={styles.container}>
         <Image
           source={logoWhite}
@@ -16,4 +18,8 @@ const HeaderTitle = props => {
   );
 };
 
-export default HeaderTitle;
+HeaderTitle.propTypes = {
+  navigation: PropTypes.object.isRequired,
+};
+
+export default withNavigation(HeaderTitle);

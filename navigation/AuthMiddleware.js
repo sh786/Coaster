@@ -32,7 +32,8 @@ const AuthMiddleware = ({navigation}) => {
 	// we have successfully fetched our user's info and can redirect to the app
 	if (userInfo && userInfo.email && appDestinationScreen) {
 		// user is in venues group so redirect them to the venue portal
-		if (user && user.signInUserSession.accessToken.payload['cognito:groups'].includes('Venues')) {
+		if (user && user.signInUserSession.accessToken.payload['cognito:groups']
+			&& user.signInUserSession.accessToken.payload['cognito:groups'].includes('Venues')) {
 			navigation.navigate('VenuePortal', {user: userInfo})
 		} else {
 			navigation.navigate(appDestinationScreen, {user: userInfo, venue, event, quantity, ticketOffer});
