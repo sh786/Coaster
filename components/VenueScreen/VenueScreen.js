@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   Modal,
   ScrollView,
+  Dimensions,
 } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
@@ -23,12 +24,14 @@ import Colors from '../../constants/Colors';
 import Icon from '../Common/Icon';
 
 const VenueScreen = ({ navigation }) => {
-  const openURL = url => {
-    Linking.openURL(url).catch(err => console.error('An error occurred', err));
+  const openURL = (url) => {
+    Linking.openURL(url).catch((err) =>
+      console.error('An error occurred', err),
+    );
   };
 
   const venue = navigation.getParam('venue');
-  const events = useSelector(state => {
+  const events = useSelector((state) => {
     return state.events[venue.id];
   });
 
@@ -37,7 +40,7 @@ const VenueScreen = ({ navigation }) => {
     dispatch(fetchEventsByBarId(venue.id));
   }, []);
 
-  const location = useSelector(state => {
+  const location = useSelector((state) => {
     return state.location;
   });
 
@@ -76,10 +79,14 @@ const VenueScreen = ({ navigation }) => {
               onPress={() => {
                 setModalVisible(!modalVisible);
               }}
-              style={{ height: 350 }}
+              style={{ height: Dimensions.get('window').height - 300 }}
             />
             <View style={styles.modal}>
-              <PurchaseEvent event={activeEvent} navigation={navigation} />
+              <PurchaseEvent
+                event={activeEvent}
+                navigation={navigation}
+                closeModal={setModalVisible}
+              />
             </View>
           </Modal>
         </>
@@ -128,7 +135,7 @@ const VenueScreen = ({ navigation }) => {
           </View>
           <View styles={styles.eventsContainer}>
             {events &&
-              events.map(e => {
+              events.map((e) => {
                 return (
                   <TouchableOpacity key={e.id}>
                     <EventItem
@@ -240,7 +247,7 @@ const VenueScreen = ({ navigation }) => {
             </View>
             <View style={styles.exploreIconContainer}>
               <TouchableOpacity
-                onPress={e => {
+                onPress={(e) => {
                   e.stopPropagation();
                   openURL(venue.socialLinks[0]);
                 }}
@@ -252,7 +259,7 @@ const VenueScreen = ({ navigation }) => {
                 />
               </TouchableOpacity>
               <TouchableOpacity
-                onPress={e => {
+                onPress={(e) => {
                   e.stopPropagation();
                   openURL(venue.socialLinks[1]);
                 }}
@@ -264,7 +271,7 @@ const VenueScreen = ({ navigation }) => {
                 />
               </TouchableOpacity>
               <TouchableOpacity
-                onPress={e => {
+                onPress={(e) => {
                   e.stopPropagation();
                   openURL(venue.socialLinks[2]);
                 }}

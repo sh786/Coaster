@@ -7,4 +7,6 @@ export default {
   darkGrayColor: '#263238',
   yellowColor: '#fad744',
   whiteColor: '#fff',
+  accentBlue: '#009DDC',
+  greyDisabled: 'rgba(0,0,0,0.3)',
 };

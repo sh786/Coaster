@@ -4,17 +4,20 @@ import { WebView } from 'react-native-webview';
 import { STRIPE } from './stripeSettings';
 import { stripeCheckoutRedirectHTML } from './stripeCheckout';
 
-const PaymentScreen = ({navigation}) => {
-
+const PaymentScreen = ({ navigation }) => {
   // TODO: this should come from some service/state store
   const user = { id: 'someID' };
-  const ticketOffer = navigation.getParam("ticketOffer");
-  const venue = navigation.getParam("venue");
-  const quantity = navigation.getParam("quantity");
+  const ticketOffer = navigation.getParam('ticketOffer');
+  const venue = navigation.getParam('venue');
+  const quantity = navigation.getParam('quantity');
   const event = navigation.getParam('event');
 
-  const onSuccessHandler = () => { /* TODO: do something */ };
-  const onCanceledHandler = () => { /* TODO: do something */ };
+  const onSuccessHandler = () => {
+    /* TODO: do something */
+  };
+  const onCanceledHandler = () => {
+    /* TODO: do something */
+  };
 
   // Called everytime the URL stats to load in the webview
   const onLoadStart = (syntheticEvent) => {
@@ -33,18 +36,23 @@ const PaymentScreen = ({navigation}) => {
     return null;
   }
 
-  // TODO: prefill inputs in webview
   return (
     <WebView
       originWhitelist={['*']}
       source={{ html: stripeCheckoutRedirectHTML(user.id, quantity) }} // added quantity
       onLoadStart={onLoadStart}
       onNavigationStateChange={(state) => {
-          if (state.url === STRIPE.SUCCESS_URL) {
-              navigation.navigate('CheckoutSuccess', {ticketOffer, venue, quantity, event});
-          } else if (state.url === STRIPE.CANCELED_URL) {
-              navigation.navigate('Event');
-          }
+        if (state.url === STRIPE.SUCCESS_URL) {
+          navigation.navigate('VenueLobby', { navigation });
+          navigation.navigate('CheckoutSuccess', {
+            ticketOffer,
+            venue,
+            quantity,
+            event,
+          });
+        } else if (state.url === STRIPE.CANCELED_URL) {
+          navigation.navigate('Event');
+        }
       }}
     />
   );
@@ -54,4 +62,4 @@ PaymentScreen.propTypes = {
   navigation: PropTypes.object.isRequired,
 };
 
-export default PaymentScreen; 
+export default PaymentScreen;
