@@ -132,7 +132,36 @@ export const getPurchasedTicket = /* GraphQL */ `
       ticketOfferId
       eventId
       userId
+      venueId
       redeemed
+      user {
+        id
+        username
+        email
+        firstName
+        lastName
+        phoneNumber
+        dob
+        barId
+      }
+      event {
+        id
+        barId
+        title
+        description
+        startTime
+        endTime
+        rules
+      }
+      ticketOffer {
+        id
+        eventId
+        title
+        description
+        capacity
+        expiration
+        price
+      }
     }
   }
 `;
@@ -152,7 +181,36 @@ export const listPurchasedTickets = /* GraphQL */ `
         ticketOfferId
         eventId
         userId
+        venueId
         redeemed
+        user {
+          id
+          username
+          email
+          firstName
+          lastName
+          phoneNumber
+          dob
+          barId
+        }
+        event {
+          id
+          barId
+          title
+          description
+          startTime
+          endTime
+          rules
+        }
+        ticketOffer {
+          id
+          eventId
+          title
+          description
+          capacity
+          expiration
+          price
+        }
       }
       nextToken
     }
@@ -275,7 +333,36 @@ export const getPurchasedTicketsByUser = /* GraphQL */ `
         ticketOfferId
         eventId
         userId
+        venueId
         redeemed
+        user {
+          id
+          username
+          email
+          firstName
+          lastName
+          phoneNumber
+          dob
+          barId
+        }
+        event {
+          id
+          barId
+          title
+          description
+          startTime
+          endTime
+          rules
+        }
+        ticketOffer {
+          id
+          eventId
+          title
+          description
+          capacity
+          expiration
+          price
+        }
       }
       nextToken
     }
@@ -303,7 +390,36 @@ export const getPurchasedTicketsByEvent = /* GraphQL */ `
         ticketOfferId
         eventId
         userId
+        venueId
         redeemed
+        user {
+          id
+          username
+          email
+          firstName
+          lastName
+          phoneNumber
+          dob
+          barId
+        }
+        event {
+          id
+          barId
+          title
+          description
+          startTime
+          endTime
+          rules
+        }
+        ticketOffer {
+          id
+          eventId
+          title
+          description
+          capacity
+          expiration
+          price
+        }
       }
       nextToken
     }

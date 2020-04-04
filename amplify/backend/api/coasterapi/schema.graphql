@@ -40,7 +40,11 @@ type PurchasedTicket @model
   ticketOfferId: ID!
   eventId: ID!
   userId: ID!
+  venueId: ID
   redeemed: Boolean
+  user: User @connection(fields: ["userId"])
+  event: Event @connection(fields: ["eventId"])
+  ticketOffer: TicketOffer @connection(fields: ["ticketOfferId"])
 }
 type User @model
   @key(fields: ["username"], name: "byUsername", queryField: "userByUsername") {

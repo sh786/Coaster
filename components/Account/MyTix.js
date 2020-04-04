@@ -17,6 +17,8 @@ const MyTix = ({navigation}) => {
 		dispatch(fetchPurchasedTicketsByUserId(user.id));
 	}, []);
 
+	console.log(tickets);
+
 	return (
 		<View>
 			{

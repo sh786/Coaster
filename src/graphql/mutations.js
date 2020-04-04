@@ -206,7 +206,36 @@ export const createPurchasedTicket = /* GraphQL */ `
       ticketOfferId
       eventId
       userId
+      venueId
       redeemed
+      user {
+        id
+        username
+        email
+        firstName
+        lastName
+        phoneNumber
+        dob
+        barId
+      }
+      event {
+        id
+        barId
+        title
+        description
+        startTime
+        endTime
+        rules
+      }
+      ticketOffer {
+        id
+        eventId
+        title
+        description
+        capacity
+        expiration
+        price
+      }
     }
   }
 `;
@@ -220,7 +249,36 @@ export const updatePurchasedTicket = /* GraphQL */ `
       ticketOfferId
       eventId
       userId
+      venueId
       redeemed
+      user {
+        id
+        username
+        email
+        firstName
+        lastName
+        phoneNumber
+        dob
+        barId
+      }
+      event {
+        id
+        barId
+        title
+        description
+        startTime
+        endTime
+        rules
+      }
+      ticketOffer {
+        id
+        eventId
+        title
+        description
+        capacity
+        expiration
+        price
+      }
     }
   }
 `;
@@ -234,7 +292,36 @@ export const deletePurchasedTicket = /* GraphQL */ `
       ticketOfferId
       eventId
       userId
+      venueId
       redeemed
+      user {
+        id
+        username
+        email
+        firstName
+        lastName
+        phoneNumber
+        dob
+        barId
+      }
+      event {
+        id
+        barId
+        title
+        description
+        startTime
+        endTime
+        rules
+      }
+      ticketOffer {
+        id
+        eventId
+        title
+        description
+        capacity
+        expiration
+        price
+      }
     }
   }
 `;

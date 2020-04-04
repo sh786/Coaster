@@ -218,24 +218,28 @@ export const fetchTicketOffersByEventId = eventId => {
 
 
 /* PURCHASED TICKET ACTIONS */
-export const createNewPurchasedTicket = (ticketOfferId, eventId, userId) => {
+export const createNewPurchasedTicket = (ticketOfferId, eventId, userId, venueId) => {
   const input = {
     ticketOfferId,
     eventId,
     userId,
+    venueId,
+    redeemed: false,
   };
+  console.log(input)
   return dispatch => {
     // best practice to dispatch on request but not handling it right now
     dispatch({ type: 'CREATE_PURCHASED_TICKET_REQUEST' });
-
-        return API.graphql(graphqlOperation(createPurchasedTicket, {input}))
-            .then((ticket) => {
-                // TODO: add to redux if necessary. Might want to do a fetch all purchased tickets for user
-                dispatch({ type: 'CREATE_PURCHASED_TICKET_SUCCESS', payload: ticket });
-            }, e => {
-              	dispatch({ type: 'CREATE_PURCHASED_TICKET_FAILURE', payload: e });
-            });
-        }
+      return API.graphql(graphqlOperation(createPurchasedTicket, {input}))
+          .then((ticket) => {
+            console.log(ticket)
+              // TODO: add to redux if necessary. Might want to do a fetch all purchased tickets for user
+              dispatch({ type: 'CREATE_PURCHASED_TICKET_SUCCESS', payload: ticket });
+          }, e => {
+            console.log(e)
+              dispatch({ type: 'CREATE_PURCHASED_TICKET_FAILURE', payload: e });
+          });
+      }
 }
 
 export const fetchPurchasedTicketsByUserId = (userId) => {
@@ -245,14 +249,18 @@ export const fetchPurchasedTicketsByUserId = (userId) => {
 		});
 		return API.graphql(graphqlOperation(getPurchasedTicketsByUser, {userId}))
 			.then((response) => {
+        console.log(response)
 				dispatch({
 					type: 'FETCH_PURCHASED_TICKETS_SUCCESS',
 					payload: response.data.getPurchasedTicketsByUser.items, 
 				});
-			}, e => dispatch({
-				type: 'FETCH_PURCHASED_TICKETS_FAILURE',
-				payload: e
-			}));
+			}, e => {
+        console.log(e)
+          dispatch({
+            type: 'FETCH_PURCHASED_TICKETS_FAILURE',
+            payload: e
+          })
+    });
 	}
 }
 

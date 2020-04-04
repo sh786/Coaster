@@ -19,8 +19,8 @@ const CheckoutSuccessScreen = ({ navigation }) => {
 
     useEffect(() => {
         for (let i = 0; i < quantity; i++) {
-            console.log(ticketOffer, event, user, 'yoooooo')
-            dispatch(createNewPurchasedTicket(ticketOffer.id, event.id, user.id));
+            // add to redux so we can display created tickets
+            dispatch(createNewPurchasedTicket(ticketOffer.id, event.id, user.id, event.barId));
         }
     }, []);
 
