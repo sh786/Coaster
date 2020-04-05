@@ -1,8 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import {
   Text,
   View,
+  TouchableOpacity,
   TouchableWithoutFeedback,
   Image,
   Linking,
@@ -12,7 +13,6 @@ import haversine from 'haversine';
 
 import { styles } from './styles/VenueItemStyles';
 import Icon from '../Common/Icon';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const VenueItem = ({ venue, navigation }) => {
   const openURL = url => {
@@ -22,9 +22,16 @@ const VenueItem = ({ venue, navigation }) => {
   const location = useSelector(state => {
     return state.location;
   });
-  
-  const latitude = location.coords ? location.coords.latitude : null;
-  const longitude = location.coords ? location.coords.longitude : null;
+
+  const [latitude, setLatitude] = useState();
+  const [longitude, setLongitude] = useState();
+
+  useEffect(() => {
+    if (location.coords) {
+      setLatitude(location.coords.latitude);
+      setLongitude(location.coords.longitude);
+    }
+  }, [location]);
 
   return (
     <TouchableWithoutFeedback
@@ -39,34 +46,51 @@ const VenueItem = ({ venue, navigation }) => {
             <Text style={styles.venueItemNameText}>{venue.name}</Text>
             <Text style={styles.venueItemStreetAddressText}>{`${
               venue.address
-            } • ${venue.city}, ${venue.state} • ${latitude && longitude && haversine(
-              {
-                latitude,
-                longitude,
-              },
-              {
-                latitude: venue.lat,
-                longitude: venue.lon,
-              },
-              { unit: 'mile' },
-            ).toFixed(1)} mi`}</Text>
+            } • ${venue.city}, ${venue.state} • ${latitude &&
+              longitude &&
+              haversine(
+                {
+                  latitude,
+                  longitude,
+                },
+                {
+                  latitude: venue.lat,
+                  longitude: venue.lon,
+                },
+                { unit: 'mile' },
+              ).toFixed(1)} mi`}</Text>
           </View>
           <View style={styles.socialLogoContainer}>
-            <TouchableOpacity onPress={() => openURL(venue.socialLinks[0])}>
+            <TouchableOpacity
+              onPress={e => {
+                e.stopPropagation();
+                openURL(venue.socialLinks[0]);
+              }}
+            >
               <Icon
                 style={styles.socialLogoIcon}
                 name='logo-facebook'
                 size={20}
               />
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => openURL(venue.socialLinks[1])}>
+            <TouchableOpacity
+              onPress={e => {
+                e.stopPropagation();
+                openURL(venue.socialLinks[1]);
+              }}
+            >
               <Icon
                 style={styles.socialLogoIcon}
                 name='logo-instagram'
                 size={20}
               />
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => openURL(venue.socialLinks[2])}>
+            <TouchableOpacity
+              onPress={e => {
+                e.stopPropagation();
+                openURL(venue.socialLinks[2]);
+              }}
+            >
               <Icon style={styles.socialLogoIcon} name='md-map' size={20} />
             </TouchableOpacity>
           </View>

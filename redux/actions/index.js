@@ -1,8 +1,8 @@
 import API, { graphqlOperation } from '@aws-amplify/api';
 import {
-	listBars,
-	getEventsByBarId,
-	getTicketOffersByEventId,
+  listBars,
+  getEventsByBarId,
+  getTicketOffersByEventId,
   getPurchasedTicketsByUser,
   userByUsername,
   listUsers,
@@ -32,27 +32,27 @@ export const getUserToken = () => {
     dispatch({ type: 'GET_USER_TOKEN_REQUEST' });
 
     return Auth.currentAuthenticatedUser()
-			.then(user => {
-          const {accessToken} = user.signInUserSession;
-          dispatch({
-            type: 'GET_USER_TOKEN_SUCCESS',
-            payload: accessToken,
-          });
-				})
-			.catch(err => {
+      .then(user => {
+        const { accessToken } = user.signInUserSession;
+        dispatch({
+          type: 'GET_USER_TOKEN_SUCCESS',
+          payload: accessToken,
+        });
+      })
+      .catch(err => {
         dispatch({
           type: 'GET_USER_TOKEN_FAILURE',
           payload: err,
         });
-      })
-    }
-}
+      });
+  };
+};
 
 export const clearUserData = () => {
   return dispatch => {
     dispatch({ type: 'CLEAR_USER_DATA' });
-  }
-}
+  };
+};
 
 /* BAR ACTIONS */
 export const fetchBars = () => {
@@ -125,12 +125,12 @@ export const fetchUsers = () => {
   };
 };
 
-export const fetchUserByUsername = (username) => {
+export const fetchUserByUsername = username => {
   return dispatch => {
     dispatch({
       type: 'FETCH_USER_REQUEST',
     });
-    return API.graphql(graphqlOperation(userByUsername, {username})).then(
+    return API.graphql(graphqlOperation(userByUsername, { username })).then(
       data => {
         dispatch({
           type: 'FETCH_USER_SUCCESS',
@@ -180,7 +180,7 @@ export const createNewUser = (
         });
         dispatch(fetchBars());
       },
-      (e) => {
+      e => {
         dispatch({
           type: 'CREATE_USER_FAILURE',
         });
@@ -241,7 +241,6 @@ export const fetchTicketOffersByEventId = eventId => {
     );
   };
 };
-
 
 /* PURCHASED TICKET ACTIONS */
 export const createNewPurchasedTicket = (ticketOfferId, eventId, userId, venueId) => {
