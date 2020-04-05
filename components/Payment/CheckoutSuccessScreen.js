@@ -19,13 +19,20 @@ const CheckoutSuccessScreen = ({ navigation }) => {
   const user = useSelector((state) => {
     return state.user;
   });
-  
+
   useEffect(() => {
-        for (let i = 0; i < quantity; i++) {
-            // add to redux so we can display created tickets
-            dispatch(createNewPurchasedTicket(ticketOffer.id, event.id, user.id, event.barId));
-            navigation.navigate('Account');
-        }
+    for (let i = 0; i < quantity; i++) {
+      // add to redux so we can display created tickets
+      dispatch(
+        createNewPurchasedTicket(
+          ticketOffer.id,
+          event.id,
+          user.id,
+          event.barId,
+        ),
+      );
+      navigation.navigate('MyTix');
+    }
   }, []);
 
   return (
