@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Dimensions, Text, View, Image, ScrollView } from 'react-native';
+import { Dimensions, Button, Text, View, Image, ScrollView } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import * as Location from 'expo-location';
 import * as Permissions from 'expo-permissions';
@@ -89,9 +89,8 @@ const VenueLobby = ({ navigation }) => {
           style={{ width: Dimensions.get('window').width, height: 100 }}
         />
       </ScrollView>
-      {!user.email && (
-        <LogInButton style={{ marginBottom: 100 }} navigation={navigation} />
-      )}
+      {!user.email && <LogInButton style={{marginBottom: 100}} navigation={navigation} />}
+      {user.barId && <Button title="VenuePortal" onPress={() => navigation.navigate('VenuePortal')} />}
       {/* Not totally sure how I feel about doing it this way, but we do need
       to made it clear what page a user is currently on */}
       {/* <View style={commonStyles.screenLabelContainer}>

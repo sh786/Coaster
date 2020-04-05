@@ -6,8 +6,11 @@ import {
   getPurchasedTicketsByUser,
   userByUsername,
   listUsers,
+  getPurchasedTicket,
+  getBar,
+  getPurchasedTicketsByEvent,
 } from '../../src/graphql/queries';
-import { createUser, createPurchasedTicket } from '../../src/graphql/mutations';
+import { createUser, createPurchasedTicket, updatePurchasedTicket } from '../../src/graphql/mutations';
 import Auth from '@aws-amplify/auth';
 
 /* USER LOCATION */
@@ -69,6 +72,30 @@ export const fetchBars = () => {
       e => {
         dispatch({
           type: 'FETCH_BARS_FAILURE',
+          payload: e,
+        });
+      },
+    );
+  };
+};
+
+export const fetchBar = (id) => {
+  return dispatch => {
+    // best practice to dispatch on request but not handling it right now
+    dispatch({
+      type: 'FETCH_BAR_REQUEST',
+    });
+
+    return API.graphql(graphqlOperation(getBar, {id})).then(
+      bar => {
+        dispatch({
+          type: 'FETCH_BAR_SUCCESS',
+          payload: bar.data.getBar,
+        });
+      },
+      e => {
+        dispatch({
+          type: 'FETCH_BAR_FAILURE',
           payload: e,
         });
       },
@@ -216,47 +243,126 @@ export const fetchTicketOffersByEventId = eventId => {
 };
 
 /* PURCHASED TICKET ACTIONS */
-export const createNewPurchasedTicket = (ticketOfferId, eventId, userId) => {
+export const createNewPurchasedTicket = (ticketOfferId, eventId, userId, venueId) => {
   const input = {
     ticketOfferId,
     eventId,
     userId,
+    venueId,
+    redeemed: false,
   };
   return dispatch => {
     // best practice to dispatch on request but not handling it right now
     dispatch({ type: 'CREATE_PURCHASED_TICKET_REQUEST' });
+      return API.graphql(graphqlOperation(createPurchasedTicket, {input}))
+          .then((ticket) => {
+            console.log(ticket)
+              // TODO: add to redux if necessary. Might want to do a fetch all purchased tickets for user
+              dispatch({ type: 'CREATE_PURCHASED_TICKET_SUCCESS', payload: ticket });
+          }, e => {
+            console.log(e)
+              dispatch({ type: 'CREATE_PURCHASED_TICKET_FAILURE', payload: e });
+          });
+      }
+}
 
-    return API.graphql(graphqlOperation(createPurchasedTicket, { input })).then(
-      ticket => {
-        // TODO: add to redux if necessary. Might want to do a fetch all purchased tickets for user
-        dispatch({ type: 'CREATE_PURCHASED_TICKET_SUCCESS', payload: ticket });
-      },
-      e => {
-        dispatch({ type: 'CREATE_PURCHASED_TICKET_FAILURE', payload: e });
-      },
-    );
-  };
-};
+export const fetchPurchasedTicketsByUserId = (userId) => {
+	return (dispatch) => {
+		dispatch({
+			type: 'FETCH_PURCHASED_TICKETS_REQUEST'
+		});
+		return API.graphql(graphqlOperation(getPurchasedTicketsByUser, {userId}))
+			.then((response) => {
+        console.log(response)
+				dispatch({
+					type: 'FETCH_PURCHASED_TICKETS_SUCCESS',
+					payload: response.data.getPurchasedTicketsByUser.items, 
+				});
+			}, e => {
+        console.log(e)
+          dispatch({
+            type: 'FETCH_PURCHASED_TICKETS_FAILURE',
+            payload: e
+          })
+    });
+	}
+}
 
-export const fetchPurchasedTicketsByUserId = userId => {
+
+/* VENUE PORTAL ACTIONS */
+export const fetchPurchasedTicketById = (id) => {
+	return (dispatch) => {
+		dispatch({
+			type: 'FETCH_PURCHASED_TICKET_REQUEST'
+		});
+		return API.graphql(graphqlOperation(getPurchasedTicket, {id}))
+			.then((response) => {
+        console.log(response)
+				dispatch({
+					type: 'FETCH_PURCHASED_TICKET_SUCCESS',
+					payload: response.data.getPurchasedTicket, 
+				});
+			}, e => dispatch({
+				type: 'FETCH_PURCHASED_TICKET_FAILURE',
+				payload: e
+			}));
+	}
+}
+
+export const redeemPurchasedTicket = (ticket) => {
   return dispatch => {
     dispatch({
-      type: 'FETCH_PURCHASED_TICKETS_REQUEST',
+			type: 'REDEEM_TICKET_REQUEST'
     });
-    return API.graphql(
-      graphqlOperation(getPurchasedTicketsByUser, { userId }),
-    ).then(
-      response => {
+    const input = {
+      id: ticket.id,
+      ticketOfferId: ticket.ticketOfferId,
+      eventId: ticket.eventId,
+      userId: ticket.userId,
+      venueId: ticket.venueId,
+      redeemed: true
+    };
+		return API.graphql(graphqlOperation(updatePurchasedTicket, {input}))
+			.then((response) => {
+        console.log(response)
+				dispatch({
+					type: 'REDEEM_TICKET_SUCCESS',
+					payload: response.data, 
+				});
+			}, e => {
+        console.log(e);
         dispatch({
-          type: 'FETCH_PURCHASED_TICKETS_SUCCESS',
-          payload: response.data.getPurchasedTicketsByUser.items,
-        });
-      },
-      e =>
-        dispatch({
-          type: 'FETCH_PURCHASED_TICKETSS_FAILURE',
-          payload: e,
-        }),
-    );
-  };
-};
+          type: 'REDEEM_TICKET_FAILURE',
+          payload: e
+        })
+    });
+	}
+}
+
+export const fetchPurchasedTicketsByEventId = (eventId) => {
+	return (dispatch) => {
+		dispatch({
+			type: 'FETCH_PURCHASED_TICKETS_FOR_EVENT_REQUEST'
+		});
+		return API.graphql(graphqlOperation(getPurchasedTicketsByEvent, {eventId}))
+			.then((response) => {
+				dispatch({
+					type: 'FETCH_PURCHASED_TICKETS_FOR_EVENT_SUCCESS',
+					payload: {tickets: response.data.getPurchasedTicketsByEvent.items, eventId}, 
+				});
+			}, e => {
+          dispatch({
+            type: 'FETCH_PURCHASED_TICKETS_FOR_EVENT_FAILURE',
+            payload: e
+          })
+    });
+	}
+}
+
+export const clearCurrScannedTicket = () => {
+  return dispatch => {
+    dispatch({
+      type: 'CLEAR_CURR_SCANNED_TICKET',
+    });
+  }
+}

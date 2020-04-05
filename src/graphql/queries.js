@@ -132,6 +132,53 @@ export const getPurchasedTicket = /* GraphQL */ `
       ticketOfferId
       eventId
       userId
+      venueId
+      redeemed
+      user {
+        id
+        username
+        email
+        firstName
+        lastName
+        phoneNumber
+        dob
+        barId
+      }
+      event {
+        id
+        barId
+        title
+        description
+        startTime
+        endTime
+        rules
+      }
+      ticketOffer {
+        id
+        eventId
+        title
+        description
+        capacity
+        expiration
+        price
+      }
+      venue {
+        id
+        name
+        address
+        city
+        state
+        phoneNumber
+        lat
+        lon
+        description
+        coverPhoto
+        socialLinks
+        rules
+        events {
+          nextToken
+        }
+      }
     }
   }
 `;
@@ -151,6 +198,50 @@ export const listPurchasedTickets = /* GraphQL */ `
         ticketOfferId
         eventId
         userId
+        venueId
+        redeemed
+        user {
+          id
+          username
+          email
+          firstName
+          lastName
+          phoneNumber
+          dob
+          barId
+        }
+        event {
+          id
+          barId
+          title
+          description
+          startTime
+          endTime
+          rules
+        }
+        ticketOffer {
+          id
+          eventId
+          title
+          description
+          capacity
+          expiration
+          price
+        }
+        venue {
+          id
+          name
+          address
+          city
+          state
+          phoneNumber
+          lat
+          lon
+          description
+          coverPhoto
+          socialLinks
+          rules
+        }
       }
       nextToken
     }
@@ -166,6 +257,7 @@ export const getUser = /* GraphQL */ `
       lastName
       phoneNumber
       dob
+      barId
     }
   }
 `;
@@ -184,6 +276,7 @@ export const listUsers = /* GraphQL */ `
         lastName
         phoneNumber
         dob
+        barId
       }
       nextToken
     }
@@ -271,6 +364,121 @@ export const getPurchasedTicketsByUser = /* GraphQL */ `
         ticketOfferId
         eventId
         userId
+        venueId
+        redeemed
+        user {
+          id
+          username
+          email
+          firstName
+          lastName
+          phoneNumber
+          dob
+          barId
+        }
+        event {
+          id
+          barId
+          title
+          description
+          startTime
+          endTime
+          rules
+        }
+        ticketOffer {
+          id
+          eventId
+          title
+          description
+          capacity
+          expiration
+          price
+        }
+        venue {
+          id
+          name
+          address
+          city
+          state
+          phoneNumber
+          lat
+          lon
+          description
+          coverPhoto
+          socialLinks
+          rules
+        }
+      }
+      nextToken
+    }
+  }
+`;
+export const getPurchasedTicketsByEvent = /* GraphQL */ `
+  query GetPurchasedTicketsByEvent(
+    $eventId: ID
+    $id: ModelIDKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelPurchasedTicketFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    getPurchasedTicketsByEvent(
+      eventId: $eventId
+      id: $id
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        ticketOfferId
+        eventId
+        userId
+        venueId
+        redeemed
+        user {
+          id
+          username
+          email
+          firstName
+          lastName
+          phoneNumber
+          dob
+          barId
+        }
+        event {
+          id
+          barId
+          title
+          description
+          startTime
+          endTime
+          rules
+        }
+        ticketOffer {
+          id
+          eventId
+          title
+          description
+          capacity
+          expiration
+          price
+        }
+        venue {
+          id
+          name
+          address
+          city
+          state
+          phoneNumber
+          lat
+          lon
+          description
+          coverPhoto
+          socialLinks
+          rules
+        }
       }
       nextToken
     }
@@ -299,6 +507,7 @@ export const userByUsername = /* GraphQL */ `
         lastName
         phoneNumber
         dob
+        barId
       }
       nextToken
     }
