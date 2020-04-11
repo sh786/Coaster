@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button} from 'react-native';
+import {View, Button} from 'react-native';
 import Auth from '@aws-amplify/auth';
 import { clearUserData } from '../../redux/actions';
 
@@ -12,17 +12,23 @@ const Account = ({navigation}) => {
 	});
 
 	return (
-		<Button title="sign out"
-			onPress={() => {
-				Auth.signOut()
-					.then(() => {
-						dispatch(clearUserData());
-						navigation.navigate('Lobby');
-					})
-					.catch(err => {
-						console.log('Error while signing out!', err)
-					})
-			}} />
+		<View>
+			<Button title="sign out"
+				onPress={() => {
+					Auth.signOut()
+						.then(() => {
+							dispatch(clearUserData());
+							navigation.navigate('Lobby');
+						})
+						.catch(err => {
+							console.log('Error while signing out!', err)
+						})
+				}} />
+			<Button
+				title="MyTix"
+				onPress={() => navigation.navigate('MyTix')}
+			/>
+		</View>
 	);
 };
 

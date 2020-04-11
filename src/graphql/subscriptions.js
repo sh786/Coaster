@@ -176,6 +176,53 @@ export const onCreatePurchasedTicket = /* GraphQL */ `
       ticketOfferId
       eventId
       userId
+      venueId
+      redeemed
+      user {
+        id
+        username
+        email
+        firstName
+        lastName
+        phoneNumber
+        dob
+        barId
+      }
+      event {
+        id
+        barId
+        title
+        description
+        startTime
+        endTime
+        rules
+      }
+      ticketOffer {
+        id
+        eventId
+        title
+        description
+        capacity
+        expiration
+        price
+      }
+      venue {
+        id
+        name
+        address
+        city
+        state
+        phoneNumber
+        lat
+        lon
+        description
+        coverPhoto
+        socialLinks
+        rules
+        events {
+          nextToken
+        }
+      }
     }
   }
 `;
@@ -186,6 +233,53 @@ export const onUpdatePurchasedTicket = /* GraphQL */ `
       ticketOfferId
       eventId
       userId
+      venueId
+      redeemed
+      user {
+        id
+        username
+        email
+        firstName
+        lastName
+        phoneNumber
+        dob
+        barId
+      }
+      event {
+        id
+        barId
+        title
+        description
+        startTime
+        endTime
+        rules
+      }
+      ticketOffer {
+        id
+        eventId
+        title
+        description
+        capacity
+        expiration
+        price
+      }
+      venue {
+        id
+        name
+        address
+        city
+        state
+        phoneNumber
+        lat
+        lon
+        description
+        coverPhoto
+        socialLinks
+        rules
+        events {
+          nextToken
+        }
+      }
     }
   }
 `;
@@ -196,6 +290,53 @@ export const onDeletePurchasedTicket = /* GraphQL */ `
       ticketOfferId
       eventId
       userId
+      venueId
+      redeemed
+      user {
+        id
+        username
+        email
+        firstName
+        lastName
+        phoneNumber
+        dob
+        barId
+      }
+      event {
+        id
+        barId
+        title
+        description
+        startTime
+        endTime
+        rules
+      }
+      ticketOffer {
+        id
+        eventId
+        title
+        description
+        capacity
+        expiration
+        price
+      }
+      venue {
+        id
+        name
+        address
+        city
+        state
+        phoneNumber
+        lat
+        lon
+        description
+        coverPhoto
+        socialLinks
+        rules
+        events {
+          nextToken
+        }
+      }
     }
   }
 `;
@@ -209,6 +350,7 @@ export const onCreateUser = /* GraphQL */ `
       lastName
       phoneNumber
       dob
+      barId
     }
   }
 `;
@@ -222,6 +364,7 @@ export const onUpdateUser = /* GraphQL */ `
       lastName
       phoneNumber
       dob
+      barId
     }
   }
 `;
@@ -235,6 +378,7 @@ export const onDeleteUser = /* GraphQL */ `
       lastName
       phoneNumber
       dob
+      barId
     }
   }
 `;

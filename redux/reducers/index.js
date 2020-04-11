@@ -63,6 +63,59 @@ const purchasedTicketsReducer = (state = [], { type, payload }) => {
     }
 }
 
+const venuePortalReducer = (state = {currScannedTicket: {}, venue: {}}, { type, payload }) => {
+  switch (type) {
+    case "FETCH_PURCHASED_TICKET_SUCCESS": {
+      return Object.assign(
+        {},
+        state,
+        {currScannedTicket: payload},
+      );
+    }
+    case "CLEAR_CURR_SCANNED_TICKET": {
+      return Object.assign(
+        {},
+        state,
+        {currScannedTicket: {}},
+      );
+    }
+    case "FETCH_BAR_SUCCESS": {
+      const venueCopy = {...payload};
+      venueCopy.events = payload.events.items;
+      return Object.assign(
+        {},
+        state,
+        {venue: venueCopy},
+      );
+    }
+    case "FETCH_PURCHASED_TICKETS_FOR_EVENT_SUCCESS": {
+      const venueCopy = {...state.venue};
+      const events = venueCopy.events;
+      const currEvent = events.find(e => e.id === payload.eventId);
+      currEvent.tickets = payload.tickets;
+      return Object.assign(
+        {},
+        state,
+        {venue: venueCopy},
+      );
+    }
+    case "REDEEM_TICKET_SUCCESS": {
+      const venueCopy = {...state.venue};
+      const events = venueCopy.events;
+      const currEvent = events.find(e => e.id === payload.eventId);
+      const currTicket = currEvent.tickets ? currEvent.tickets.find(t => t.id === payload.id) : {};
+      currTicket.redeemed === true;
+      return Object.assign(
+        {},
+        state,
+        {venue: venueCopy},
+      );
+    }
+    default:
+      return state;
+    }
+}
+
 export default combineReducers({
   location: locationReducer,
   bars: barsReducer,
@@ -70,4 +123,5 @@ export default combineReducers({
   events: eventReducer,
   ticketOffers: ticketOffersReducer,
   purchasedTickets: purchasedTicketsReducer,
+  venuePortal: venuePortalReducer,
 });

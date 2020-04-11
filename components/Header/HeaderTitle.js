@@ -5,11 +5,14 @@ import { styles } from './styles/HeaderStyles';
 import logoWhite from '../../assets/images/logoWhite.png';
 import { withNavigation } from 'react-navigation';
 
-const HeaderTitle = ({navigation}) => {
+const HeaderTitle = ({ navigation }) => {
   return (
     <TouchableWithoutFeedback onPress={() => navigation.navigate('Lobby')}>
       <View style={styles.container}>
-        <Image source={logoWhite} style={{ maxWidth: '60%', maxHeight: '60%' }} />
+        <Image
+          source={logoWhite}
+          style={{ maxWidth: '60%', maxHeight: '60%' }}
+        />
       </View>
     </TouchableWithoutFeedback>
   );
