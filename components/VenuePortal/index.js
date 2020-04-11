@@ -1,7 +1,10 @@
 import React, {useEffect} from 'react';
 import PropTypes from 'prop-types';
-import {View, Button} from 'react-native';
+import {View, Button, Text, TouchableOpacity, ScrollView} from 'react-native';
 import { fetchBar } from '../../redux/actions';
+import EventItem from './EventItem';
+import { styles } from './styles/VenuePortalStyles';
+import Icon from '../Common/Icon';
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -12,17 +15,47 @@ const VenuePortal = ({navigation}) => {
 	});
 
 	const venue = useSelector(state => state.venuePortal.venue);
+	const {events} = venue;
+	console.log(events);
 
 	useEffect(() => {
 		dispatch(fetchBar(user.barId));
 	}, []);
 
 	return (
-		<View style={{flex:1}} >
-			{venue.events && venue.events &&
-				venue.events.map(e => 
-					<Button title={e.description} key={e.id} onPress={() => navigation.navigate('EventList', {event: e})}/>)
-			}
+		<View style={styles.container} >
+			<View style={styles.headingContainer}>
+				<Icon
+					style={styles.headingIcon}
+					name='md-calendar'
+					size={20}
+					color='black'
+				/>
+            <Text style={styles.venuePageHeading}>Events</Text>
+            <View style={styles.dateContainer}>
+              <Text style={styles.dateText}>
+                {new Date().toLocaleDateString([], { dateStyle: 'long' })}
+              </Text>
+            </View>
+          </View>
+			<ScrollView style={{ display: 'flex', flex: 1, width: '100%' }}>
+				<View styles={styles.eventsContainer}>
+					{events &&
+						events.map((e) => {
+							console.log(e)
+							return (
+								<TouchableOpacity key={e.id}>
+									<EventItem
+										event={e}
+										venue={venue}
+										navigation={navigation}
+										handleEventClick={() => navigation.navigate('EventList', {event: e})}
+									/>
+								</TouchableOpacity>
+							);
+						})}
+				</View>
+			</ScrollView>
 			<Button title="Lobby"
 				onPress={() => navigation.navigate('Lobby')} />
 		</View>
