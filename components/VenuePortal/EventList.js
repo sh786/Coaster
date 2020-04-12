@@ -18,10 +18,11 @@ const EventList = ({navigation}) => {
 		const currEvent = events ? events.find(e => e.id === event.id) : {};
 		return currEvent.tickets;
 	});
-	console.log('hello worl')
 
-	const refreshList = () => {
-		console.log('fetching')
+	const refreshList = useSelector(state => state.venuePortal.refreshList);
+
+	if (refreshList) {
+		console.log('fetching !!!!!    -----------    !!!!!!')
 		dispatch(fetchPurchasedTicketsByEventId(event.id));
 	}
 	

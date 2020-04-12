@@ -105,22 +105,16 @@ const venuePortalReducer = (state = {
       return Object.assign(
         {},
         state,
-        {venue: venueCopy},
+        {
+          venue: venueCopy,
+        },
       );
     }
     case "REDEEM_TICKET_SUCCESS": {
-      console.log('ahhhhhhhh', payload)
-      const venueCopy = {...state.venue};
-      // const events = venueCopy.events ? venueCopy.events : {};
-      // const currEvent = events ? events.find(e => e.id === payload.eventId) : {};
-      // let currTicket = currEvent && currEvent.tickets ? currEvent.tickets.find(t => t.id === payload.id) : {};
-      //console.log('yppp', currTicket, payload);
-      // currTicket = payload;
       return Object.assign(
         {},
         state,
         {
-          venue: venueCopy,
           successfulRedemption: true
         },
       );

@@ -320,16 +320,15 @@ export const redeemPurchasedTicket = (ticket) => {
       venueId: ticket.venueId,
       redeemed: true
     };
-    console.log('wtf')
 		return API.graphql(graphqlOperation(updatePurchasedTicket, {input}))
 			.then((response) => {
-        console.log('response', response);
 				dispatch({
 					type: 'REDEEM_TICKET_SUCCESS',
 					payload: response.data.updatePurchasedTicket, 
-				});
+        });
+        dispatch(fetchPurchasedTicketsByEventId(ticket.eventId));
+        
 			}, e => {
-        console.log(e);
         dispatch({
           type: 'REDEEM_TICKET_FAILURE',
           payload: e

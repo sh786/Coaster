@@ -35,9 +35,11 @@ const PostScan = ({navigation}) => {
 		<View style={styles.container} >
 			<View style={styles.infoContainer}>
 				<View style={styles.messageContainer}>
-					{alreadyRedeemed && <Text style={styles.bold}>This ticket has already been redeemed.</Text>}
+					{alreadyRedeemed || isWrongEvent && 
+						<Text style={styles.bold}>
+							Something has gone wrong. Check please verify that this is the correct event.
+						</Text>}
 					{successfulRedemption && <Text style={styles.bold}>You may admit this patron.</Text>}
-					{isWrongEvent && <Text style={styles.bold}>This ticket is for another event.</Text>}
 				</View>
 				<Text style={styles.info}>
 					Name: {currScannedTicket.user && currScannedTicket.user.firstName} {currScannedTicket.user && currScannedTicket.user.lastName}
