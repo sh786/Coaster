@@ -63,7 +63,11 @@ const purchasedTicketsReducer = (state = [], { type, payload }) => {
     }
 }
 
-const venuePortalReducer = (state = {currScannedTicket: {}, venue: {}}, { type, payload }) => {
+const venuePortalReducer = (state = {
+  currScannedTicket: {}, 
+  venue: {},
+  successfulRedemption: false,
+}, { type, payload }) => {
   switch (type) {
     case "FETCH_PURCHASED_TICKET_SUCCESS": {
       return Object.assign(
@@ -76,7 +80,10 @@ const venuePortalReducer = (state = {currScannedTicket: {}, venue: {}}, { type, 
       return Object.assign(
         {},
         state,
-        {currScannedTicket: {}},
+        {
+          currScannedTicket: {},
+          successfulRedemption: false
+        },
       );
     }
     case "FETCH_BAR_SUCCESS": {
@@ -91,8 +98,10 @@ const venuePortalReducer = (state = {currScannedTicket: {}, venue: {}}, { type, 
     case "FETCH_PURCHASED_TICKETS_FOR_EVENT_SUCCESS": {
       const venueCopy = {...state.venue};
       const events = venueCopy.events;
-      const currEvent = events.find(e => e.id === payload.eventId);
-      currEvent.tickets = payload.tickets;
+      const currEvent = events && events.find(e => e.id === payload.eventId);
+      if (currEvent) {
+        currEvent.tickets = payload.tickets;
+      }
       return Object.assign(
         {},
         state,
@@ -100,15 +109,20 @@ const venuePortalReducer = (state = {currScannedTicket: {}, venue: {}}, { type, 
       );
     }
     case "REDEEM_TICKET_SUCCESS": {
+      console.log('ahhhhhhhh', payload)
       const venueCopy = {...state.venue};
-      const events = venueCopy.events;
-      const currEvent = events.find(e => e.id === payload.eventId);
-      const currTicket = currEvent.tickets ? currEvent.tickets.find(t => t.id === payload.id) : {};
-      currTicket.redeemed === true;
+      // const events = venueCopy.events ? venueCopy.events : {};
+      // const currEvent = events ? events.find(e => e.id === payload.eventId) : {};
+      // let currTicket = currEvent && currEvent.tickets ? currEvent.tickets.find(t => t.id === payload.id) : {};
+      //console.log('yppp', currTicket, payload);
+      // currTicket = payload;
       return Object.assign(
         {},
         state,
-        {venue: venueCopy},
+        {
+          venue: venueCopy,
+          successfulRedemption: true
+        },
       );
     }
     default:

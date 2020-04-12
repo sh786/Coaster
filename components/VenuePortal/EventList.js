@@ -18,6 +18,7 @@ const EventList = ({navigation}) => {
 		const currEvent = events ? events.find(e => e.id === event.id) : {};
 		return currEvent.tickets;
 	});
+	console.log('hello worl')
 
 	const refreshList = () => {
 		console.log('fetching')
@@ -25,7 +26,6 @@ const EventList = ({navigation}) => {
 	}
 	
 	useEffect(() => {
-		console.log('fetching purchased tix')
 		dispatch(fetchPurchasedTicketsByEventId(event.id));
 	}, []);
 
@@ -50,22 +50,12 @@ const EventList = ({navigation}) => {
 					tickets && tickets.map((t) => (
 						<View key={t.id} style={styles.line}>
 							<Text style={styles.lineItem}>{t.user.firstName} {t.user.lastName}</Text>
-							<Text style={styles.lineItem}>{t.redeemed ? 'Admitted' : 'Not Admitted'}</Text>
+							<Text style={styles.lineItem}>{t.redeemed ? 'Admitted' : ''}</Text>
 						</View>
 					))
 				}
 			</ScrollView>
-			{/* <Text>The following users are on the list for your event</Text>
-			{
-				tickets && tickets.map((t) => (
-					<Text key={t.id}>{t.user.firstName} {t.user.lastName} | {t.redeemed ? 'Admitted' : 'Not Admitted'}</Text>
-				))
-			}
-			<Button title="Scan Tickets"
-				onPress={() => navigation.navigate('Scanner')} />
-			<Button title="Refresh List"
-				onPress={() => refreshList()} /> */}
-			<ScanButton event={event} navigation={navigation} />
+			<ScanButton event={event} onClick={() => navigation.navigate('Scanner', {event})} />
 		</View>
 	);
 };

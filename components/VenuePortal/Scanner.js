@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 const Scanner = ({navigation}) => {
 	const [hasPermission, setHasPermission] = useState(null);
 	const dispatch = useDispatch();
+	const event = navigation.getParam('event');
 
 	const currScannedTicket = useSelector(state => state.venuePortal.currScannedTicket);
 
@@ -20,7 +21,7 @@ const Scanner = ({navigation}) => {
 	}, []);
 
 	if (currScannedTicket && currScannedTicket.id && currScannedTicket.user) {
-		navigation.navigate('PostScan');
+		navigation.navigate('PostScan', {event});
 	}
 
 	if (hasPermission === null) {

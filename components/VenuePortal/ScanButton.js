@@ -6,7 +6,9 @@ export default function ScanButton(props) {
   return (
     <Button
 		light
-		onPress={() => props.navigation.navigate('Scanner', {event: props.event})}
+		onPress={() => {
+			props.onClick()
+		}}
 		style={{marginBottom: 20, alignContent: 'center', justifyContent: 'center'}}>
 		<Text style={{textAlign: 'center'}}>Scan Tickets</Text>
 	</Button>

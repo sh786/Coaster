@@ -273,7 +273,6 @@ export const fetchPurchasedTicketsByUserId = (userId) => {
 		});
 		return API.graphql(graphqlOperation(getPurchasedTicketsByUser, {userId}))
 			.then((response) => {
-        console.log(response)
 				dispatch({
 					type: 'FETCH_PURCHASED_TICKETS_SUCCESS',
 					payload: response.data.getPurchasedTicketsByUser.items, 
@@ -297,7 +296,6 @@ export const fetchPurchasedTicketById = (id) => {
 		});
 		return API.graphql(graphqlOperation(getPurchasedTicket, {id}))
 			.then((response) => {
-        console.log(response)
 				dispatch({
 					type: 'FETCH_PURCHASED_TICKET_SUCCESS',
 					payload: response.data.getPurchasedTicket, 
@@ -322,12 +320,13 @@ export const redeemPurchasedTicket = (ticket) => {
       venueId: ticket.venueId,
       redeemed: true
     };
+    console.log('wtf')
 		return API.graphql(graphqlOperation(updatePurchasedTicket, {input}))
 			.then((response) => {
-        console.log(response)
+        console.log('response', response);
 				dispatch({
 					type: 'REDEEM_TICKET_SUCCESS',
-					payload: response.data, 
+					payload: response.data.updatePurchasedTicket, 
 				});
 			}, e => {
         console.log(e);

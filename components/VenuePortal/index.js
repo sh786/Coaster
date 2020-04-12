@@ -16,7 +16,6 @@ const VenuePortal = ({navigation}) => {
 
 	const venue = useSelector(state => state.venuePortal.venue);
 	const {events} = venue;
-	console.log(events);
 
 	useEffect(() => {
 		dispatch(fetchBar(user.barId));
