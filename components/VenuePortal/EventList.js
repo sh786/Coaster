@@ -46,6 +46,7 @@ const EventList = ({navigation}) => {
 					</Text>
 				</View>
 			</View>
+			<Text style={styles.ticketCount}>{tickets && tickets.length} Total Tickets Sold</Text>
 			<ScrollView style={styles.scrollView}>
 				{
 					tickets && tickets.map((t) => (

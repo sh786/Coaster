@@ -49,7 +49,14 @@ export const styles = StyleSheet.create({
   eventListHeading: {
     fontSize: 20,
     fontFamily: 'san-francisco-semibold',
-    marginBottom: 10,
+    marginBottom: 5,
+  },
+  ticketCount: {
+    fontSize: 16,
+    fontFamily: 'san-francisco',
+    marginBottom: 5,
+    textAlign: 'center',
+    fontWeight: '400',
   },
   scrollView: {
 	display: 'flex',
@@ -62,8 +69,8 @@ export const styles = StyleSheet.create({
     backgroundColor: '#fff',
     padding: 4,
     marginTop: 4,
-    marginLeft: 40,
-    marginRight: 20,
+    marginLeft: 10,
+    marginRight: 10,
     marginBottom: 4,
     borderRadius: 2,
     shadowOpacity: 0.5,

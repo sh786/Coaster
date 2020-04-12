@@ -41,7 +41,6 @@ const VenuePortal = ({navigation}) => {
 				<View styles={styles.eventsContainer}>
 					{events &&
 						events.map((e) => {
-							console.log(e)
 							return (
 								<TouchableOpacity key={e.id}>
 									<EventItem
