@@ -427,3 +427,39 @@ export const deleteUser = /* GraphQL */ `
     }
   }
 `;
+export const createHeadCount = /* GraphQL */ `
+  mutation CreateHeadCount(
+    $input: CreateHeadCountInput!
+    $condition: ModelHeadCountConditionInput
+  ) {
+    createHeadCount(input: $input, condition: $condition) {
+      id
+      barId
+      count
+    }
+  }
+`;
+export const updateHeadCount = /* GraphQL */ `
+  mutation UpdateHeadCount(
+    $input: UpdateHeadCountInput!
+    $condition: ModelHeadCountConditionInput
+  ) {
+    updateHeadCount(input: $input, condition: $condition) {
+      id
+      barId
+      count
+    }
+  }
+`;
+export const deleteHeadCount = /* GraphQL */ `
+  mutation DeleteHeadCount(
+    $input: DeleteHeadCountInput!
+    $condition: ModelHeadCountConditionInput
+  ) {
+    deleteHeadCount(input: $input, condition: $condition) {
+      id
+      barId
+      count
+    }
+  }
+`;

@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {View, Button, Text, TouchableOpacity, ScrollView} from 'react-native';
-import { fetchBar } from '../../redux/actions';
+import { fetchBar, fetchHeadCountByBarId } from '../../redux/actions';
 import EventItem from './EventItem';
 import { styles } from './styles/VenuePortalStyles';
 import Icon from '../Common/Icon';
@@ -19,6 +19,7 @@ const VenuePortal = ({navigation}) => {
 
 	useEffect(() => {
 		dispatch(fetchBar(user.barId));
+		dispatch(fetchHeadCountByBarId(user.barId));
 	}, []);
 
 	return (

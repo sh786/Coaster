@@ -67,6 +67,7 @@ const venuePortalReducer = (state = {
   currScannedTicket: {}, 
   venue: {},
   successfulRedemption: false,
+  headCount: {},
 }, { type, payload }) => {
   switch (type) {
     case "FETCH_PURCHASED_TICKET_SUCCESS": {
@@ -116,6 +117,19 @@ const venuePortalReducer = (state = {
         state,
         {
           successfulRedemption: true
+        },
+      );
+    }
+    case "FETCH_HEAD_COUNT_FOR_BAR_SUCCESS": {
+      console.log(payload)
+      if (!payload.headCount) {
+        return state;
+      }
+      return Object.assign(
+        {},
+        state,
+        {
+          headCount: payload.headCount
         },
       );
     }

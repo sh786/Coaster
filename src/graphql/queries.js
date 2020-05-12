@@ -282,6 +282,31 @@ export const listUsers = /* GraphQL */ `
     }
   }
 `;
+export const getHeadCount = /* GraphQL */ `
+  query GetHeadCount($id: ID!) {
+    getHeadCount(id: $id) {
+      id
+      barId
+      count
+    }
+  }
+`;
+export const listHeadCounts = /* GraphQL */ `
+  query ListHeadCounts(
+    $filter: ModelHeadCountFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listHeadCounts(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        barId
+        count
+      }
+      nextToken
+    }
+  }
+`;
 export const getEventsByBarId = /* GraphQL */ `
   query GetEventsByBarId(
     $barId: ID
@@ -508,6 +533,32 @@ export const userByUsername = /* GraphQL */ `
         phoneNumber
         dob
         barId
+      }
+      nextToken
+    }
+  }
+`;
+export const getHeadCountByBarId = /* GraphQL */ `
+  query GetHeadCountByBarId(
+    $barId: String
+    $id: ModelIDKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelHeadCountFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    getHeadCountByBarId(
+      barId: $barId
+      id: $id
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        barId
+        count
       }
       nextToken
     }

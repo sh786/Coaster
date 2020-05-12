@@ -9,8 +9,10 @@ import {
   getPurchasedTicket,
   getBar,
   getPurchasedTicketsByEvent,
+  getHeadCountByBarId,
 } from '../../src/graphql/queries';
-import { createUser, createPurchasedTicket, updatePurchasedTicket } from '../../src/graphql/mutations';
+import { createUser, createPurchasedTicket, updatePurchasedTicket, updateHeadCount } from '../../src/graphql/mutations';
+import {onHeadCountChange} from '../../src/graphql/subscriptions';
 import Auth from '@aws-amplify/auth';
 
 /* USER LOCATION */
@@ -361,3 +363,78 @@ export const clearCurrScannedTicket = () => {
     });
   }
 }
+
+/* HEAD COUNT ACTIONS */
+export const fetchHeadCountByBarId = barId => {
+  return dispatch => {
+    dispatch({
+      type: 'FETCH_HEAD_COUNT_FOR_BAR_REQUEST',
+    });
+    return API.graphql(graphqlOperation(getHeadCountByBarId, { barId })).then(
+      response => {
+        dispatch({
+          type: 'FETCH_HEAD_COUNT_FOR_BAR_SUCCESS',
+          payload: {
+            barId,
+            headCount: response.data.getHeadCountByBarId.items[0],
+          },
+        });
+      },
+      e => {
+        dispatch({
+          type: 'FETCH_HEAD_COUNT_FOR_BAR_FAILURE',
+          payload: e,
+        });
+      },
+    );
+  };
+};
+
+export const subscribeToHeadCountForBar = (barId) => {
+	return (dispatch) => {
+		return API.graphql(
+			graphqlOperation(onHeadCountChange, {barId})
+		).subscribe({
+			next: (response) => {
+				console.log(Object.keys(response), response.value, 'socket');
+				dispatch({
+					type: 'FETCH_HEAD_COUNT_FOR_BAR_SUCCESS',
+					payload: {
+						barId,
+						headCount: response.value.data.onHeadCountChange,
+					},
+				});
+			}
+		});
+	}
+}
+
+export const updateCountForBar = (barId, count, id) => {
+	return dispatch => {
+		dispatch({
+			type: 'UPDATE_COUNT_FOR_BAR',
+		});
+		const input = {
+			barId, 
+			count,
+			id,
+		};
+		console.log(input, 'input')
+		return API.graphql(graphqlOperation(updateHeadCount, {input}))
+			.then((response) => {
+				console.log(response, 'hmmm');
+				dispatch({
+					type: 'UPDATE_COUNT_FOR_BAR_SUCCESS',
+					payload: response.data.updateHeadCount, 
+			});
+			// dispatch(fetchPurchasedTicketsByEventId(ticket.eventId));
+			
+			}, e => {
+				console.log(e)
+			dispatch({
+				type: 'UPDATE_COUNT_FOR_BAR_FAILURE',
+				payload: e
+			})
+		});
+	}
+  }

@@ -1,6 +1,15 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const onHeadCountChange = /* GraphQL */ `
+  subscription OnHeadCountChange($barId: ID) {
+    onHeadCountChange(barId: $barId) {
+      id
+      barId
+      count
+    }
+  }
+`;
 export const onCreateBar = /* GraphQL */ `
   subscription OnCreateBar {
     onCreateBar {

@@ -58,3 +58,12 @@ type User @model
   dob: String!
   barId: String
 }
+type HeadCount @model(subscriptions: null)
+  @key(name: "byBarId", fields: ["barId", "id"], queryField: "getHeadCountByBarId") {
+  id: ID!
+  barId: String!
+  count: Int!
+}
+type Subscription {
+  onHeadCountChange(barId: ID): HeadCount @aws_subscribe(mutations: ["updateHeadCount"])
+}
