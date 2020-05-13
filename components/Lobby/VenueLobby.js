@@ -25,10 +25,10 @@ import VenuePortalButton from '../Common/VenuePortalButton';
 
 const VenueLobby = ({ navigation }) => {
   const dispatch = useDispatch();
-  const bars = useSelector(state => {
+  const bars = useSelector((state) => {
     return state.bars;
   });
-  const user = useSelector(state => {
+  const user = useSelector((state) => {
     return state.user;
   });
 
@@ -94,8 +94,15 @@ const VenueLobby = ({ navigation }) => {
           style={{ width: Dimensions.get('window').width, height: 100 }}
         />
       </ScrollView>
-      {!user.email && <LogInButton style={{marginBottom: 100}} navigation={navigation} />}
-      {user.barId && <VenuePortalButton style={{marginBottom: 100}} navigation={navigation} />}
+      {!user.email && (
+        <LogInButton style={{ marginBottom: 100 }} navigation={navigation} />
+      )}
+      {user.barId && (
+        <VenuePortalButton
+          style={{ marginBottom: 100 }}
+          navigation={navigation}
+        />
+      )}
       {/* Not totally sure how I feel about doing it this way, but we do need
       to made it clear what page a user is currently on */}
       {/* <View style={commonStyles.screenLabelContainer}>
@@ -113,14 +120,23 @@ VenueLobby.navigationOptions = ({ navigation }) => ({
   headerTitle: <HeaderTitle title='coaster' />,
   headerLeft: (
     <Icon
-      name='md-person'
+      faIcon
+      name='ticket'
       size={32}
       color='white'
       style={{ marginLeft: 20 }}
+      onPress={() => navigation.navigate('MyTix')}
+    />
+  ),
+  headerRight: (
+    <Icon
+      name='md-person'
+      size={32}
+      color='white'
+      style={{ marginRight: 24 }}
       onPress={() => navigation.navigate('Account')}
     />
   ),
-  headerRight: <SortView />,
 });
 
 export default VenueLobby;
