@@ -1,39 +1,32 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import {View, Text, Button} from 'react-native';
-import { fetchPurchasedTicketsByUserId } from '../../redux/actions';
-import Ticket from '../Ticket';
+import { View, Button, Text, ScrollView } from 'react-native';
 
-import { useDispatch, useSelector } from 'react-redux';
+import RedeemedTicketList from './RedeemedTicketList';
+import TicketList from './TicketList';
+import { styles } from './AccountStyles';
 
-const MyTix = ({navigation}) => {
-	const dispatch = useDispatch();
-	const tickets = useSelector(state => {
-		return state.purchasedTickets;
-	});
-	const user = useSelector(state => state.user)
-
-	useEffect(() => {
-		dispatch(fetchPurchasedTicketsByUserId(user.id));
-	}, []);
-
-	console.log(tickets);
-
-	return (
-		<View>
-			{
-				tickets.map(t => <Ticket key={t.id} purchasedTicket={t} />)
-			}
-			<Button
-				title="Lobby"
-				onPress={() => navigation.navigate('Lobby')}
-			/>
-		</View>
-	);
+const MyTix = ({ navigation }) => {
+  return (
+    <ScrollView
+      contentContainerStyle={{
+        flexGrow: 1,
+      }}
+    >
+      <View>
+        <Text style={styles.sectionHeaderText}>Active Tickets</Text>
+        <TicketList />
+      </View>
+      <View>
+        <Text style={styles.sectionHeaderText}>Redeemed Tickets</Text>
+        <RedeemedTicketList />
+      </View>
+    </ScrollView>
+  );
 };
 
 MyTix.propTypes = {
-	navigation: PropTypes.object.isRequired,
+  navigation: PropTypes.object.isRequired,
 };
 
 export default MyTix;
