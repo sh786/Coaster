@@ -61,6 +61,13 @@ export const styles = StyleSheet.create({
   },
   capacityCount: {
     flex: 1.5,
+    display: 'flex',
+    flexDirection: 'row',
+  },
+  capacityIcons: {
+    marginLeft: 10,
+    display: 'flex',
+    flexDirection: 'row',
   },
   capacityCountText: {
     fontSize: 12,

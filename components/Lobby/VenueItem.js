@@ -26,6 +26,8 @@ const VenueItem = ({ venue, navigation }) => {
   const [latitude, setLatitude] = useState();
   const [longitude, setLongitude] = useState();
 
+  const crowdMetric = Math.round((venue.headCount / venue.capacity) * 4) + 1;
+
   useEffect(() => {
     if (location.coords) {
       setLatitude(location.coords.latitude);
@@ -61,9 +63,23 @@ const VenueItem = ({ venue, navigation }) => {
               ).toFixed(1)} mi`}</Text>
           </View>
           <View style={styles.bottomContainer}>
-            <View style={styles.capacityCount}>
-              {venue.headCount && <Text style={styles.capacityCountText}>{venue.headCount}/{venue.capacity} Capacity</Text>}
-            </View>
+            {venue.headCount &&
+              <View style={styles.capacityCount}>
+                <Text style={styles.capacityCountText}>
+                  {venue.headCount}/{venue.capacity}
+                </Text>
+                <View style={styles.capacityIcons}>
+                  {[...Array(crowdMetric)].map((x, i) => (
+                    <Icon
+                      key={i}
+                      name='md-person'
+                      size={12}
+                      color='black'
+                      style={{marginRight: 5}}
+                    />
+                  ))}
+                </View>
+              </View>}
             <View style={styles.socialLogoContainer}>
               <TouchableOpacity
                 onPress={e => {
