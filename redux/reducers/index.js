@@ -13,6 +13,24 @@ const barsReducer = (state = [], { type, payload }) => {
   switch (type) {
     case 'FETCH_BARS_SUCCESS':
       return payload;
+    case 'FETCH_HEAD_COUNT_SUCCESS': {
+      const stateCopy = [...state];
+      const updatedBar = stateCopy.find(bar => bar.id === payload.barId);
+      updatedBar.headCount = payload.count;
+      return stateCopy;
+    }
+    case 'FETCH_HEAD_COUNTS_SUCCESS': {
+      const stateCopy = [...state];
+      const barIdToHeadCount = payload.reduce((acc, headCountObj) => {
+        acc[headCountObj.barId] = headCountObj.count;
+        return acc;
+      }, []);
+      for (const bar of stateCopy) {
+        bar.headCount = barIdToHeadCount[bar.id];
+      }
+      
+      return stateCopy;
+    }
     default:
       return state;
   }
@@ -121,7 +139,6 @@ const venuePortalReducer = (state = {
       );
     }
     case "FETCH_HEAD_COUNT_FOR_BAR_SUCCESS": {
-      console.log(payload)
       if (!payload.headCount) {
         return state;
       }

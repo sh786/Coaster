@@ -28,6 +28,7 @@ export const getBar = /* GraphQL */ `
         }
         nextToken
       }
+      capacity
     }
   }
 `;
@@ -54,6 +55,7 @@ export const listBars = /* GraphQL */ `
         events {
           nextToken
         }
+        capacity
       }
       nextToken
     }
@@ -178,6 +180,7 @@ export const getPurchasedTicket = /* GraphQL */ `
         events {
           nextToken
         }
+        capacity
       }
     }
   }
@@ -241,6 +244,7 @@ export const listPurchasedTickets = /* GraphQL */ `
           coverPhoto
           socialLinks
           rules
+          capacity
         }
       }
       nextToken
@@ -432,6 +436,7 @@ export const getPurchasedTicketsByUser = /* GraphQL */ `
           coverPhoto
           socialLinks
           rules
+          capacity
         }
       }
       nextToken
@@ -503,6 +508,7 @@ export const getPurchasedTicketsByEvent = /* GraphQL */ `
           coverPhoto
           socialLinks
           rules
+          capacity
         }
       }
       nextToken

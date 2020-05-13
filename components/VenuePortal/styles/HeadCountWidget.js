@@ -66,5 +66,19 @@ export const styles = StyleSheet.create({
 		textAlign: 'center',
 		width: '100%',
 		height: '100%',
+	},
+	disabledMinusButtonContainer: {
+		display: 'flex',
+		width: 60,
+		height: 60,
+		borderRadius: 50,
+		alignItems: 'center',
+	},
+	disabledPlusButtonContainer: {
+		display: 'flex',
+		width: 100,
+		height: 100,
+		borderRadius: 50,
+		alignItems: 'center',
 	}
 });

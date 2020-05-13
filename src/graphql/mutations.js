@@ -31,6 +31,7 @@ export const createBar = /* GraphQL */ `
         }
         nextToken
       }
+      capacity
     }
   }
 `;
@@ -64,6 +65,7 @@ export const updateBar = /* GraphQL */ `
         }
         nextToken
       }
+      capacity
     }
   }
 `;
@@ -97,6 +99,7 @@ export const deleteBar = /* GraphQL */ `
         }
         nextToken
       }
+      capacity
     }
   }
 `;
@@ -252,6 +255,7 @@ export const createPurchasedTicket = /* GraphQL */ `
         events {
           nextToken
         }
+        capacity
       }
     }
   }
@@ -312,6 +316,7 @@ export const updatePurchasedTicket = /* GraphQL */ `
         events {
           nextToken
         }
+        capacity
       }
     }
   }
@@ -372,6 +377,7 @@ export const deletePurchasedTicket = /* GraphQL */ `
         events {
           nextToken
         }
+        capacity
       }
     }
   }

@@ -10,9 +10,10 @@ import {
   getBar,
   getPurchasedTicketsByEvent,
   getHeadCountByBarId,
+  listHeadCounts,
 } from '../../src/graphql/queries';
 import { createUser, createPurchasedTicket, updatePurchasedTicket, updateHeadCount } from '../../src/graphql/mutations';
-import {onHeadCountChange} from '../../src/graphql/subscriptions';
+import {onHeadCountChangeByBarId, onUpdateHeadCount} from '../../src/graphql/subscriptions';
 import Auth from '@aws-amplify/auth';
 
 /* USER LOCATION */
@@ -69,7 +70,8 @@ export const fetchBars = () => {
         dispatch({
           type: 'FETCH_BARS_SUCCESS',
           payload: bars.data.listBars.items,
-        });
+		});
+		dispatch(fetchHeadCounts());
       },
       e => {
         dispatch({
@@ -389,20 +391,55 @@ export const fetchHeadCountByBarId = barId => {
     );
   };
 };
+export const fetchHeadCounts = () => {
+	return dispatch => {
+		dispatch({
+			type: 'FETCH_HEAD_COUNTS_REQUEST',
+		});
+		return API.graphql(graphqlOperation(listHeadCounts)).then(
+			response => {
+				dispatch({
+					type: 'FETCH_HEAD_COUNTS_SUCCESS',
+					payload: response.data.listHeadCounts.items,
+				});
+			},
+			e => {
+				dispatch({
+					type: 'FETCH_HEAD_COUNTS_FAILURE',
+					payload: e,
+				});
+			},
+		);
+	};
+};
 
 export const subscribeToHeadCountForBar = (barId) => {
 	return (dispatch) => {
 		return API.graphql(
-			graphqlOperation(onHeadCountChange, {barId})
+			graphqlOperation(onHeadCountChangeByBarId, {barId})
 		).subscribe({
 			next: (response) => {
-				console.log(Object.keys(response), response.value, 'socket');
 				dispatch({
 					type: 'FETCH_HEAD_COUNT_FOR_BAR_SUCCESS',
 					payload: {
 						barId,
-						headCount: response.value.data.onHeadCountChange,
+						headCount: response.value.data.onHeadCountChangeByBarId,
 					},
+				});
+			}
+		});
+	}
+}
+
+export const subscribeToHeadCounts = () => {
+	return (dispatch) => {
+		return API.graphql(
+			graphqlOperation(onUpdateHeadCount)
+		).subscribe({
+			next: (response) => {
+				dispatch({
+					type: 'FETCH_HEAD_COUNT_SUCCESS',
+					payload: response.value.data.onUpdateHeadCount,
 				});
 			}
 		});
@@ -419,18 +456,13 @@ export const updateCountForBar = (barId, count, id) => {
 			count,
 			id,
 		};
-		console.log(input, 'input')
 		return API.graphql(graphqlOperation(updateHeadCount, {input}))
 			.then((response) => {
-				console.log(response, 'hmmm');
 				dispatch({
 					type: 'UPDATE_COUNT_FOR_BAR_SUCCESS',
 					payload: response.data.updateHeadCount, 
-			});
-			// dispatch(fetchPurchasedTicketsByEventId(ticket.eventId));
-			
+				});
 			}, e => {
-				console.log(e)
 			dispatch({
 				type: 'UPDATE_COUNT_FOR_BAR_FAILURE',
 				payload: e

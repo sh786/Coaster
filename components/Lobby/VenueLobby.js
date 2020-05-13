@@ -10,6 +10,7 @@ import {
   setLocation,
   fetchUserByUsername,
   getUserToken,
+  subscribeToHeadCounts,
 } from '../../redux/actions';
 
 import VenueItem from './VenueItem';
@@ -50,6 +51,10 @@ const VenueLobby = ({ navigation }) => {
     };
     fetchLocation();
     dispatch(fetchBars());
+    const subscription = dispatch(subscribeToHeadCounts());
+      return () => {
+        subscription.unsubscribe();
+      };
   }, []);
 
   useEffect(() => {

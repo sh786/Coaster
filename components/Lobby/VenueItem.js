@@ -60,39 +60,44 @@ const VenueItem = ({ venue, navigation }) => {
                 { unit: 'mile' },
               ).toFixed(1)} mi`}</Text>
           </View>
-          <View style={styles.socialLogoContainer}>
-            <TouchableOpacity
-              onPress={e => {
-                e.stopPropagation();
-                openURL(venue.socialLinks[0]);
-              }}
-            >
-              <Icon
-                style={styles.socialLogoIcon}
-                name='logo-facebook'
-                size={20}
-              />
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={e => {
-                e.stopPropagation();
-                openURL(venue.socialLinks[1]);
-              }}
-            >
-              <Icon
-                style={styles.socialLogoIcon}
-                name='logo-instagram'
-                size={20}
-              />
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={e => {
-                e.stopPropagation();
-                openURL(venue.socialLinks[2]);
-              }}
-            >
-              <Icon style={styles.socialLogoIcon} name='md-map' size={20} />
-            </TouchableOpacity>
+          <View style={styles.bottomContainer}>
+            <View style={styles.capacityCount}>
+              {venue.headCount && <Text style={styles.capacityCountText}>{venue.headCount}/{venue.capacity} Capacity</Text>}
+            </View>
+            <View style={styles.socialLogoContainer}>
+              <TouchableOpacity
+                onPress={e => {
+                  e.stopPropagation();
+                  openURL(venue.socialLinks[0]);
+                }}
+              >
+                <Icon
+                  style={styles.socialLogoIcon}
+                  name='logo-facebook'
+                  size={20}
+                />
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={e => {
+                  e.stopPropagation();
+                  openURL(venue.socialLinks[1]);
+                }}
+              >
+                <Icon
+                  style={styles.socialLogoIcon}
+                  name='logo-instagram'
+                  size={20}
+                />
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={e => {
+                  e.stopPropagation();
+                  openURL(venue.socialLinks[2]);
+                }}
+              >
+                <Icon style={styles.socialLogoIcon} name='md-map' size={20} />
+              </TouchableOpacity>
+            </View>
           </View>
         </View>
       </View>

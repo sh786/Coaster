@@ -51,9 +51,24 @@ export const styles = StyleSheet.create({
     flex: 3,
     fontSize: 10,
   },
-  socialLogoContainer: {
-    width: '100%',
+  bottomContainer: {
     display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    width: '100%',
+    alignContent: 'center',
+    alignItems: 'center'
+  },
+  capacityCount: {
+    flex: 1.5,
+  },
+  capacityCountText: {
+    fontSize: 12,
+    fontWeight: 'bold',
+  },
+  socialLogoContainer: {
+    display: 'flex',
+    flex: 0.5,
     flexDirection: 'row',
     justifyContent: 'flex-end',
     marginBottom: 4,
