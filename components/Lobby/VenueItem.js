@@ -23,6 +23,11 @@ const VenueItem = ({ venue, navigation }) => {
     return state.location;
   });
 
+  // only show counts that have been updated recently
+  const {lastHeadCountUpdate} = venue;
+  const millisecondsLastUpdate = new Date(lastHeadCountUpdate).getTime();
+  const updatedInLastHour = (Date.now() - millisecondsLastUpdate) < 3600000;
+
   const [latitude, setLatitude] = useState();
   const [longitude, setLongitude] = useState();
 
@@ -63,7 +68,7 @@ const VenueItem = ({ venue, navigation }) => {
               ).toFixed(1)} mi`}</Text>
           </View>
           <View style={styles.bottomContainer}>
-            {venue.headCount &&
+            {venue.headCount && updatedInLastHour &&
               <View style={styles.capacityCount}>
                 <Text style={styles.capacityCountText}>
                   {venue.headCount}/{venue.capacity}

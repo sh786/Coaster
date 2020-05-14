@@ -519,7 +519,8 @@ export const updateCountForBar = (barId, count, id) => {
 		const input = {
 			barId, 
 			count,
-			id,
+      id,
+      lastUpdateTime: new Date().toISOString(),
 		};
 		return API.graphql(graphqlOperation(updateHeadCount, {input}))
 			.then((response) => {
