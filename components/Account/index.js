@@ -1,5 +1,6 @@
 import React from 'react';
 import {View, Button} from 'react-native';
+import * as Linking from 'expo-linking';
 import Auth from '@aws-amplify/auth';
 import { clearUserData } from '../../redux/actions';
 
@@ -27,6 +28,10 @@ const Account = ({navigation}) => {
 			<Button
 				title="MyTix"
 				onPress={() => navigation.navigate('MyTix')}
+			/>
+			<Button
+				title="Open Email"
+				onPress={() => Linking.openURL('mailto:support@example.com?subject=SendMail&body=Description')}
 			/>
 		</View>
 	);
