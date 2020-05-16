@@ -1,42 +1,42 @@
 {
-	"dev": {
-		"awscloudformation": {
-			"AuthRoleName": "amplify-coaster-dev-213401-authRole",
-			"UnauthRoleArn": "arn:aws:iam::885195653239:role/amplify-coaster-dev-213401-unauthRole",
-			"AuthRoleArn": "arn:aws:iam::885195653239:role/amplify-coaster-dev-213401-authRole",
-			"Region": "us-east-1",
-			"DeploymentBucketName": "amplify-coaster-dev-213401-deployment",
-			"UnauthRoleName": "amplify-coaster-dev-213401-unauthRole",
-			"StackName": "amplify-coaster-dev-213401",
-			"StackId": "arn:aws:cloudformation:us-east-1:885195653239:stack/amplify-coaster-dev-213401/45270b20-626f-11ea-85a8-0a5afd1032bb",
-			"AmplifyAppId": "d3iko7m2yqqd54"
-		},
-		"categories": {
-			"auth": {
-				"coasterbbb6d16c": {
-					"hostedUIProviderCreds": "[]"
-				}
-			}
-		}
-	},
-	"production": {
-		"awscloudformation": {
-			"AuthRoleName": "amplify-coaster-production-115201-authRole",
-			"UnauthRoleArn": "arn:aws:iam::885195653239:role/amplify-coaster-production-115201-unauthRole",
-			"AuthRoleArn": "arn:aws:iam::885195653239:role/amplify-coaster-production-115201-authRole",
-			"Region": "us-east-1",
-			"DeploymentBucketName": "amplify-coaster-production-115201-deployment",
-			"UnauthRoleName": "amplify-coaster-production-115201-unauthRole",
-			"StackName": "amplify-coaster-production-115201",
-			"StackId": "arn:aws:cloudformation:us-east-1:885195653239:stack/amplify-coaster-production-115201/62d9bcb0-7c0c-11ea-b77c-1220c9cd2399",
-			"AmplifyAppId": "d3iko7m2yqqd54"
-		},
-		"categories": {
-			"auth": {
-				"coasterbbb6d16c": {
-					"hostedUIProviderCreds": "[]"
-				}
-			}
-		}
-	}
+    "dev": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-coaster-dev-213401-authRole",
+            "UnauthRoleArn": "arn:aws:iam::885195653239:role/amplify-coaster-dev-213401-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::885195653239:role/amplify-coaster-dev-213401-authRole",
+            "Region": "us-east-1",
+            "DeploymentBucketName": "amplify-coaster-dev-213401-deployment",
+            "UnauthRoleName": "amplify-coaster-dev-213401-unauthRole",
+            "StackName": "amplify-coaster-dev-213401",
+            "StackId": "arn:aws:cloudformation:us-east-1:885195653239:stack/amplify-coaster-dev-213401/45270b20-626f-11ea-85a8-0a5afd1032bb",
+            "AmplifyAppId": "d3iko7m2yqqd54"
+        },
+        "categories": {
+            "auth": {
+                "coasterbbb6d16c": {
+                    "hostedUIProviderCreds": "[]"
+                }
+            }
+        }
+    },
+    "production": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-coaster-production-115201-authRole",
+            "UnauthRoleArn": "arn:aws:iam::885195653239:role/amplify-coaster-production-115201-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::885195653239:role/amplify-coaster-production-115201-authRole",
+            "Region": "us-east-1",
+            "DeploymentBucketName": "amplify-coaster-production-115201-deployment",
+            "UnauthRoleName": "amplify-coaster-production-115201-unauthRole",
+            "StackName": "amplify-coaster-production-115201",
+            "StackId": "arn:aws:cloudformation:us-east-1:885195653239:stack/amplify-coaster-production-115201/62d9bcb0-7c0c-11ea-b77c-1220c9cd2399",
+            "AmplifyAppId": "d3iko7m2yqqd54"
+        },
+        "categories": {
+            "auth": {
+                "coasterbbb6d16c": {
+                    "hostedUIProviderCreds": "[]"
+                }
+            }
+        }
+    }
 }

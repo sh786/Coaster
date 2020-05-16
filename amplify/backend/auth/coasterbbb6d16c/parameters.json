@@ -1,6 +1,6 @@
 {
     "identityPoolName": "coasterbbb6d16c_identitypool_bbb6d16c",
-    "allowUnauthenticatedIdentities": false,
+    "allowUnauthenticatedIdentities": true,
     "resourceNameTruncated": "coastebbb6d16c",
     "userPoolName": "coasterbbb6d16c_userpool_bbb6d16c",
     "autoVerifiedAttributes": [

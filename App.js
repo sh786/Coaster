@@ -11,10 +11,10 @@ import { createStore, applyMiddleware } from 'redux';
 import { Ionicons } from '@expo/vector-icons';
 // AWS
 // import API from '@aws-amplify/api';
-import Amplify from 'aws-amplify';
+import Amplify, {Auth} from 'aws-amplify';
 // import PubSub from '@aws-amplify/pubsub';
 import AppNavigator from './navigation/AppNavigator';
-
+Auth.currentCredentials();
 import config from './aws-exports';
 Amplify.configure(config);
 // API.configure(config); // Configure Amplify

@@ -6,6 +6,7 @@ import { Button } from 'native-base';
 import {updateCountForBar, subscribeToHeadCountForBar} from '../../redux/actions';
 
 
+
 const HeadCountWidget = ({barId}) => {
 	const countObj = useSelector((state) => state.venuePortal.headCount);
 	const capacity = useSelector((state) => state.venuePortal.venue.capacity);

@@ -19,7 +19,7 @@ import {
 	updateHeadCount,
 } from '../../src/graphql/mutations';
 import {onHeadCountChangeByBarId, onUpdateHeadCount} from '../../src/graphql/subscriptions';
-
+import { Analytics } from 'aws-amplify';
 import Auth from '@aws-amplify/auth';
 
 /* USER LOCATION */
@@ -523,6 +523,7 @@ export const updateCountForBar = (barId, count, id) => {
 		};
 		return API.graphql(graphqlOperation(updateHeadCount, {input}))
 			.then((response) => {
+        Analytics.record({ name: 'UPDATE_COUNT', barId, count });
 				dispatch({
 					type: 'UPDATE_COUNT_FOR_BAR_SUCCESS',
 					payload: response.data.updateHeadCount, 
