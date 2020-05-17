@@ -20,7 +20,7 @@ export const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: -2 },
     borderRadius: 20,
   },
-  overlay: modalVisible => {
+  overlay: (modalVisible) => {
     if (modalVisible)
       return {
         flex: 1,
@@ -68,6 +68,17 @@ export const styles = StyleSheet.create({
     textShadowOffset: { width: 2, height: 2 },
     marginTop: 2,
   },
+  venueSubDetailContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  capacityIcons: {
+    display: 'flex',
+    flexDirection: 'row',
+    marginLeft: 6,
+    marginTop: 2,
+  },
   partition: {
     backgroundColor: Colors.darkGrayColor,
     height: 1,
@@ -99,6 +110,10 @@ export const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  centeredText: {
+    textAlign: 'center',
+    marginBottom: 10,
   },
   aboutContainer: {
     display: 'flex',

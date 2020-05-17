@@ -1,25 +1,156 @@
 import { StyleSheet, Dimensions } from 'react-native';
+import Colors from '../../constants/Colors';
 
 export const styles = StyleSheet.create({
-  overlay: {
+  accountContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  ticketBar: {
+    display: 'flex',
+    flexDirection: 'row',
+  },
+  ticketBarItem: {
     flex: 1,
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    backgroundColor: Colors.headerColor,
+    paddingVertical: 10,
+  },
+  ticketBarItemText: {
+    color: Colors.whiteColor,
+    fontFamily: 'san-francisco',
+    marginTop: 5,
+  },
+  accountAvatar: {
+    marginTop: 40,
+    marginBottom: 5,
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    textAlign: 'center',
+    justifyContent: 'center',
+    width: 120,
+    height: 120,
+    borderRadius: 60,
+    backgroundColor: Colors.primaryColor,
+  },
+  accountAvatarText: {
+    fontSize: 42,
+    fontFamily: 'san-francisco',
+    color: Colors.whiteColor,
+  },
+  accountFirstName: {
+    display: 'flex',
+    marginBottom: 20,
+  },
+  accountFirstNameText: {
+    fontSize: 20,
+    fontFamily: 'san-francisco-semibold',
+  },
+  accountInfoContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 20,
+    paddingVertical: 20,
+  },
+  accountInfo: {
+    flex: 1,
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+    borderRightWidth: 1,
+    borderRightColor: Colors.darkGrayColor,
+  },
+  accountInfoItemIcon: {
+    width: 16,
+    color: Colors.darkGrayColor,
+  },
+  accountInfoItem: {
+    display: 'flex',
+    flexDirection: 'row',
+    marginVertical: 5,
+  },
+  accountInfoItemText: {
+    marginLeft: 10,
+    fontFamily: 'san-francisco',
+    color: Colors.darkGrayColor,
+  },
+  accountInfoAttended: {
+    flex: 1,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  accountInfoAttendedText: {
+    fontSize: 32,
+    fontFamily: 'san-francisco',
+    color: Colors.darkGrayColor,
+  },
+  accountInfoAttendedLabeled: {
+    fontSize: 14,
+    fontFamily: 'san-francisco',
+    color: Colors.darkGrayColor,
+  },
+  barOnboardLink: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 40,
+  },
+  barOnboardLinkText: {
+    color: Colors.primaryColorDark,
+    fontFamily: 'san-francisco-semibold',
+  },
+  barOnboardModalContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: Colors.greyDisabled,
+  },
+  barOnboardModal: {
+    backgroundColor: Colors.whiteColor,
+    maxWidth: Dimensions.get('window').width / 1.25,
+    borderRadius: 5,
+    padding: 10,
+    paddingTop: 20,
+    shadowOpacity: 0.5,
+    shadowColor: 'rgb(0,0,0)',
+    shadowRadius: 1,
+    shadowOffset: { width: 0, height: 0 },
+  },
+  barOnboardModalText: {
+    textAlign: 'center',
+  },
+  signOutBtn: {
     position: 'absolute',
-    top: 0,
-    left: 0,
-    width: '100%',
-    height: '100%',
-    backgroundColor: 'rgba(0,0,0,0.2)',
-    zIndex: 100,
+    bottom: 0,
+    width: Dimensions.get('window').width,
+    height: 80,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: Colors.headerColor,
+  },
+  signOutBtnText: {
+    color: Colors.whiteColor,
+    fontFamily: 'san-francisco',
+    fontSize: 18,
   },
   sectionHeaderText: {
     fontSize: 20,
     fontFamily: 'san-francisco-semibold',
     margin: 20,
+    marginBottom: 15,
   },
   ticketListContainer: {
     display: 'flex',
     flexDirection: 'row',
     overflow: 'scroll',
+    marginTop: 5,
   },
   ticketContainer: {
     display: 'flex',
@@ -93,5 +224,6 @@ export const styles = StyleSheet.create({
     shadowRadius: 1,
     shadowOffset: { width: 0, height: 0 },
     backgroundColor: '#fff',
+    marginVertical: 5,
   },
 });
