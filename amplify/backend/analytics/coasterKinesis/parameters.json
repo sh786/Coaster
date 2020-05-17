@@ -1,0 +1,12 @@
+{
+    "kinesisStreamName": "coasterKinesis",
+    "kinesisStreamShardCount": 1,
+    "authRoleName": {
+        "Ref": "AuthRoleName"
+    },
+    "unauthRoleName": {
+        "Ref": "UnauthRoleName"
+    },
+    "authPolicyName": "kinesis_amplify_3fb3ce64",
+    "unauthPolicyName": "kinesis_amplify_3fb3ce64"
+}

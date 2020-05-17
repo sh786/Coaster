@@ -23,5 +23,15 @@
 			"providerPlugin": "awscloudformation",
 			"dependsOn": []
 		}
+	},
+	"analytics": {
+		"coasterKinesis": {
+			"service": "Kinesis",
+			"providerPlugin": "awscloudformation"
+		},
+		"coasterDevPinPoint": {
+			"service": "Pinpoint",
+			"providerPlugin": "awscloudformation"
+		}
 	}
 }
