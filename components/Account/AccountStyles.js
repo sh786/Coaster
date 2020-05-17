@@ -21,10 +21,11 @@ export const styles = StyleSheet.create({
   },
   ticketBarItemText: {
     color: Colors.whiteColor,
+    fontFamily: 'san-francisco',
     marginTop: 5,
   },
   accountAvatar: {
-    marginTop: 20,
+    marginTop: 40,
     marginBottom: 5,
     display: 'flex',
     flexDirection: 'row',
@@ -38,6 +39,7 @@ export const styles = StyleSheet.create({
   },
   accountAvatarText: {
     fontSize: 42,
+    fontFamily: 'san-francisco',
     color: Colors.whiteColor,
   },
   accountFirstName: {
@@ -52,7 +54,7 @@ export const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    paddingHorizontal: 40,
+    paddingHorizontal: 20,
     paddingVertical: 20,
   },
   accountInfo: {
@@ -61,7 +63,6 @@ export const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'flex-start',
     borderRightWidth: 1,
-    paddingRight: 20,
     borderRightColor: Colors.darkGrayColor,
   },
   accountInfoItemIcon: {
@@ -74,23 +75,55 @@ export const styles = StyleSheet.create({
     marginVertical: 5,
   },
   accountInfoItemText: {
-    marginLeft: 6,
+    marginLeft: 10,
+    fontFamily: 'san-francisco',
     color: Colors.darkGrayColor,
   },
   accountInfoAttended: {
     flex: 1,
-    paddingLeft: 20,
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
   },
   accountInfoAttendedText: {
     fontSize: 32,
+    fontFamily: 'san-francisco',
     color: Colors.darkGrayColor,
   },
   accountInfoAttendedLabeled: {
     fontSize: 14,
+    fontFamily: 'san-francisco',
     color: Colors.darkGrayColor,
+  },
+  barOnboardLink: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 40,
+  },
+  barOnboardLinkText: {
+    color: Colors.primaryColorDark,
+    fontFamily: 'san-francisco-semibold',
+  },
+  barOnboardModalContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: Colors.greyDisabled,
+  },
+  barOnboardModal: {
+    backgroundColor: Colors.whiteColor,
+    maxWidth: Dimensions.get('window').width / 1.25,
+    borderRadius: 5,
+    padding: 10,
+    paddingTop: 20,
+    shadowOpacity: 0.5,
+    shadowColor: 'rgb(0,0,0)',
+    shadowRadius: 1,
+    shadowOffset: { width: 0, height: 0 },
+  },
+  barOnboardModalText: {
+    textAlign: 'center',
   },
   signOutBtn: {
     position: 'absolute',
@@ -104,6 +137,7 @@ export const styles = StyleSheet.create({
   },
   signOutBtnText: {
     color: Colors.whiteColor,
+    fontFamily: 'san-francisco',
     fontSize: 18,
   },
   sectionHeaderText: {
