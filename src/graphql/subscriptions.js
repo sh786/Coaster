@@ -7,6 +7,7 @@ export const onHeadCountChangeByBarId = /* GraphQL */ `
       id
       barId
       count
+      lastUpdateTime
     }
   }
 `;
@@ -16,6 +17,7 @@ export const onCreateHeadCount = /* GraphQL */ `
       id
       barId
       count
+      lastUpdateTime
     }
   }
 `;
@@ -25,6 +27,7 @@ export const onUpdateHeadCount = /* GraphQL */ `
       id
       barId
       count
+      lastUpdateTime
     }
   }
 `;
@@ -34,6 +37,7 @@ export const onDeleteHeadCount = /* GraphQL */ `
       id
       barId
       count
+      lastUpdateTime
     }
   }
 `;

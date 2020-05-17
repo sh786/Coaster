@@ -64,6 +64,7 @@ type HeadCount @model
   id: ID!
   barId: String!
   count: Int!
+  lastUpdateTime: String
 }
 type Subscription {
   onHeadCountChangeByBarId(barId: ID): HeadCount @aws_subscribe(mutations: ["updateHeadCount"])

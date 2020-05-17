@@ -1,0 +1,20 @@
+{
+    "appName": "coasterPreprod",
+    "roleName": "pinpointLambdaRoleccaf2a32",
+    "cloudWatchPolicyName": "cloudWatchPolicyccaf2a32",
+    "pinpointPolicyName": "pinpointPolicyccaf2a32",
+    "authPolicyName": "pinpoint_amplify_ccaf2a32",
+    "unauthPolicyName": "pinpoint_amplify_ccaf2a32",
+    "authRoleName": {
+        "Ref": "AuthRoleName"
+    },
+    "unauthRoleName": {
+        "Ref": "UnauthRoleName"
+    },
+    "authRoleArn": {
+        "Fn::GetAtt": [
+            "AuthRole",
+            "Arn"
+        ]
+    }
+}

@@ -292,6 +292,7 @@ export const getHeadCount = /* GraphQL */ `
       id
       barId
       count
+      lastUpdateTime
     }
   }
 `;
@@ -306,6 +307,7 @@ export const listHeadCounts = /* GraphQL */ `
         id
         barId
         count
+        lastUpdateTime
       }
       nextToken
     }
@@ -565,6 +567,7 @@ export const getHeadCountByBarId = /* GraphQL */ `
         id
         barId
         count
+        lastUpdateTime
       }
       nextToken
     }

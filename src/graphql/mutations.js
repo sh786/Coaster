@@ -442,6 +442,7 @@ export const createHeadCount = /* GraphQL */ `
       id
       barId
       count
+      lastUpdateTime
     }
   }
 `;
@@ -454,6 +455,7 @@ export const updateHeadCount = /* GraphQL */ `
       id
       barId
       count
+      lastUpdateTime
     }
   }
 `;
@@ -466,6 +468,7 @@ export const deleteHeadCount = /* GraphQL */ `
       id
       barId
       count
+      lastUpdateTime
     }
   }
 `;
