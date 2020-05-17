@@ -1,4 +1,4 @@
-type Bar @model {
+type Bar @model(subscriptions: null) {
   id: ID!
   name: String!
   address: String!
@@ -12,8 +12,9 @@ type Bar @model {
   socialLinks: [String]
   rules: String
   events: [Event] @connection(keyName: "byBarId", fields: ["id"])
+  capacity: Int
 }
-type Event @model 
+type Event @model(subscriptions: null)
   @key(name: "byBarId", fields: ["barId", "id"], queryField: "getEventsByBarId") {
   id: ID!
   barId: ID!
@@ -23,7 +24,7 @@ type Event @model
   endTime: String
   rules: String
 }
-type TicketOffer @model 
+type TicketOffer @model(subscriptions: null)
   @key (name: "byEvent", fields: ["eventId", "id"], queryField: "getTicketOffersByEventId") {
   id: ID!
   eventId: ID!
@@ -33,7 +34,7 @@ type TicketOffer @model
   expiration: String
   price: Int!
 }
-type PurchasedTicket @model 
+type PurchasedTicket @model(subscriptions: null)
   @key (name: "byUser", fields: ["userId", "id"], queryField: "getPurchasedTicketsByUser")
   @key (name: "byEvent", fields: ["eventId", "id"], queryField: "getPurchasedTicketsByEvent") {
   id: ID!
@@ -47,7 +48,7 @@ type PurchasedTicket @model
   ticketOffer: TicketOffer @connection(fields: ["ticketOfferId"])
   venue: Bar @connection(fields: ["venueId"])
 }
-type User @model
+type User @model(subscriptions: null)
   @key(fields: ["username"], name: "byUsername", queryField: "userByUsername") {
   id: ID!
   username: String!
@@ -57,4 +58,13 @@ type User @model
   phoneNumber: String!
   dob: String!
   barId: String
+}
+type HeadCount @model
+  @key(name: "byBarId", fields: ["barId", "id"], queryField: "getHeadCountByBarId") {
+  id: ID!
+  barId: String!
+  count: Int!
+}
+type Subscription {
+  onHeadCountChangeByBarId(barId: ID): HeadCount @aws_subscribe(mutations: ["updateHeadCount"])
 }

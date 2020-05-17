@@ -5,6 +5,7 @@ import { fetchPurchasedTicketsByEventId } from '../../redux/actions';
 import {styles} from './styles/EventListStyles';
 import Icon from '../Common/Icon';
 import ScanButton from './ScanButton';
+import HeadCountWidget from './HeadCountWidget';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { ScrollView } from 'react-native-gesture-handler';
@@ -57,6 +58,7 @@ const EventList = ({navigation}) => {
 					))
 				}
 			</ScrollView>
+			<HeadCountWidget barId={event.barId} />
 			<ScanButton event={event} onClick={() => navigation.navigate('Scanner', {event})} />
 		</View>
 	);

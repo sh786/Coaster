@@ -4,8 +4,8 @@ import Colors from '../../../constants/Colors';
 export const styles = StyleSheet.create({
   container: {
     backgroundColor: Colors.whiteColor,
-	display: 'flex',
-	flexDirection: 'column',
+    display: 'flex',
+    flexDirection: 'column',
     flex: 1,
     width: '100%',
     marginBottom: 20,
@@ -59,8 +59,9 @@ export const styles = StyleSheet.create({
     fontWeight: '400',
   },
   scrollView: {
-	display: 'flex',
-	flexDirection: 'column',
+    display: 'flex',
+    flexDirection: 'column',
+    flex: 1,
   },
   line: {
     display: 'flex',

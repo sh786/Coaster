@@ -31,6 +31,7 @@ export const createBar = /* GraphQL */ `
         }
         nextToken
       }
+      capacity
     }
   }
 `;
@@ -64,6 +65,7 @@ export const updateBar = /* GraphQL */ `
         }
         nextToken
       }
+      capacity
     }
   }
 `;
@@ -97,6 +99,7 @@ export const deleteBar = /* GraphQL */ `
         }
         nextToken
       }
+      capacity
     }
   }
 `;
@@ -252,6 +255,7 @@ export const createPurchasedTicket = /* GraphQL */ `
         events {
           nextToken
         }
+        capacity
       }
     }
   }
@@ -312,6 +316,7 @@ export const updatePurchasedTicket = /* GraphQL */ `
         events {
           nextToken
         }
+        capacity
       }
     }
   }
@@ -372,6 +377,7 @@ export const deletePurchasedTicket = /* GraphQL */ `
         events {
           nextToken
         }
+        capacity
       }
     }
   }
@@ -424,6 +430,42 @@ export const deleteUser = /* GraphQL */ `
       phoneNumber
       dob
       barId
+    }
+  }
+`;
+export const createHeadCount = /* GraphQL */ `
+  mutation CreateHeadCount(
+    $input: CreateHeadCountInput!
+    $condition: ModelHeadCountConditionInput
+  ) {
+    createHeadCount(input: $input, condition: $condition) {
+      id
+      barId
+      count
+    }
+  }
+`;
+export const updateHeadCount = /* GraphQL */ `
+  mutation UpdateHeadCount(
+    $input: UpdateHeadCountInput!
+    $condition: ModelHeadCountConditionInput
+  ) {
+    updateHeadCount(input: $input, condition: $condition) {
+      id
+      barId
+      count
+    }
+  }
+`;
+export const deleteHeadCount = /* GraphQL */ `
+  mutation DeleteHeadCount(
+    $input: DeleteHeadCountInput!
+    $condition: ModelHeadCountConditionInput
+  ) {
+    deleteHeadCount(input: $input, condition: $condition) {
+      id
+      barId
+      count
     }
   }
 `;

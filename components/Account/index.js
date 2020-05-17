@@ -1,5 +1,13 @@
-import React, { useEffect } from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+  Button,
+  Modal,
+} from 'react-native';
+import * as Linking from 'expo-linking';
 import Auth from '@aws-amplify/auth';
 import { clearUserData } from '../../redux/actions';
 import { useDispatch, useSelector } from 'react-redux';
@@ -14,6 +22,7 @@ import Icon from '../Common/Icon';
 import Colors from '../../constants/Colors';
 
 const Account = ({ navigation }) => {
+  const [barEmailVisible, setBarEmailVisible] = useState(false);
   const dispatch = useDispatch();
   const user = useSelector((state) => {
     return state.user;
@@ -48,22 +57,21 @@ const Account = ({ navigation }) => {
       <View style={styles.accountContainer}>
         <View style={styles.ticketBar}>
           {['Active', 'Redeemed', 'Expired'].map((ticketCat) => (
-            <View
-              // style={styles[`${ticketCat.split(' ')[0].toLowerCase()}Count`]}
-              style={styles.ticketBarItem}
+            <TouchableOpacity
               key={ticketCat}
+              style={styles.ticketBarItem}
+              onPress={() => navigation.navigate('MyTix')}
             >
               <Icon
                 faIcon
                 name={getIconFromCat(ticketCat)}
                 size={24}
-                onPress={() => navigation.navigate('MyTix')}
                 color={Colors.whiteColor}
               />
               <Text style={styles.ticketBarItemText}>
                 {getTicketCatCount(ticketCat)} {ticketCat}
               </Text>
-            </View>
+            </TouchableOpacity>
           ))}
         </View>
         <View style={styles.accountAvatar}>
@@ -137,7 +145,40 @@ const Account = ({ navigation }) => {
             </Text>
           </View>
         </View>
+        <Modal
+          animationType='fade'
+          transparent={true}
+          visible={barEmailVisible}
+        >
+          <TouchableWithoutFeedback onPress={() => setBarEmailVisible(false)}>
+            <View style={styles.barOnboardModalContainer}>
+              <TouchableWithoutFeedback>
+                <View style={styles.barOnboardModal}>
+                  <Text style={styles.barOnboardModalText}>
+                    To get help signing up your bar, send an email to:
+                  </Text>
+                  <Button
+                    title='grant.fabrizio@coastertech.com'
+                    onPress={() =>
+                      Linking.openURL(
+                        'mailto:grant.fabrizio@coastertech.com?subject=BarOnboard&body=Description',
+                      )
+                    }
+                  />
+                </View>
+              </TouchableWithoutFeedback>
+            </View>
+          </TouchableWithoutFeedback>
+        </Modal>
       </View>
+      <TouchableOpacity
+        style={styles.barOnboardLink}
+        onPress={() => setBarEmailVisible(true)}
+      >
+        <Text style={styles.barOnboardLinkText}>
+          If you run a bar, click here to get onboarded.
+        </Text>
+      </TouchableOpacity>
       <TouchableOpacity
         style={styles.signOutBtn}
         onPress={() => {
