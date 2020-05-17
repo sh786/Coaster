@@ -17,16 +17,21 @@ const barsReducer = (state = [], { type, payload }) => {
       const stateCopy = [...state];
       const updatedBar = stateCopy.find(bar => bar.id === payload.barId);
       updatedBar.headCount = payload.count;
+      updatedBar.lastHeadCountUpdate = payload.lastUpdateTime;
       return stateCopy;
     }
     case 'FETCH_HEAD_COUNTS_SUCCESS': {
       const stateCopy = [...state];
       const barIdToHeadCount = payload.reduce((acc, headCountObj) => {
-        acc[headCountObj.barId] = headCountObj.count;
+        acc[headCountObj.barId] = headCountObj;
         return acc;
       }, []);
       for (const bar of stateCopy) {
-        bar.headCount = barIdToHeadCount[bar.id];
+        const countObj = barIdToHeadCount[bar.id];
+        if (countObj) {
+          bar.headCount = countObj.count;
+          bar.lastHeadCountUpdate = countObj.lastUpdateTime;
+        }
       }
       
       return stateCopy;

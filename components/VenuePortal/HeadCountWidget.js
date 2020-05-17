@@ -21,25 +21,45 @@ const HeadCountWidget = ({barId}) => {
 	return (
 		<View style={styles.container}>
 			<Text style={styles.headCountTitle}>Head Count</Text>
-			<View style={styles.countContainer}>
-				<Text style={styles.currentCount}>{countObj.count}</Text>
-				<Text style={styles.totalCapacity}>/ {capacity}</Text>
-			</View>
-			<Text >Total Tickets Sold</Text>
-			<View style={styles.buttonsContainer}>
-				<Button light disabled={countObj.count === 0}
-					onPress={() => {
-						dispatch(updateCountForBar(barId, countObj.count - 1, countObj.id));
-					}}
-					style={countObj.count > 0 ? styles.minusButtonContainer : styles.disabledMinusButtonContainer}>
-					<Text style={styles.minusButtonText}>-</Text>
-				</Button>
+			<View>
 				<Button light disabled={countObj.count >= capacity}
 					onPress={() => {
 						dispatch(updateCountForBar(barId, countObj.count + 1, countObj.id));
 					}}
-					style={countObj.count < capacity ? styles.plusButtonContainer : styles.disabledPlusButtonContainer}>
-					<Text style={styles.plusButtonText}>+</Text>
+					style={countObj.count < capacity ? styles.incrementOneButtonContainer : styles.disabledIncrementFiveButtonContainer}>
+					<Text style={styles.incrementOneButtonText}>+1</Text>
+				</Button>
+			</View>
+			<View style={styles.buttonsContainer}>
+				<Button light disabled={countObj.count < 5}
+					onPress={() => {
+						dispatch(updateCountForBar(barId, countObj.count - 5, countObj.id));
+					}}
+					style={countObj.count >= 5 ? styles.incrementFiveButtonContainer : styles.disabledIncrementFiveButtonContainer}>
+					<Text style={styles.incrementFiveButtonText}>-5</Text>
+				</Button>
+				<View style={styles.countInfoContainer}>
+					<View style={styles.countContainer}>
+						<Text style={styles.currentCount}>{countObj.count}</Text>
+						<Text style={styles.totalCapacity}>/ {capacity}</Text>
+					</View>
+					<Text >Total Tickets Sold</Text>
+				</View>
+				<Button light disabled={countObj.count >= capacity - 5}
+					onPress={() => {
+						dispatch(updateCountForBar(barId, countObj.count + 5, countObj.id));
+					}}
+					style={countObj.count + 5 < capacity ? styles.incrementFiveButtonContainer : styles.disabledIncrementFiveButtonContainer}>
+					<Text style={styles.incrementFiveButtonText}>+5</Text>
+				</Button>
+			</View>
+			<View>
+				<Button light disabled={countObj.count === 0}
+					onPress={() => {
+						dispatch(updateCountForBar(barId, countObj.count - 1, countObj.id));
+					}}
+					style={countObj.count > 0 ? styles.incrementOneButtonContainer : styles.disabledIncrementFiveButtonContainer}>
+					<Text style={styles.incrementOneButtonText}>-1</Text>
 				</Button>
 			</View>
 		</View>
