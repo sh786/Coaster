@@ -525,7 +525,7 @@ export const updateCountForBar = (barId, count, id) => {
 		};
 		return API.graphql(graphqlOperation(updateHeadCount, {input}))
 			.then((response) => {
-        Analytics.record({name: 'update-head-count-3'});
+        Analytics.record({name: 'update-head-count-for-bar', attributes: {barId}, metrics: {count}}, 'AWSPinpoint');
 				dispatch({
 					type: 'UPDATE_COUNT_FOR_BAR_SUCCESS',
 					payload: response.data.updateHeadCount, 
