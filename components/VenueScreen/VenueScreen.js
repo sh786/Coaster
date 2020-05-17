@@ -14,7 +14,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import haversine from 'haversine';
 
-import { fetchEventsByBarId } from '../../redux/actions';
+import {
+  fetchEventsByBarId,
+  subscribeToHeadCountForBar,
+} from '../../redux/actions';
 
 import PurchaseEvent from './PurchaseEvent';
 import HeaderTitle from '../Header/HeaderTitle';
@@ -38,6 +41,10 @@ const VenueScreen = ({ navigation }) => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchEventsByBarId(venue.id));
+    const subscription = dispatch(subscribeToHeadCountForBar(venue.id));
+    return () => {
+      subscription.unsubscribe();
+    };
   }, []);
 
   const location = useSelector((state) => {
@@ -48,6 +55,8 @@ const VenueScreen = ({ navigation }) => {
   const [longitude, setLongitude] = useState();
   const [modalVisible, setModalVisible] = useState(false);
   const [activeEvent, setActiveEvent] = useState(null);
+
+  const crowdMetric = Math.round((venue.headCount / venue.capacity) * 4) + 1;
 
   useEffect(() => {
     if (location.coords) {
@@ -101,23 +110,41 @@ const VenueScreen = ({ navigation }) => {
           <View style={styles.imageOverlay}>
             <Text style={styles.venueName}>{venue.name}</Text>
             <Text style={styles.venueAddress}>{venue.address}</Text>
-            <Text style={styles.venueAddress}>
-              {venue.city}, {venue.state} •{' '}
-              {latitude &&
-                longitude &&
-                haversine(
-                  {
-                    latitude,
-                    longitude,
-                  },
-                  {
-                    latitude: venue.lat,
-                    longitude: venue.lon,
-                  },
-                  { unit: 'mile' },
-                ).toFixed(1)}{' '}
-              mi
-            </Text>
+            <View style={styles.venueSubDetailContainer}>
+              <Text style={styles.venueAddress}>
+                {venue.city}, {venue.state} •{' '}
+                {latitude &&
+                  longitude &&
+                  haversine(
+                    {
+                      latitude,
+                      longitude,
+                    },
+                    {
+                      latitude: venue.lat,
+                      longitude: venue.lon,
+                    },
+                    { unit: 'mile' },
+                  ).toFixed(1)}{' '}
+                mi • {venue.headCount || 'No Current Count'}
+                {venue.headCount
+                  ? `/${venue.capacity}`
+                  : `• Max: ${venue.capacity}`}
+              </Text>
+              {venue.headCount && venue.capacity && (
+                <View style={styles.capacityIcons}>
+                  {[...Array(crowdMetric)].map((x, i) => (
+                    <Icon
+                      key={i}
+                      name='md-person'
+                      size={14}
+                      color='white'
+                      style={{ marginRight: 3 }}
+                    />
+                  ))}
+                </View>
+              )}
+            </View>
           </View>
           <View style={styles.headingContainer}>
             <Icon
@@ -134,7 +161,7 @@ const VenueScreen = ({ navigation }) => {
             </View>
           </View>
           <View styles={styles.eventsContainer}>
-            {events &&
+            {events && events.length > 0 ? (
               events.map((e) => {
                 return (
                   <TouchableOpacity key={e.id}>
@@ -146,7 +173,12 @@ const VenueScreen = ({ navigation }) => {
                     />
                   </TouchableOpacity>
                 );
-              })}
+              })
+            ) : (
+              <Text style={styles.centeredText}>
+                No upcoming events this week.
+              </Text>
+            )}
           </View>
 
           <View style={styles.aboutContainer}>
