@@ -1,6 +1,6 @@
 {
     "identityPoolName": "coasterbbb6d16c_identitypool_bbb6d16c",
-    "allowUnauthenticatedIdentities": false,
+    "allowUnauthenticatedIdentities": true,
     "resourceNameTruncated": "coastebbb6d16c",
     "userPoolName": "coasterbbb6d16c_userpool_bbb6d16c",
     "autoVerifiedAttributes": [
@@ -44,13 +44,9 @@
             "Arn"
         ]
     },
-    "useDefault": "defaultSocial",
+    "useDefault": "default",
     "hostedUI": true,
     "triggers": "{}",
-    "hostedUIDomainName": "coasterbbb6d16c-bbb6d16c",
-    "authProvidersUserPool": [],
-    "hostedUIProviderMeta": "[]",
-    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"exp://127.0.0.1:19000/--/\"],\"LogoutURLs\":[\"exp://127.0.0.1:19000/--/\"]}",
     "userPoolGroupList": [],
     "parentStack": {
         "Ref": "AWS::StackId"
