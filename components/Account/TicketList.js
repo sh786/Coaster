@@ -9,7 +9,9 @@ import { styles } from './AccountStyles';
 const TicketList = () => {
   const dispatch = useDispatch();
   const tickets = useSelector((state) => {
-    return state.purchasedTickets;
+    return state.purchasedTickets.filter(
+      (t) => new Date(t.event.endTime) > new Date(),
+    );
   });
   const user = useSelector((state) => state.user);
 
@@ -53,6 +55,12 @@ const TicketList = () => {
             </View>
           </View>
         ))}
+        {tickets.filter((t) => new Date(t.event.endTime) > new Date())
+          .length === 0 && (
+          <View style={styles.ticketContainer}>
+            <Text>No active tickets.</Text>
+          </View>
+        )}
       </ScrollView>
     </View>
   );

@@ -15,11 +15,13 @@ import { styles } from './styles/VenueItemStyles';
 import Icon from '../Common/Icon';
 
 const VenueItem = ({ venue, navigation }) => {
-  const openURL = url => {
-    Linking.openURL(url).catch(err => console.error('An error occurred', err));
+  const openURL = (url) => {
+    Linking.openURL(url).catch((err) =>
+      console.error('An error occurred', err),
+    );
   };
 
-  const location = useSelector(state => {
+  const location = useSelector((state) => {
     return state.location;
   });
 
@@ -48,7 +50,8 @@ const VenueItem = ({ venue, navigation }) => {
             <Text style={styles.venueItemNameText}>{venue.name}</Text>
             <Text style={styles.venueItemStreetAddressText}>{`${
               venue.address
-            } • ${venue.city}, ${venue.state} • ${latitude &&
+            } • ${venue.city}, ${venue.state} • ${
+              latitude &&
               longitude &&
               haversine(
                 {
@@ -60,10 +63,11 @@ const VenueItem = ({ venue, navigation }) => {
                   longitude: venue.lon,
                 },
                 { unit: 'mile' },
-              ).toFixed(1)} mi`}</Text>
+              ).toFixed(1)
+            } mi`}</Text>
           </View>
           <View style={styles.bottomContainer}>
-            {venue.headCount &&
+            {venue.headCount && (
               <View style={styles.capacityCount}>
                 <Text style={styles.capacityCountText}>
                   {venue.headCount}/{venue.capacity}
@@ -73,16 +77,17 @@ const VenueItem = ({ venue, navigation }) => {
                     <Icon
                       key={i}
                       name='md-person'
-                      size={12}
+                      size={14}
                       color='black'
-                      style={{marginRight: 5}}
+                      style={{ marginRight: 3 }}
                     />
                   ))}
                 </View>
-              </View>}
+              </View>
+            )}
             <View style={styles.socialLogoContainer}>
               <TouchableOpacity
-                onPress={e => {
+                onPress={(e) => {
                   e.stopPropagation();
                   openURL(venue.socialLinks[0]);
                 }}
@@ -94,7 +99,7 @@ const VenueItem = ({ venue, navigation }) => {
                 />
               </TouchableOpacity>
               <TouchableOpacity
-                onPress={e => {
+                onPress={(e) => {
                   e.stopPropagation();
                   openURL(venue.socialLinks[1]);
                 }}
@@ -106,7 +111,7 @@ const VenueItem = ({ venue, navigation }) => {
                 />
               </TouchableOpacity>
               <TouchableOpacity
-                onPress={e => {
+                onPress={(e) => {
                   e.stopPropagation();
                   openURL(venue.socialLinks[2]);
                 }}
