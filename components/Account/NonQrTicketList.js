@@ -2,19 +2,32 @@ import React, { useEffect } from 'react';
 import { View, Text, ScrollView, Image } from 'react-native';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchRedeemedTicketsByUserId } from '../../redux/actions';
+import {
+  fetchRedeemedTicketsByUserId,
+  fetchPurchasedTicketsByUserId,
+} from '../../redux/actions';
 import Ticket from '../Ticket';
 import { styles } from './AccountStyles';
 
-const RedeemedTicketList = () => {
+const NonQrTicketList = ({ type }) => {
   const dispatch = useDispatch();
   const tickets = useSelector((state) => {
-    return state.redeemedTickets;
+    if (type === 'redeemed') {
+      return state.redeemedTickets;
+    } else if (type === 'expired') {
+      return state.purchasedTickets.filter(
+        (t) => new Date(t.event.endTime) < new Date(),
+      );
+    }
   });
   const user = useSelector((state) => state.user);
 
   useEffect(() => {
-    dispatch(fetchRedeemedTicketsByUserId(user.id));
+    if (type === 'redeemed') {
+      dispatch(fetchRedeemedTicketsByUserId(user.id));
+    } else if (type === 'expired') {
+      dispatch(fetchPurchasedTicketsByUserId(user.id));
+    }
   }, []);
 
   return (
@@ -33,8 +46,13 @@ const RedeemedTicketList = () => {
           </Text>
         </View>
       ))}
+      {tickets.length === 0 && (
+        <View>
+          <Text>No {type} tickets.</Text>
+        </View>
+      )}
     </View>
   );
 };
 
-export default RedeemedTicketList;
+export default NonQrTicketList;

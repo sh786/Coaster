@@ -1,25 +1,122 @@
 import { StyleSheet, Dimensions } from 'react-native';
+import Colors from '../../constants/Colors';
 
 export const styles = StyleSheet.create({
-  overlay: {
+  accountContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  ticketBar: {
+    display: 'flex',
+    flexDirection: 'row',
+  },
+  ticketBarItem: {
     flex: 1,
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    backgroundColor: Colors.headerColor,
+    paddingVertical: 10,
+  },
+  ticketBarItemText: {
+    color: Colors.whiteColor,
+    marginTop: 5,
+  },
+  accountAvatar: {
+    marginTop: 20,
+    marginBottom: 5,
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    textAlign: 'center',
+    justifyContent: 'center',
+    width: 120,
+    height: 120,
+    borderRadius: 60,
+    backgroundColor: Colors.primaryColor,
+  },
+  accountAvatarText: {
+    fontSize: 42,
+    color: Colors.whiteColor,
+  },
+  accountFirstName: {
+    display: 'flex',
+    marginBottom: 20,
+  },
+  accountFirstNameText: {
+    fontSize: 20,
+    fontFamily: 'san-francisco-semibold',
+  },
+  accountInfoContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 40,
+    paddingVertical: 20,
+  },
+  accountInfo: {
+    flex: 1,
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+    borderRightWidth: 1,
+    paddingRight: 20,
+    borderRightColor: Colors.darkGrayColor,
+  },
+  accountInfoItemIcon: {
+    width: 16,
+    color: Colors.darkGrayColor,
+  },
+  accountInfoItem: {
+    display: 'flex',
+    flexDirection: 'row',
+    marginVertical: 5,
+  },
+  accountInfoItemText: {
+    marginLeft: 6,
+    color: Colors.darkGrayColor,
+  },
+  accountInfoAttended: {
+    flex: 1,
+    paddingLeft: 20,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  accountInfoAttendedText: {
+    fontSize: 32,
+    color: Colors.darkGrayColor,
+  },
+  accountInfoAttendedLabeled: {
+    fontSize: 14,
+    color: Colors.darkGrayColor,
+  },
+  signOutBtn: {
     position: 'absolute',
-    top: 0,
-    left: 0,
-    width: '100%',
-    height: '100%',
-    backgroundColor: 'rgba(0,0,0,0.2)',
-    zIndex: 100,
+    bottom: 0,
+    width: Dimensions.get('window').width,
+    height: 80,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: Colors.headerColor,
+  },
+  signOutBtnText: {
+    color: Colors.whiteColor,
+    fontSize: 18,
   },
   sectionHeaderText: {
     fontSize: 20,
     fontFamily: 'san-francisco-semibold',
     margin: 20,
+    marginBottom: 15,
   },
   ticketListContainer: {
     display: 'flex',
     flexDirection: 'row',
     overflow: 'scroll',
+    marginTop: 5,
   },
   ticketContainer: {
     display: 'flex',
@@ -93,5 +190,6 @@ export const styles = StyleSheet.create({
     shadowRadius: 1,
     shadowOffset: { width: 0, height: 0 },
     backgroundColor: '#fff',
+    marginVertical: 5,
   },
 });
