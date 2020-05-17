@@ -1,0 +1,20 @@
+{
+    "appName": "coaster",
+    "roleName": "pinpointLambdaRole9ce895b3",
+    "cloudWatchPolicyName": "cloudWatchPolicy9ce895b3",
+    "pinpointPolicyName": "pinpointPolicy9ce895b3",
+    "authPolicyName": "pinpoint_amplify_9ce895b3",
+    "unauthPolicyName": "pinpoint_amplify_9ce895b3",
+    "authRoleName": {
+        "Ref": "AuthRoleName"
+    },
+    "unauthRoleName": {
+        "Ref": "UnauthRoleName"
+    },
+    "authRoleArn": {
+        "Fn::GetAtt": [
+            "AuthRole",
+            "Arn"
+        ]
+    }
+}

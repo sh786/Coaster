@@ -25,8 +25,12 @@
 		}
 	},
 	"analytics": {
-		"coasterPreprod": {
+		"coaster": {
 			"service": "Pinpoint",
+			"providerPlugin": "awscloudformation"
+		},
+		"coasterKinesis": {
+			"service": "Kinesis",
 			"providerPlugin": "awscloudformation"
 		}
 	}
