@@ -1,6 +1,19 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { Dimensions, Text, View, Image, ScrollView } from 'react-native';
+import {
+  Dimensions,
+  Text,
+  View,
+  Image,
+  ScrollView,
+  Modal,
+  TouchableWithoutFeedback,
+  TouchableOpacity,
+  TextInput,
+  KeyboardAvoidingView,
+  Keyboard,
+  Platform,
+} from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import * as Location from 'expo-location';
 import * as Permissions from 'expo-permissions';
@@ -22,8 +35,13 @@ import CoasterSplash from '../../assets/images/CoasterSplash.png';
 import moment from 'moment';
 import LogInButton from '../Common/LogInButton';
 import VenuePortalButton from '../Common/VenuePortalButton';
+import Colors from '../../constants/Colors';
 
 const VenueLobby = ({ navigation }) => {
+  const [filtersOpen, setFiltersOpen] = useState(false);
+  const [currentFilters, setCurrentFilters] = useState({
+    search: '',
+  });
   const dispatch = useDispatch();
   const bars = useSelector((state) => {
     return state.bars;
@@ -52,9 +70,9 @@ const VenueLobby = ({ navigation }) => {
     fetchLocation();
     dispatch(fetchBars());
     const subscription = dispatch(subscribeToHeadCounts());
-      return () => {
-        subscription.unsubscribe();
-      };
+    return () => {
+      subscription.unsubscribe();
+    };
   }, []);
 
   useEffect(() => {
@@ -81,19 +99,75 @@ const VenueLobby = ({ navigation }) => {
             'MMM Do, YYYY',
           )}`}</Text>
         </View>
-        {bars.map((b, i) => (
-          <VenueItem
-            key={i}
-            venue={b}
-            navigation={navigation}
-            onPress={() => navigation.navigate('Venue', { b })}
-          />
-        ))}
+        {bars
+          .filter(
+            (b) =>
+              b.name
+                .toLowerCase()
+                .includes(currentFilters.search.toLowerCase()) ||
+              b.city
+                .toLowerCase()
+                .includes(currentFilters.search.toLowerCase()) ||
+              b.state
+                .toLowerCase()
+                .includes(currentFilters.search.toLowerCase()) ||
+              b.address
+                .toLowerCase()
+                .includes(currentFilters.search.toLowerCase()),
+          )
+          .map((b, i) => (
+            <VenueItem
+              key={i}
+              venue={b}
+              navigation={navigation}
+              onPress={() => navigation.navigate('Venue', { b })}
+            />
+          ))}
         <Image
           source={CoasterSplash}
           style={{ width: Dimensions.get('window').width, height: 100 }}
         />
       </ScrollView>
+      <TouchableOpacity
+        onPress={() => setFiltersOpen(true)}
+        style={styles.filterBtnContainer}
+      >
+        <Icon faIcon name='search' size={28} color={Colors.whiteColor} />
+        <Text style={styles.filterBtnText}>Search</Text>
+        {currentFilters.search.length > 0 && (
+          <View style={styles.filterCount}>
+            <Text style={styles.filterCountText}>1</Text>
+          </View>
+        )}
+      </TouchableOpacity>
+      <Modal transparent={true} visible={filtersOpen}>
+        <TouchableWithoutFeedback onPress={() => setFiltersOpen(false)}>
+          <View style={styles.filterModalContainer}>
+            <KeyboardAvoidingView
+              behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+            >
+              <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+                <View style={styles.filterModal}>
+                  <View style={styles.filterItem}>
+                    <Text style={styles.filterLabel}>Search</Text>
+                    <TextInput
+                      style={styles.filterInput}
+                      placeholder='Search...'
+                      value={currentFilters.search}
+                      onChangeText={(text) =>
+                        setCurrentFilters({
+                          ...currentFilters,
+                          search: text,
+                        })
+                      }
+                    />
+                  </View>
+                </View>
+              </TouchableWithoutFeedback>
+            </KeyboardAvoidingView>
+          </View>
+        </TouchableWithoutFeedback>
+      </Modal>
       {!user.email && (
         <LogInButton style={{ marginBottom: 100 }} navigation={navigation} />
       )}
@@ -103,11 +177,6 @@ const VenueLobby = ({ navigation }) => {
           navigation={navigation}
         />
       )}
-      {/* Not totally sure how I feel about doing it this way, but we do need
-      to made it clear what page a user is currently on */}
-      {/* <View style={commonStyles.screenLabelContainer}>
-          <Text style={commonStyles.screenLabelText}>LOBBY</Text>
-        </View> */}
     </View>
   );
 };
