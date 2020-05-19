@@ -18,7 +18,6 @@ import {
   fetchBar,
   fetchEventsByBarId,
   subscribeToHeadCountForBar,
-  subscribeToHeadCounts,
 } from '../../redux/actions';
 
 import PurchaseEvent from './PurchaseEvent';
@@ -39,15 +38,16 @@ const VenueScreen = ({ navigation }) => {
   const events = useSelector((state) => {
     return state.events[venue.id];
   });
-  const bar = useSelector((state) => {
-    return state.bar;
+  const headCount = useSelector((state) => {
+    const currBar = state.bars.find(b => b.id === venue.id);
+    return currBar ? currBar.headCount : null;
   });
 
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchBar(venue.id));
     dispatch(fetchEventsByBarId(venue.id));
-    const subscription = dispatch(subscribeToHeadCounts());
+    const subscription = dispatch(subscribeToHeadCountForBar(venue.id));
     return () => {
       subscription.unsubscribe();
     };
@@ -62,7 +62,7 @@ const VenueScreen = ({ navigation }) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [activeEvent, setActiveEvent] = useState(null);
 
-  const crowdMetric = Math.round((bar.headCount / bar.capacity) * 4) + 1;
+  const crowdMetric = Math.round((headCount / venue.capacity) * 4) + 1;
 
   useEffect(() => {
     if (location.coords) {
@@ -132,10 +132,10 @@ const VenueScreen = ({ navigation }) => {
                     },
                     { unit: 'mile' },
                   ).toFixed(1)}{' '}
-                mi • {bar.headCount || 'No Current Count'}
-                {bar.headCount ? `/${bar.capacity}` : `• Max: ${bar.capacity}`}
+                mi • {headCount || 'No Current Count'}
+                {headCount ? `/${venue.capacity}` : `• Max: ${venue.capacity}`}
               </Text>
-              {bar.headCount && bar.capacity && (
+              {headCount && venue.capacity && (
                 <View style={styles.capacityIcons}>
                   {[...Array(crowdMetric)].map((x, i) => (
                     <Icon

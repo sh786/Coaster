@@ -22,6 +22,12 @@ const barsReducer = (state = [], { type, payload }) => {
   switch (type) {
     case 'FETCH_BARS_SUCCESS':
       return payload;
+    case 'FETCH_HEAD_COUNT_FOR_BAR_SUCCESS': {
+      const stateCopy = [...state];
+      const updatedBar = stateCopy.find((bar) => bar.id === payload.barId);
+      updatedBar.headCount = payload.headCount.count;
+      return stateCopy;
+    }
     case 'FETCH_HEAD_COUNT_SUCCESS': {
       const stateCopy = [...state];
       const updatedBar = stateCopy.find((bar) => bar.id === payload.barId);
