@@ -14,18 +14,46 @@ export const styles = StyleSheet.create({
 	headCountTitle: {
 		fontSize: 24,
 		textAlign: 'center',
-		marginBottom: 10,
+		marginBottom: 5,
 	},
 	refreshContainer: {
 		position: 'absolute',
 		right: 10,
-		top: 10,
+		top: -3,
 		display: 'flex',
 		backgroundColor: Colors.greyDisabled,
-		width: 30,
-		height: 30,
-		borderRadius: 15,
+		width: 40,
+		height: 40,
+		borderRadius: 20,
 		alignItems: 'center',
+		justifyContent: 'center',
+	},
+	confirmRefresh: {
+		display: 'flex',
+		flexDirection: 'column',
+		width: '100%',
+		alignItems: 'center',
+		marginTop: 30,
+	},
+	refreshAreYouSureContainer: {
+		display: 'flex',
+		flexDirection: 'row',
+		justifyContent: 'space-between',
+		width: '60%',
+	},
+	areYouSureTitleText: {
+		fontSize: 14,
+		textAlign: 'center',
+		marginBottom: 5,
+	},
+	areYouSureButton: {
+		backgroundColor: Colors.greyDisabled,
+		height: 40,
+	},
+	areYouSureButtonText: {
+		fontSize: 14,
+		color: Colors.whiteColor,
+		paddingHorizontal: 40,
 	},
 	countContainer: {
 		display: 'flex',
@@ -38,7 +66,8 @@ export const styles = StyleSheet.create({
 		flexDirection: 'column',
 		width: 150,
 		alignItems: 'center',
-		textAlign: 'center'
+		textAlign: 'center',
+		marginHorizontal: 15,
 	},
 	currentCount: {
 		fontSize: 70,
