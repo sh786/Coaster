@@ -4,7 +4,8 @@ import {View, Text} from 'react-native';
 import {styles} from './styles/HeadCountWidget'; 
 import { Button } from 'native-base';
 import {updateCountForBar, subscribeToHeadCountForBar} from '../../redux/actions';
-
+import Icon from '../Common/Icon';
+import Colors from '../../constants/Colors';
 
 const HeadCountWidget = ({barId}) => {
 	const countObj = useSelector((state) => state.venuePortal.headCount);
@@ -21,6 +22,13 @@ const HeadCountWidget = ({barId}) => {
 	return (
 		<View style={styles.container}>
 			<Text style={styles.headCountTitle}>Head Count</Text>
+			<View style={styles.refreshContainer}>
+				<Icon
+					name="ios-refresh"
+					size={24}
+					color={Colors.darkGrayColor}
+				/>
+			</View>
 			<View>
 				<Button light disabled={countObj.count >= capacity}
 					onPress={() => {

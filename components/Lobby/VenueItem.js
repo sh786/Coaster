@@ -89,7 +89,7 @@ const VenueItem = ({ venue, navigation }) => {
                   ))}
                 </View>
               </View>
-            )}
+            }
             <View style={styles.socialLogoContainer}>
               <TouchableOpacity
                 onPress={(e) => {

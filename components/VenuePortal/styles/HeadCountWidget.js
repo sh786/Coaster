@@ -16,6 +16,17 @@ export const styles = StyleSheet.create({
 		textAlign: 'center',
 		marginBottom: 10,
 	},
+	refreshContainer: {
+		position: 'absolute',
+		right: 10,
+		top: 10,
+		display: 'flex',
+		backgroundColor: Colors.greyDisabled,
+		width: 30,
+		height: 30,
+		borderRadius: 15,
+		alignItems: 'center',
+	},
 	countContainer: {
 		display: 'flex',
 		flexDirection: 'row',
