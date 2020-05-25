@@ -105,6 +105,7 @@ export const fetchBar = (id) => {
           type: 'FETCH_BAR_SUCCESS',
           payload: bar.data.getBar,
         });
+        dispatch(fetchHeadCountByBarId(id));
       },
       (e) => {
         dispatch({

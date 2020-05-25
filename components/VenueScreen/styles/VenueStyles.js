@@ -113,12 +113,13 @@ export const styles = StyleSheet.create({
   },
   centeredText: {
     textAlign: 'center',
-    marginBottom: 10,
+    marginTop: 8,
   },
   aboutContainer: {
     display: 'flex',
     flex: 1,
     width: '100%',
+    marginTop: 20,
     marginBottom: 20,
   },
   description: {

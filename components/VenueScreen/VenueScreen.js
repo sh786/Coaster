@@ -15,6 +15,7 @@ import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import haversine from 'haversine';
 
 import {
+  fetchBar,
   fetchEventsByBarId,
   subscribeToHeadCountForBar,
 } from '../../redux/actions';
@@ -37,9 +38,14 @@ const VenueScreen = ({ navigation }) => {
   const events = useSelector((state) => {
     return state.events[venue.id];
   });
+  const headCount = useSelector((state) => {
+    const currBar = state.bars.find(b => b.id === venue.id);
+    return currBar ? currBar.headCount : null;
+  });
 
   const dispatch = useDispatch();
   useEffect(() => {
+    dispatch(fetchBar(venue.id));
     dispatch(fetchEventsByBarId(venue.id));
     const subscription = dispatch(subscribeToHeadCountForBar(venue.id));
     return () => {
@@ -56,7 +62,7 @@ const VenueScreen = ({ navigation }) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [activeEvent, setActiveEvent] = useState(null);
 
-  const crowdMetric = Math.round((venue.headCount / venue.capacity) * 4) + 1;
+  const crowdMetric = Math.round((headCount / venue.capacity) * 4) + 1;
 
   useEffect(() => {
     if (location.coords) {
@@ -126,12 +132,10 @@ const VenueScreen = ({ navigation }) => {
                     },
                     { unit: 'mile' },
                   ).toFixed(1)}{' '}
-                mi • {venue.headCount || 'No Current Count'}
-                {venue.headCount
-                  ? `/${venue.capacity}`
-                  : `• Max: ${venue.capacity}`}
+                mi • {headCount || 'No Current Count'}
+                {headCount ? `/${venue.capacity}` : `• Max: ${venue.capacity}`}
               </Text>
-              {venue.headCount && venue.capacity && (
+              {headCount && venue.capacity && (
                 <View style={styles.capacityIcons}>
                   {[...Array(crowdMetric)].map((x, i) => (
                     <Icon

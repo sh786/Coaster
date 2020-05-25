@@ -9,13 +9,28 @@ const locationReducer = (state = {}, { type, payload }) => {
   }
 };
 
+const barReducer = (state = {}, { type, payload }) => {
+  switch (type) {
+    case 'FETCH_BAR_SUCCESS':
+      return payload;
+    default:
+      return state;
+  }
+};
+
 const barsReducer = (state = [], { type, payload }) => {
   switch (type) {
     case 'FETCH_BARS_SUCCESS':
       return payload;
+    case 'FETCH_HEAD_COUNT_FOR_BAR_SUCCESS': {
+      const stateCopy = [...state];
+      const updatedBar = stateCopy.find((bar) => bar.id === payload.barId);
+      updatedBar.headCount = payload.headCount.count;
+      return stateCopy;
+    }
     case 'FETCH_HEAD_COUNT_SUCCESS': {
       const stateCopy = [...state];
-      const updatedBar = stateCopy.find(bar => bar.id === payload.barId);
+      const updatedBar = stateCopy.find((bar) => bar.id === payload.barId);
       updatedBar.headCount = payload.count;
       return stateCopy;
     }
@@ -28,7 +43,7 @@ const barsReducer = (state = [], { type, payload }) => {
       for (const bar of stateCopy) {
         bar.headCount = barIdToHeadCount[bar.id];
       }
-      
+
       return stateCopy;
     }
     default:
@@ -90,12 +105,15 @@ const redeemedTicketsReducer = (state = [], { type, payload }) => {
   }
 };
 
-const venuePortalReducer = (state = {
-  currScannedTicket: {}, 
-  venue: {},
-  successfulRedemption: false,
-  headCount: {},
-}, { type, payload }) => {
+const venuePortalReducer = (
+  state = {
+    currScannedTicket: {},
+    venue: {},
+    successfulRedemption: false,
+    headCount: {},
+  },
+  { type, payload },
+) => {
   switch (type) {
     case 'FETCH_PURCHASED_TICKET_SUCCESS': {
       return Object.assign({}, state, { currScannedTicket: payload });
@@ -127,17 +145,13 @@ const venuePortalReducer = (state = {
         successfulRedemption: true,
       });
     }
-    case "FETCH_HEAD_COUNT_FOR_BAR_SUCCESS": {
+    case 'FETCH_HEAD_COUNT_FOR_BAR_SUCCESS': {
       if (!payload.headCount) {
         return state;
       }
-      return Object.assign(
-        {},
-        state,
-        {
-          headCount: payload.headCount
-        },
-      );
+      return Object.assign({}, state, {
+        headCount: payload.headCount,
+      });
     }
     default:
       return state;
@@ -146,6 +160,7 @@ const venuePortalReducer = (state = {
 
 export default combineReducers({
   location: locationReducer,
+  bar: barReducer,
   bars: barsReducer,
   user: userReducer,
   events: eventReducer,

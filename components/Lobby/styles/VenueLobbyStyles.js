@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
 import Colors from '../../../constants/Colors';
 
 export const styles = StyleSheet.create({
@@ -13,6 +13,90 @@ export const styles = StyleSheet.create({
   },
   dateHeaderText: {
     color: Colors.accentColor,
-    fontWeight: '600',
+    fontFamily: 'san-francisco-semibold',
+  },
+  filterBtnContainer: {
+    position: 'absolute',
+    bottom: 40,
+    right: 40,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    backgroundColor: Colors.primaryColorDark,
+    shadowOpacity: 0.5,
+    shadowColor: 'rgba(0,0,0,0.6)',
+    shadowRadius: 1,
+    shadowOffset: { width: 0, height: 0 },
+  },
+  filterBtnText: {
+    color: Colors.whiteColor,
+    fontSize: 10,
+    fontFamily: 'san-francisco',
+    marginTop: 3,
+  },
+  filterCount: {
+    position: 'absolute',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    top: -4,
+    right: -4,
+    height: 24,
+    width: 24,
+    backgroundColor: Colors.accentColor,
+    borderRadius: 12,
+  },
+  filterCountText: {
+    color: Colors.whiteColor,
+    fontSize: 12,
+    paddingLeft: 1,
+    fontFamily: 'san-francisco-semibold',
+  },
+  filterModalContainer: {
+    flex: 1,
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+    backgroundColor: Colors.greyDisabled,
+  },
+  filterModal: {
+    display: 'flex',
+    backgroundColor: Colors.whiteColor,
+    width: Dimensions.get('window').width,
+    borderTopRightRadius: 20,
+    borderTopLeftRadius: 20,
+    padding: 20,
+    paddingTop: 20,
+    shadowOpacity: 0.5,
+    shadowColor: 'rgb(0,0,0)',
+    shadowRadius: 1,
+    shadowOffset: { width: 0, height: 0 },
+  },
+  filterItem: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+    justifyContent: 'center',
+    marginBottom: 10,
+  },
+  filterLabel: {
+    fontSize: 16,
+    fontFamily: 'san-francisco-semibold',
+    color: Colors.accentColor,
+    marginBottom: 5,
+  },
+  filterInput: {
+    borderColor: Colors.greyDisabled,
+    borderWidth: 1,
+    borderRadius: 4,
+    width: Dimensions.get('window').width - 40,
+    padding: 10,
+  },
+  filterAction: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignSelf: 'flex-end',
   },
 });
