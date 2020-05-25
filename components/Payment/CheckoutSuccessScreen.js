@@ -64,7 +64,7 @@ const CheckoutSuccessScreen = ({ navigation }) => {
           }}
         />
         <Text style={{ fontSize: 24, color: Colors.successColor }}>
-          Purchase Successful!
+          Ticket Confirmed!
         </Text>
       </View>
     </View>

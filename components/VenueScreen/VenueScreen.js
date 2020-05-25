@@ -42,6 +42,9 @@ const VenueScreen = ({ navigation }) => {
   const bar = useSelector((state) => {
     return state.bar;
   });
+  const bars = useSelector((state) => {
+    return state.bars;
+  });
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -132,8 +135,10 @@ const VenueScreen = ({ navigation }) => {
                     },
                     { unit: 'mile' },
                   ).toFixed(1)}{' '}
-                mi • {bar.headCount || 'No Current Count'}
-                {bar.headCount ? `/${bar.capacity}` : `• Max: ${bar.capacity}`}
+                mi • {bars[venue.id].headCount || 'No Current Count'}
+                {bars[venue.id].headCount
+                  ? `/${bar.capacity}`
+                  : `• Max: ${bar.capacity}`}
               </Text>
               {bar.headCount && bar.capacity && (
                 <View style={styles.capacityIcons}>

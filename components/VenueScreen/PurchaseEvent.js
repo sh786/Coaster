@@ -99,13 +99,23 @@ const PurchaseEvent = ({ event, navigation, closeModal }) => {
             onPress={() => {
               closeModal(false);
               if (user.username) {
-                navigation.navigate('Payment', {
-                  ticketOffer,
-                  venue,
-                  quantity,
-                  event,
-                  user,
-                });
+                if (ticketOffers[0].price === 0) {
+                  navigation.navigate('CheckoutSuccess', {
+                    ticketOffer,
+                    venue,
+                    quantity,
+                    event,
+                    user,
+                  });
+                } else {
+                  navigation.navigate('Payment', {
+                    ticketOffer,
+                    venue,
+                    quantity,
+                    event,
+                    user,
+                  });
+                }
               } else {
                 navigation.navigate('AuthMiddleware', {
                   ticketOffer,
