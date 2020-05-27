@@ -527,28 +527,27 @@ export const subscribeToHeadCounts = () => {
 };
 
 export const updateCountForBar = (barId, count, id) => {
-  return (dispatch) => {
-    dispatch({
-      type: 'UPDATE_COUNT_FOR_BAR',
-    });
-    const input = {
-      barId,
-      count,
+	return dispatch => {
+		dispatch({
+			type: 'UPDATE_COUNT_FOR_BAR',
+		});
+		const input = {
+			barId, 
+			count,
       id,
-    };
-    return API.graphql(graphqlOperation(updateHeadCount, { input })).then(
-      (response) => {
-        dispatch({
-          type: 'UPDATE_COUNT_FOR_BAR_SUCCESS',
-          payload: response.data.updateHeadCount,
-        });
-      },
-      (e) => {
-        dispatch({
-          type: 'UPDATE_COUNT_FOR_BAR_FAILURE',
-          payload: e,
-        });
-      },
-    );
-  };
-};
+      lastUpdateTime: new Date().toISOString(),
+		};
+		return API.graphql(graphqlOperation(updateHeadCount, {input}))
+			.then((response) => {
+				dispatch({
+					type: 'UPDATE_COUNT_FOR_BAR_SUCCESS',
+					payload: response.data.updateHeadCount, 
+				});
+			}, e => {
+			dispatch({
+				type: 'UPDATE_COUNT_FOR_BAR_FAILURE',
+				payload: e
+			})
+		});
+	}
+  }

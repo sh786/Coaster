@@ -25,10 +25,16 @@ const VenueItem = ({ venue, navigation }) => {
     return state.location;
   });
 
+  // only show counts that have been updated recently
+  const {lastHeadCountUpdate, headCount} = venue;
+  const millisecondsLastUpdate = new Date(lastHeadCountUpdate).getTime();
+  const updatedInLastHour = (Date.now() - millisecondsLastUpdate) < 3600000;
+
   const [latitude, setLatitude] = useState();
   const [longitude, setLongitude] = useState();
 
-  const crowdMetric = Math.round((venue.headCount / venue.capacity) * 4) + 1;
+  const crowdMetric = venue.headCount ? Math.round((venue.headCount / venue.capacity) * 4) + 1 : 0;
+
 
   useEffect(() => {
     if (location.coords) {
@@ -67,10 +73,10 @@ const VenueItem = ({ venue, navigation }) => {
             } mi`}</Text>
           </View>
           <View style={styles.bottomContainer}>
-            {venue.headCount && (
+            {Boolean(headCount) && Boolean(updatedInLastHour) &&
               <View style={styles.capacityCount}>
                 <Text style={styles.capacityCountText}>
-                  {venue.headCount}/{venue.capacity}
+                  {headCount}/{venue.capacity}
                 </Text>
                 <View style={styles.capacityIcons}>
                   {[...Array(crowdMetric)].map((x, i) => (
@@ -84,7 +90,7 @@ const VenueItem = ({ venue, navigation }) => {
                   ))}
                 </View>
               </View>
-            )}
+            }
             <View style={styles.socialLogoContainer}>
               <TouchableOpacity
                 onPress={(e) => {

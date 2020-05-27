@@ -48,6 +48,7 @@ const EventList = ({navigation}) => {
 				</View>
 			</View>
 			<Text style={styles.ticketCount}>{tickets && tickets.length} Total Tickets Sold</Text>
+			<HeadCountWidget barId={event.barId} />
 			<ScrollView style={styles.scrollView}>
 				{
 					tickets && tickets.map((t) => (
@@ -58,7 +59,6 @@ const EventList = ({navigation}) => {
 					))
 				}
 			</ScrollView>
-			<HeadCountWidget barId={event.barId} />
 			<ScanButton event={event} onClick={() => navigation.navigate('Scanner', {event})} />
 		</View>
 	);

@@ -13,15 +13,64 @@ export const styles = StyleSheet.create({
 	},
 	headCountTitle: {
 		fontSize: 24,
-		textAlign: 'center'
+		textAlign: 'center',
+		marginBottom: 5,
+	},
+	refreshContainer: {
+		position: 'absolute',
+		right: 10,
+		top: -3,
+		display: 'flex',
+		backgroundColor: Colors.greyDisabled,
+		width: 40,
+		height: 40,
+		borderRadius: 20,
+		alignItems: 'center',
+		justifyContent: 'center',
+	},
+	confirmRefresh: {
+		display: 'flex',
+		flexDirection: 'column',
+		width: '100%',
+		alignItems: 'center',
+		marginTop: 30,
+	},
+	refreshAreYouSureContainer: {
+		display: 'flex',
+		flexDirection: 'row',
+		justifyContent: 'space-between',
+		width: '60%',
+	},
+	areYouSureTitleText: {
+		fontSize: 14,
+		textAlign: 'center',
+		marginBottom: 5,
+	},
+	areYouSureButton: {
+		backgroundColor: Colors.greyDisabled,
+		height: 40,
+	},
+	areYouSureButtonText: {
+		fontSize: 14,
+		color: Colors.whiteColor,
+		paddingHorizontal: 40,
 	},
 	countContainer: {
 		display: 'flex',
-		marginTop: 20,
 		flexDirection: 'row',
+		alignItems: 'center',
+		textAlign: 'center',
+	},
+	countInfoContainer: {
+		display: 'flex',
+		flexDirection: 'column',
+		width: 150,
+		alignItems: 'center',
+		textAlign: 'center',
+		marginHorizontal: 15,
 	},
 	currentCount: {
-		fontSize: 48,
+		fontSize: 70,
 	},
 	totalCapacity: {
 		fontSize: 14,
@@ -33,52 +82,55 @@ export const styles = StyleSheet.create({
 		flexDirection: 'row',
 		alignItems: 'center',
 		width: '80%',
-		marginTop: 20,
+		marginBottom: 15,
+		marginTop: 5,
 	},
-	minusButtonContainer: {
+	incrementFiveButtonContainer: {
 		display: 'flex',
 		backgroundColor: Colors.primaryColor,
 		width: 60,
 		height: 60,
-		borderRadius: 50,
+		borderRadius: 30,
 		alignItems: 'center',
 	},
-	plusButtonContainer: {
+	incrementOneButtonContainer: {
 		display: 'flex',
 		backgroundColor: Colors.primaryColor,
-		width: 100,
-		height: 100,
-		borderRadius: 50,
+		width: 40,
+		height: 40,
+		borderRadius: 20,
 		alignItems: 'center',
 	},
-	minusButtonText: {
+	incrementOneButtonText: {
 		color: Colors.whiteColor,
-		fontSize: 50,
+		fontSize: 20,
+		lineHeight: 30,
+		textAlign: 'center',
+		width: '100%',
+		height: '100%',
+		fontWeight: 'bold'
+	},
+	incrementFiveButtonText: {
+		color: Colors.whiteColor,
+		fontSize: 24,
 		lineHeight: 50,
+		fontWeight: 'bold',
 		textAlign: 'center',
 		width: '100%',
 		height: '100%',
 	},
-	plusButtonText: {
-		color: Colors.whiteColor,
-		fontSize: 70,
-		lineHeight: 80,
-		textAlign: 'center',
-		width: '100%',
-		height: '100%',
-	},
-	disabledMinusButtonContainer: {
+	disabledIncrementFiveButtonContainer: {
 		display: 'flex',
 		width: 60,
 		height: 60,
-		borderRadius: 50,
+		borderRadius: 30,
 		alignItems: 'center',
 	},
-	disabledPlusButtonContainer: {
+	disabledIncrementOneButtonContainer: {
 		display: 'flex',
-		width: 100,
-		height: 100,
-		borderRadius: 50,
+		width: 40,
+		height: 40,
+		borderRadius: 20,
 		alignItems: 'center',
 	}
 });
