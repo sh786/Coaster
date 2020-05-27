@@ -13,6 +13,7 @@ const MyTix = () => {
     <ScrollView
       contentContainerStyle={{
         flexGrow: 1,
+        paddingBottom: 40,
       }}
     >
       <View>

@@ -11,7 +11,7 @@ export const styles = StyleSheet.create({
     marginTop: 8,
     marginLeft: 40,
     marginRight: 20,
-    marginBottom: 20,
+    marginBottom: 2,
     borderRadius: 2,
     shadowOpacity: 0.5,
     shadowColor: 'rgb(0,0,0)',

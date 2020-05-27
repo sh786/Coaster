@@ -24,7 +24,7 @@ const Ticket = ({ purchasedTicket }) => {
 
   return (
     qrString && (
-      <SvgUri fill='#fff' width='300' height='300' svgXmlData={qrString} />
+      <SvgUri fill='#fff' width='280' height='280' svgXmlData={qrString} />
     )
   );
 };

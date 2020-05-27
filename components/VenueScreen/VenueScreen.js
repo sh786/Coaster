@@ -15,6 +15,7 @@ import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import haversine from 'haversine';
 
 import {
+  fetchBar,
   fetchEventsByBarId,
   subscribeToHeadCountForBar,
 } from '../../redux/actions';
@@ -37,9 +38,14 @@ const VenueScreen = ({ navigation }) => {
   const events = useSelector((state) => {
     return state.events[venue.id];
   });
+  const headCount = useSelector((state) => {
+    const currBar = state.bars.find(b => b.id === venue.id);
+    return currBar ? currBar.headCount : null;
+  });
 
   const dispatch = useDispatch();
   useEffect(() => {
+    dispatch(fetchBar(venue.id));
     dispatch(fetchEventsByBarId(venue.id));
     const subscription = dispatch(subscribeToHeadCountForBar(venue.id));
     return () => {
@@ -57,7 +63,7 @@ const VenueScreen = ({ navigation }) => {
   const [activeEvent, setActiveEvent] = useState(null);
 
   // only show counts that have been updated recently
-  const {lastHeadCountUpdate, headCount, capacity} = venue;
+  const {lastHeadCountUpdate, capacity} = venue;
   const millisecondsLastUpdate = new Date(lastHeadCountUpdate).getTime();
   const updatedInLastHour = (Date.now() - millisecondsLastUpdate) < 3600000;
 

@@ -14,6 +14,7 @@ import Icon from '../Common/Icon';
 import Colors from '../../constants/Colors';
 
 const PurchaseEvent = ({ event, navigation, closeModal }) => {
+  console.log('purchas event', JSON.stringify(event));
   const [quantity, setQuantity] = useState(1);
   const user = useSelector((state) => {
     return state.user;
