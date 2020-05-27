@@ -56,7 +56,12 @@ const VenueScreen = ({ navigation }) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [activeEvent, setActiveEvent] = useState(null);
 
-  const crowdMetric = Math.round((venue.headCount / venue.capacity) * 4) + 1;
+  // only show counts that have been updated recently
+  const {lastHeadCountUpdate, headCount, capacity} = venue;
+  const millisecondsLastUpdate = new Date(lastHeadCountUpdate).getTime();
+  const updatedInLastHour = (Date.now() - millisecondsLastUpdate) < 3600000;
+
+  const crowdMetric = Math.round((headCount / capacity) * 4) + 1;
 
   useEffect(() => {
     if (location.coords) {
@@ -126,12 +131,12 @@ const VenueScreen = ({ navigation }) => {
                     },
                     { unit: 'mile' },
                   ).toFixed(1)}{' '}
-                mi • {venue.headCount || 'No Current Count'}
-                {venue.headCount
+                mi • {headCount && Boolean(updatedInLastHour) ? headCount : 'No Current Count '}
+                {venue.headCount && Boolean(updatedInLastHour)
                   ? `/${venue.capacity}`
                   : `• Max: ${venue.capacity}`}
               </Text>
-              {venue.headCount && venue.capacity && (
+              {Boolean(updatedInLastHour) && venue.headCount && venue.capacity && (
                 <View style={styles.capacityIcons}>
                   {[...Array(crowdMetric)].map((x, i) => (
                     <Icon
