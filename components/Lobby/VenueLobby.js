@@ -22,7 +22,6 @@ import CoasterSplash from '../../assets/images/CoasterSplash.png';
 import moment from 'moment';
 import LogInButton from '../Common/LogInButton';
 import VenuePortalButton from '../Common/VenuePortalButton';
-import {Analytics} from 'aws-amplify';
 
 const VenueLobby = ({ navigation }) => {
   const dispatch = useDispatch();
@@ -46,7 +45,6 @@ const VenueLobby = ({ navigation }) => {
   // const purchasedTickets = useSelector(state => state.purchasedTickets); // TODO: move to my tix page
 
   useEffect(() => {
-    Analytics.record({name: 'venue'}).then(d => console.log(d));
     dispatch(getUserToken());
     const fetchLocation = async () => {
       await getLocationAsync();
