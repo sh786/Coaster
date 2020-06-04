@@ -9,7 +9,6 @@ import PaymentScreen from '../components/Payment';
 import CheckoutSuccessScreen from '../components/Payment/CheckoutSuccessScreen';
 import Colors from '../constants/Colors';
 import HeaderTitle from '../components/Header/HeaderTitle';
-import Logo from '../components/Common/Logo';
 import AccountScreen from '../components/Account';
 import MyTixScreen from '../components/Account/MyTix';
 
@@ -48,11 +47,11 @@ const MainTabNavigator = createStackNavigator(
   config,
 );
 
-MainTabNavigator.navigationOptions = ({
+MainTabNavigator.navigationOptions = {
   headerStyle: {
     backgroundColor: '#fff',
   },
-});
+};
 
 MainTabNavigator.path = '';
 
