@@ -31,12 +31,8 @@ function App() {
   async function loadResourcesAsync() {
     await Promise.all([
       Asset.loadAsync([
-        require('./assets/images/robot-dev.png'),
-        require('./assets/images/robot-prod.png'),
         require('./assets/images/CoasterSplash.png'),
         require('./assets/images/logoWhite.png'),
-        require('./assets/poodlesPics.jpg'),
-        require('./assets/bar_stock.jpg'),
       ]),
       // TODO: Query all image asset URLs we need and do Image.prefetch(url) for each
       Font.loadAsync({
@@ -65,7 +61,7 @@ function App() {
 
   return isLoaded ? (
     <Provider store={store}>
-        <AppNavigator />
+      <AppNavigator />
     </Provider>
   ) : (
     <ActivityIndicator />
